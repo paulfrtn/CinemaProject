@@ -1,0 +1,48 @@
+Liste de commandes git de base:
+
+- `git init` : initialise un dépôt git
+- `git add <fichier>` : ajoute un fichier à l'index
+- `git commit -m "message"` : crée un commit avec les fichiers de l'index
+- `git status` : affiche l'état des fichiers dans le dépôt
+- `git branch` : affiche la liste des branches
+- `git checkout <branche>` : change de branche
+- `git merge <branche>` : fusionne une branche dans la branche courante
+- `git clone <url>` : clone un dépôt distant
+- `git pull` : récupère les modifications depuis le dépôt distant
+- `git push` : envoie les modifications vers le dépôt distant
+
+
+## Les branches :
+- `git branch` : affiche la liste des branches
+- `git branch <nom>` : crée une nouvelle branche
+- `git checkout <branche>` : change de branche
+- `git switch <branche>` : change de branche
+- `git merge <branche>` : fusionne une branche dans la branche courante
+- `git branch -d <branche>` : supprime une branche
+
+
+## L'ajout et commit :
+- `git add <fichier>` : ajoute un fichier à l'index
+- `git add .` : ajoute tous les fichiers modifiés à l'index
+- `git add -p :` : permet d'ajouter des modifications de manière interactive
+- `git commit -m "message"` : crée un commit avec les fichiers de l'index
+- `git commit --amend` : modifie le dernier commit
+
+## push et pull :
+- `git pull` : récupère les modifications depuis le dépôt distant
+- `git push` : envoie les modifications vers le dépôt distant
+
+## Les rebases :
+- `git rebase <branche>` : déplace les commits de la branche courante après la branche spécifiée
+- `git rebase --continue` : continue le rebase après la résolution des conflits
+- `git rebase --abort` : annule le rebase en cours
+
+### !!! Commandes interdites !!! Sauf en ultime recours et avec validation de toute l'équipe :
+- `git push --force` : force le push et écrase l'historique
+- `git pull --force` : force le pull et écrase l'historique
+- `git reset --hard` : supprime les modifications locales
+- `git rebase --force` : modifie l'historique des commits
+- `git reset --hard` : supprime les modifications locales
+- `git reset --hard HEAD^` : annule le dernier commit
+- `git reset --hard HEAD~n` : annule les n derniers commits
+- `git reset --hard <hash>` : annule les commits jusqu'au hash spécifié
