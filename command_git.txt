@@ -10,6 +10,7 @@ Liste de commandes git de base:
 - `git clone <url>` : clone un dépôt distant
 - `git pull` : récupère les modifications depuis le dépôt distant
 - `git push` : envoie les modifications vers le dépôt distant
+- 'git fetch' : récupère les modifications depuis le dépôt distant sans les fusionner
 
 
 ## Les branches :
