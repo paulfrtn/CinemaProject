@@ -4,7 +4,7 @@ services:
   db:
     image: mysql:8.0.19
     restart: always
-    platform: linux/arm64
+    platform: linux/amd64
     environment:
       MYSQL_DATABASE: 'Cinema'
       MYSQL_USER: 'root'
