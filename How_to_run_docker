@@ -1,0 +1,5 @@
+Windows, il faut lancer la commande :
+- 'docker compose -f docker-compose.windows.yml up -d'
+
+MacOS et Linux, il faut lancer la commande :
+- 'docker compose -f docker-compose.mac.yml up -d'
