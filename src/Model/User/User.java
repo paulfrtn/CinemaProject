@@ -12,6 +12,7 @@ public class User {
     private Boolean user_role;
     private Date user_birthdate;
     private int user_type;
+    private String user_token;
 
     public User(int user_id, String user_firstname, String user_lastname, String user_mail, String user_pseudo, String user_password, Boolean user_role, Date user_birthdate, int user_type) {
         this.user_id = user_id;
