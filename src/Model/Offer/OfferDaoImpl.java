@@ -25,7 +25,11 @@ public class OfferDaoImpl {
     }
 
     // Delete
-    public void deleteOffer(Offer offer) {
+    public void deleteOfferById(int id) {
         // Code pour supprimer une offre
+    }
+
+    public void deleteOfferByName(String name) {
+        // Code pour supprimer une offre par son nom
     }
 }

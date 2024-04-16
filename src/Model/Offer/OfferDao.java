@@ -14,5 +14,7 @@ public interface OfferDao {
     public void updateOffer(Offer offer);
 
     // Delete
-    public void deleteOffer(Offer offer);
+    public void deleteOfferbyId(int id);
+
+    public void deleteofferByName(String name);
 }
