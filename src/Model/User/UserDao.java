@@ -5,7 +5,6 @@ public interface UserDao {
 
     // Create
     public void addUser(User user);
-    public void addAdmin(User user);
 
     // Read
     public User getUserById(int id);
