@@ -12,7 +12,9 @@ public class Film {
     private Date film_release_date;
     private Boolean film_status;
 
-    public Film(int film_id, String film_title, String film_director, String film_genre, int film_duration, String film_synopsis, Date film_release_date, Boolean film_status) {
+    private String film_poster;
+
+    public Film(int film_id, String film_title, String film_director, String film_genre, int film_duration, String film_synopsis, Date film_release_date, Boolean film_status, String film_poster) {
         this.film_id = film_id;
         this.film_title = film_title;
         this.film_director = film_director;
@@ -21,7 +23,7 @@ public class Film {
         this.film_synopsis = film_synopsis;
         this.film_release_date = film_release_date;
         this.film_status = film_status;
-    }
+        this.film_poster = film_poster;}
 
     // Getters
     public int getFilm_id() {
@@ -56,6 +58,9 @@ public class Film {
         return film_status;
     }
 
+    public String getFilm_poster() {
+        return film_poster;
+    }
     // Setters
 
     public void setFilm_id(int film_id) {
@@ -90,9 +95,12 @@ public class Film {
         this.film_status = film_status;
     }
 
+    public void setFilm_poster(String film_poster) { this.film_poster = film_poster;}
+
     @Override
     public String toString() {
-        return "Film{" + "film_id=" + film_id + ", film_title=" + film_title + ", film_director=" + film_director + ", film_genre=" + film_genre + ", film_duration=" + film_duration + ", film_synopsis=" + film_synopsis + ", film_release_date=" + film_release_date + ", film_status=" + film_status + '}';
+        return "Film{" + "film_id=" + film_id + ", film_title=" + film_title + ", film_director=" + film_director + ", film_genre=" + film_genre + ", film_duration=" +
+                film_duration + ", film_synopsis=" + film_synopsis + ", film_release_date=" + film_release_date + ", film_status=" + film_status + ", film_poster=" + film_poster +'}';
     }
 
 }
