@@ -15,6 +15,11 @@ public class ModelMain {
                 Salle salle = new Salle (1,150, true);
                 SalleDaoImpl salleDao = new SalleDaoImpl();
                 salleDao.addSalle(salle);
+                salleDao.updateSalle(salle);
+
+                Salle salle2 = salleDao.getSalleByNumber(1);
+                System.out.println(salle2.toString());
+
             } else {
                 System.out.println("Failed to make connection!");
             }
