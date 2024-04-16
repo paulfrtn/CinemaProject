@@ -15,5 +15,5 @@ public interface SalleDao {
     public void updateSalle(Salle salle);
 
     // Delete
-    public void deleteSalle(Salle salle);
+    public void deleteSalleByNumber(int number);
 }
