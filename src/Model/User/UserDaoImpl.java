@@ -48,31 +48,117 @@ public class UserDaoImpl implements UserDao {
 
     // Read
     public User getUserById(int id) {
-        // TODO
-        return null;
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        User user = null;
+
+        try {
+            con = ConnectionDb.getConnection();
+            String query = "SELECT * FROM user WHERE user_id = ?";
+            ps = con.prepareStatement(query);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                user = new User(rs.getInt("user_id"),rs.getString("user_firstname"), rs.getString("user_lastname"), rs.getString("user_mail"), rs.getString("user_pseudo"), rs.getString("user_password"), rs.getBoolean("user_role"), rs.getDate("user_birthday"), rs.getInt("user_type"));
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            }catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return user;
     }
 
     public User getUserByPseudo(String pseudo) {
-        // TODO
-        return null;
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        User user = null;
+
+        try {
+            con = ConnectionDb.getConnection();
+            String query = "SELECT * FROM user WHERE user_pseudo = ?";
+            ps = con.prepareStatement(query);
+            ps.setString(1, pseudo);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                user = new User(rs.getInt("user_id"),rs.getString("user_firstname"), rs.getString("user_lastname"), rs.getString("user_mail"), rs.getString("user_pseudo"), rs.getString("user_password"), rs.getBoolean("user_role"), rs.getDate("user_birthday"), rs.getInt("user_type"));
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            }catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return user;
     }
 
     public User getUserByMail(String mail) {
-        // TODO
-        return null;
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        User user = null;
+
+        try {
+            con = ConnectionDb.getConnection();
+            String query = "SELECT * FROM user WHERE user_mail = ?";
+            ps = con.prepareStatement(query);
+            ps.setString(1, mail);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                user = new User(rs.getInt("user_id"),rs.getString("user_firstname"), rs.getString("user_lastname"), rs.getString("user_mail"), rs.getString("user_pseudo"), rs.getString("user_password"), rs.getBoolean("user_role"), rs.getDate("user_birthday"), rs.getInt("user_type"));
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            }catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return user;
     }
 
     // Update
     public void updateUser(User user) {
-        // TODO
+
     }
 
     // Delete
     public void deleteUser(User user) {
-        // TODO
-    }
-
-    public void deleteAdmin(User user) {
         // TODO
     }
 }

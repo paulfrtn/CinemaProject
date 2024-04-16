@@ -14,7 +14,12 @@ public class ModelMain {
                 System.out.println("Connected to the database!");
                 User user = new User("John", "Doe", "JohnDoe@mail.fr", "JohnDoe", "password", true, java.sql.Date.valueOf("1990-01-01"), 1);
                 UserDaoImpl userDao = new UserDaoImpl();
-                userDao.addUser(user);
+                //userDao.addUser(user);
+                User user2 = userDao.getUserById(1);
+                userDao.deleteUserById(1);
+                userDao.deleteUserByPseudo("JohnDoe");
+                System.out.println(user2.toString());
+
             } else {
                 System.out.println("Failed to make connection!");
             }

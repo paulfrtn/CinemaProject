@@ -15,7 +15,7 @@ public interface UserDao {
     public void updateUser(User user);
 
     // Delete
-    public void deleteUser(User user);
-    public void deleteAdmin(User user);
+    public void deleteUserById(int id);
+    public void deleteUserByPseudo(String pseudo);
 
 }
