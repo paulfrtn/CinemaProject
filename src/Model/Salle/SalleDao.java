@@ -7,7 +7,8 @@ public interface SalleDao {
     public void addSalle(Salle salle);
 
     // Read
-    public Salle getSalleById(int id);
+    /*public Salle getSalleById(int id);*/
+
     public Salle getSalleByNumber(int number);
 
     // Update
