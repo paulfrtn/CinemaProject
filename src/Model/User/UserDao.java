@@ -5,7 +5,6 @@ public interface UserDao {
 
     // Create
     public void addUser(User user);
-    public void addAdmin(User user);
 
     // Read
     public User getUserById(int id);
@@ -16,7 +15,7 @@ public interface UserDao {
     public void updateUser(User user);
 
     // Delete
-    public void deleteUser(User user);
-    public void deleteAdmin(User user);
+    public void deleteUserById(int id);
+    public void deleteUserByPseudo(String pseudo);
 
 }
