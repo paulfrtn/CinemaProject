@@ -4,13 +4,19 @@ public class Salle {
     private int salle_id;
     private int salle_number;
     private int salle_capa_max;
-    private boolean salle_status;
+    private boolean salle_dispo;
 
-    public Salle(int salle_id, int salle_number, int salle_capa_max, boolean salle_status) {
+    public Salle(int salle_id, int salle_number, int salle_capa_max, boolean salle_dispo) {
         this.salle_id = salle_id;
         this.salle_number = salle_number;
         this.salle_capa_max = salle_capa_max;
-        this.salle_status = salle_status;
+        this.salle_dispo = salle_dispo;
+    }
+
+    public Salle( int salle_number, int salle_capa_max, boolean salle_dispo) {
+        this.salle_number = salle_number;
+        this.salle_capa_max = salle_capa_max;
+        this.salle_dispo = salle_dispo;
     }
 
     // Getters
@@ -26,8 +32,8 @@ public class Salle {
         return salle_capa_max;
     }
 
-    public boolean getSalle_status() {
-        return salle_status;
+    public boolean getSalle_dispo() {
+        return salle_dispo;
     }
 
     // Setters
@@ -44,8 +50,8 @@ public class Salle {
         this.salle_capa_max = salle_capa_max;
     }
 
-    public void setSalle_status(boolean salle_status) {
-        this.salle_status = salle_status;
+    public void setSalle_dispo(boolean salle_dispo) {
+        this.salle_dispo = salle_dispo;
     }
 
 
