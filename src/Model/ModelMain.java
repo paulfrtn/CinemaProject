@@ -48,12 +48,12 @@ public class ModelMain {
                     filmDao.updateFilm(fetchedFilm);
                     System.out.println("Film updated.");
                 }
-/*
+
                 // Supprimer le film
                 if (fetchedFilm != null) {
                     filmDao.deleteFilm(fetchedFilm);
                     System.out.println("Film deleted.");
-                }*/
+                }
 
             } else {
                 System.out.println("Failed to make connection!");
