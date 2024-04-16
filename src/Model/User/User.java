@@ -10,19 +10,17 @@ public class User {
     private String user_pseudo;
     private String user_password;
     private Boolean user_role;
-    private Date user_birthdate;
+    private Date user_birthday;
     private int user_type;
-    private String user_token;
 
-    public User(int user_id, String user_firstname, String user_lastname, String user_mail, String user_pseudo, String user_password, Boolean user_role, Date user_birthdate, int user_type) {
-        this.user_id = user_id;
+    public User(String user_firstname, String user_lastname, String user_mail, String user_pseudo, String user_password, Boolean user_role, Date user_birthday, int user_type) {
         this.user_firstname = user_firstname;
         this.user_lastname = user_lastname;
         this.user_mail = user_mail;
         this.user_pseudo = user_pseudo;
         this.user_password = user_password;
         this.user_role = user_role;
-        this.user_birthdate = user_birthdate;
+        this.user_birthday = user_birthday;
         this.user_type = user_type;
     }
 
@@ -55,8 +53,8 @@ public class User {
         return user_role;
     }
 
-    public Date getUser_birthdate() {
-        return user_birthdate;
+    public Date getUser_birthday() {
+        return user_birthday;
     }
 
     public int getUser_type() {
@@ -93,8 +91,8 @@ public class User {
         this.user_role = user_role;
     }
 
-    public void setUser_birthdate(Date user_birthdate) {
-        this.user_birthdate = user_birthdate;
+    public void setUser_birthday(Date user_birthday) {
+        this.user_birthday = user_birthday;
     }
 
     public void setUser_type(int user_type) {
@@ -111,10 +109,8 @@ public class User {
                 ", user_pseudo='" + user_pseudo + '\'' +
                 ", user_password='" + user_password + '\'' +
                 ", user_role=" + user_role +
-                ", user_birthdate=" + user_birthdate +
+                ", user_birthday=" + user_birthday +
                 ", user_type=" + user_type +
                 '}';
-
-
     }
 }
