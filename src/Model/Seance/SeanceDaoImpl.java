@@ -7,6 +7,8 @@ import java.sql.SQLException;
 
 import Model.Film.*;
 import Model.Salle.Salle;
+import Model.DataBase.ConnectionDb;
+
 
 public class SeanceDaoImpl {
     //Nous allons réaliser le CRUD (Create, Read, Update, Delete)
@@ -18,7 +20,7 @@ public class SeanceDaoImpl {
     // Create
     public void addSeance(Seance seance) {
         String sql = "INSERT INTO Seance (seance_date, seance_time, seance_language, seance_nb_reservation, film_id, salle_id) VALUES (?, ?, ?, ?, ?, ?)";
-        try (Connection conn = getConnection();
+        try (Connection conn = ConnectionDb.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setDate(1, new java.sql.Date(seance.getSeance_date().getTime()));
             stmt.setTime(2, seance.getSeance_time());
@@ -38,7 +40,7 @@ public class SeanceDaoImpl {
     public Seance getSeanceById(int id) {
         String query = "SELECT * FROM Seance WHERE seance_id = ?";
         //Récupérer une séance par son id
-        try (Connection connection = getConnection();
+        try (Connection connection = ConnectionDb.getConnection();
              java.sql.PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, id);
             java.sql.ResultSet resultSet = preparedStatement.executeQuery();
@@ -62,7 +64,7 @@ public class SeanceDaoImpl {
     // Update
     public void updateSeance(Seance seance) {
         String sql = "UPDATE Seance SET seance_date = ?, seance_time = ?, seance_language = ?, seance_nb_reservation = ? WHERE seance_id = ?";
-        try (Connection conn = getConnection();
+        try (Connection conn = ConnectionDb.getConnection();
              java.sql.PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setDate(1, new java.sql.Date(seance.getSeance_date().getTime()));
             stmt.setTime(2, seance.getSeance_time());
@@ -78,7 +80,7 @@ public class SeanceDaoImpl {
     // Delete
     public void deleteSeance(Seance seance) {
         String sql = "DELETE FROM Seance WHERE seance_id = ?";
-        try (Connection conn = getConnection();
+        try (Connection conn = ConnectionDb.getConnection();
              java.sql.PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, seance.getSeance_id());
             stmt.executeUpdate();

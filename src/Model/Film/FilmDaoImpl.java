@@ -1,20 +1,18 @@
 package Model.Film;
 import java.sql.*;
 
-public class FilmDaoImpl implements FilmDao {
-    private Connection getConnection () throws SQLException {
-        //Connexion à la base de données
-        return DriverManager.getConnection("jdbc:mysql://localhost:3307/Cinema", "root", "password");
+import Model.DataBase.ConnectionDb;
 
-    }
+public class FilmDaoImpl implements FilmDao {
     //Nous allons réaliser le CRUD (Create, Read, Update, Delete)
 
     // Create
 
     @Override
     public void addFilm(Film film) {
+
         String sql = "INSERT INTO film (film_title, film_director, film_genre, film_synopsis, film_duration, film_release_date, film_status, film_poster) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        try (Connection conn = getConnection();
+        try (Connection conn = ConnectionDb.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, film.getFilm_title());
             stmt.setString(2, film.getFilm_director());
@@ -36,7 +34,7 @@ public class FilmDaoImpl implements FilmDao {
         String query = "SELECT * FROM film WHERE film_id = ?";
 
         //Récupérer un film par son id
-        try (Connection connection = getConnection();
+        try (Connection connection = ConnectionDb.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -63,7 +61,7 @@ public class FilmDaoImpl implements FilmDao {
         String query = "SELECT * FROM film WHERE film_title = ?";
         //Récupérer un film par son titre
 
-        try (Connection connection = getConnection();
+        try (Connection connection = ConnectionDb.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, title);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -91,7 +89,7 @@ public class FilmDaoImpl implements FilmDao {
         String query = "UPDATE film SET film_title = ?, film_director = ?, film_genre = ?, film_duration = ?, film_synopsis = ?, film_release_date = ?, film_status = ?, film_poster = ? WHERE film_id = ?";
 
         //Mettre à jour un film
-        try (Connection connection = getConnection();
+        try (Connection connection = ConnectionDb.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setString(1, film.getFilm_title());
                 preparedStatement.setString(2, film.getFilm_director());
@@ -112,7 +110,7 @@ public class FilmDaoImpl implements FilmDao {
     public void deleteFilm(Film film) {
         String query = "DELETE FROM film WHERE film_id = ?";
         //Supprimer un film
-        try (Connection connection = getConnection();
+        try (Connection connection = ConnectionDb.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, film.getFilm_id());
             preparedStatement.executeUpdate();
