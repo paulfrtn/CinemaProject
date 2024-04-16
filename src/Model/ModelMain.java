@@ -17,7 +17,7 @@ public class ModelMain {
                 // Créer une instance de FilmDaoImpl
                 FilmDaoImpl filmDao = new FilmDaoImpl();
 
-                // Créer un nouvel objet film
+
                 // Créer un nouvel objet film
                 Film newFilm = new Film(
                         0, // l'ID est généralement auto-généré par la base de données

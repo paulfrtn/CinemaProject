@@ -30,10 +30,6 @@ public class FilmDaoImpl implements FilmDao {
         }
     }
 
-
-
-
-
     // Read
     @Override
     public Film getFilmById(int id) {
