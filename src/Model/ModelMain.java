@@ -15,10 +15,13 @@ public class ModelMain {
                 User user = new User("John", "Doe", "JohnDoe@mail.fr", "JohnDoe", "password", true, java.sql.Date.valueOf("1990-01-01"), 1);
                 UserDaoImpl userDao = new UserDaoImpl();
                 //userDao.addUser(user);
-                User user2 = userDao.getUserById(1);
-                userDao.deleteUserById(1);
-                userDao.deleteUserByPseudo("JohnDoe");
-                System.out.println(user2.toString());
+                //userDao.deleteUserById(1);
+                //userDao.deleteUserByPseudo("JohnDoe");
+                user.setUser_mail("JohnDoe@gmail.com");
+                //System.out.println(user.getUser_mail());
+                User user2 = userDao.getUserById(3);
+                userDao.updateUser(user2);
+                //System.out.println(user2.toString());
 
             } else {
                 System.out.println("Failed to make connection!");
