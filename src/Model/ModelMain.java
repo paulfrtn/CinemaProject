@@ -1,67 +1,47 @@
 package Model;
 
-import Model.Film.Film;
-import Model.Film.FilmDaoImpl;
+import Model.Seance.Seance;
+import Model.Seance.SeanceDaoImpl;
 
-import java.sql.Connection;
+import java.sql.Time;
+import java.util.Calendar;
 import java.util.Date;
-
-import Model.DataBase.ConnectionDb;
+import java.util.GregorianCalendar;
 
 public class ModelMain {
     public static void main(String[] args) {
-        try (Connection connection = ConnectionDb.getConnection()) {
-            if (connection != null) {
-                System.out.println("Connected to the database!");
+        SeanceDaoImpl seanceDao = new SeanceDaoImpl();
 
-                // Créer une instance de FilmDaoImpl
-                FilmDaoImpl filmDao = new FilmDaoImpl();
+        // Créer un nouvel objet Seance
+        Calendar calendar = GregorianCalendar.getInstance();
+        calendar.set(2024, Calendar.APRIL, 16, 19, 30); // Date et heure arbitraires pour la séance
+        Date seanceDate = calendar.getTime();
+        Time seanceTime = new Time(calendar.getTimeInMillis());
 
+        Seance newSeance = new Seance(0, seanceDate, seanceTime, "Français", 0, 5, 1); // Remplacez les ID de film et de salle par des valeurs réelles
 
-                // Créer un nouvel objet film
-                Film newFilm = new Film(
-                        0, // l'ID est généralement auto-généré par la base de données
-                        "Le Titre du Film",
-                        "Le Réalisateur",
-                        "Le Genre",
-                        120, // Durée en minutes
-                        "Le Synopsis",
-                        new Date(), // Utiliser java.sql.Date pour les tests
-                        true, // Statut du film
-                        "https://lien.vers/affiche_du_film.jpg" // URL de l'affiche du film
-                );
+        // Ajouter la séance dans la base de données
+        seanceDao.addSeance(newSeance);
+        System.out.println("Séance ajoutée à la base de données.");
 
-// Ajouter le film dans la base de données
-                filmDao.addFilm(newFilm);
-                System.out.println("Film added to database.");
+        // Récupérer la séance par son ID
+        Seance fetchedSeance = seanceDao.getSeanceById(4); // Remplacez par l'ID réel après l'insertion
+        Seance fetchedSeance2 = seanceDao.getSeanceById(7);
+        if (fetchedSeance != null) {
+            System.out.println("Séance récupérée : " + fetchedSeance.toString());
+        }
 
+        // Mettre à jour la séance
+        if (fetchedSeance2 != null) {
+            fetchedSeance2.setSeance_nb_reservation(10000); // Mettre à jour le nombre de réservations
+            seanceDao.updateSeance(fetchedSeance2);
+            System.out.println("Séance mise à jour.");
+        }
 
-                // Récupérer le film par son titre
-                Film fetchedFilm = filmDao.getFilmByTitle("Le Titre du Film");
-                if (fetchedFilm != null) {
-                    System.out.println("Film retrieved: " + fetchedFilm.toString());
-                }
-
-                // Mettre à jour le film
-                if (fetchedFilm != null) {
-                    fetchedFilm.setFilm_duration(125); // Modifier la durée
-                    filmDao.updateFilm(fetchedFilm);
-                    System.out.println("Film updated.");
-                }
-
-                // Supprimer le film
-                if (fetchedFilm != null) {
-                    filmDao.deleteFilm(fetchedFilm);
-                    System.out.println("Film deleted.");
-                }
-
-            } else {
-                System.out.println("Failed to make connection!");
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        // Supprimer la séance
+        if (fetchedSeance != null) {
+            seanceDao.deleteSeance(fetchedSeance);
+            System.out.println("Séance supprimée.");
         }
     }
 }
-
