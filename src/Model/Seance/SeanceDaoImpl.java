@@ -12,11 +12,7 @@ import Model.DataBase.ConnectionDb;
 
 public class SeanceDaoImpl {
     //Nous allons réaliser le CRUD (Create, Read, Update, Delete)
-    private Connection getConnection () throws SQLException {
-        //Connexion à la base de données
-        return DriverManager.getConnection("jdbc:mysql://localhost:3307/Cinema", "root", "password");
-
-    }
+    
     // Create
     public void addSeance(Seance seance) {
         String sql = "INSERT INTO Seance (seance_date, seance_time, seance_language, seance_nb_reservation, film_id, salle_id) VALUES (?, ?, ?, ?, ?, ?)";
