@@ -9,13 +9,17 @@ public class Seance {
     private Time seance_time;
     private String seance_language;
     private int seance_nb_reservation;
+    private int film_id;
+    private int salle_id;
 
-    public Seance(int seance_id, Date seance_date, Time seance_time, String seance_language, int seance_nb_reservation) {
+    public Seance(int seance_id, Date seance_date, Time seance_time, String seance_language, int seance_nb_reservation, int film_id, int salle_id) {
         this.seance_id = seance_id;
         this.seance_date = seance_date;
         this.seance_time = seance_time;
         this.seance_language = seance_language;
         this.seance_nb_reservation = seance_nb_reservation;
+        this.film_id = film_id; // Initialisation de film_id
+        this.salle_id = salle_id; // Initialisation de salle_id
     }
 
     // Getters
@@ -39,6 +43,13 @@ public class Seance {
         return seance_nb_reservation;
     }
 
+    public int getFilm_id() {
+        return film_id;
+    }
+
+    public int getSalle_id() {
+        return salle_id;
+    }
     // Setters
 
     public void setSeance_id(int seance_id) {
@@ -60,4 +71,24 @@ public class Seance {
     public void setSeance_nb_reservation(int seance_nb_reservation) {
         this.seance_nb_reservation = seance_nb_reservation;
     }
+
+    public void setFilm_id(int film_id) {
+        this.film_id = film_id;
+    }
+
+    public void setSalle_id(int salle_id) {
+        this.salle_id = salle_id;
+    }
+
+    @Override
+    public String toString() {
+        return "Seance{" +
+                "seance_id=" + seance_id +
+                ", seance_date=" + seance_date +
+                ", seance_time=" + seance_time +
+                ", seance_language='" + seance_language + '\'' +
+                ", seance_nb_reservation=" + seance_nb_reservation +
+                '}';
+    }
+
 }
