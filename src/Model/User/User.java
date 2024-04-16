@@ -23,6 +23,17 @@ public class User {
         this.user_birthday = user_birthday;
         this.user_type = user_type;
     }
+    public User(int id,String user_firstname, String user_lastname, String user_mail, String user_pseudo, String user_password, Boolean user_role, Date user_birthday, int user_type) {
+        this.user_id = id;
+        this.user_firstname = user_firstname;
+        this.user_lastname = user_lastname;
+        this.user_mail = user_mail;
+        this.user_pseudo = user_pseudo;
+        this.user_password = user_password;
+        this.user_role = user_role;
+        this.user_birthday = user_birthday;
+        this.user_type = user_type;
+    }
 
     // Getters
     public int getUser_id() {
