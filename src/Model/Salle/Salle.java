@@ -54,5 +54,14 @@ public class Salle {
         this.salle_dispo = salle_dispo;
     }
 
+    @Override
+    public String toString() {
+        return "Salle{" +
+                "salle_id=" + salle_id +
+                ", salle_number=" + salle_number +
+                ", salle_capa_max=" + salle_capa_max +
+                ", salle_dispo=" + salle_dispo +
+                '}';
+    }
 
 }
