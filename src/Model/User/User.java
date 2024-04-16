@@ -124,5 +124,6 @@ public class User {
                 ", user_birthday=" + user_birthday +
                 ", user_type=" + user_type +
                 '}';
+
     }
 }
