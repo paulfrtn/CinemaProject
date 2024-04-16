@@ -92,21 +92,21 @@ public class FilmDaoImpl implements FilmDao {
     // Update
     @Override
     public void updateFilm(Film film) {
-        String query = "UPDATE film SET film_title = ?, film_director = ?, film_genre = ?, film_duration = ?, film_synopsis = ?, film_release_date = ?, film_status = ?, film_poster = ?, WHERE film_id = ?";
+        String query = "UPDATE film SET film_title = ?, film_director = ?, film_genre = ?, film_duration = ?, film_synopsis = ?, film_release_date = ?, film_status = ?, film_poster = ? WHERE film_id = ?";
 
         //Mettre à jour un film
         try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1, film.getFilm_title());
-            preparedStatement.setString(2, film.getFilm_director());
-            preparedStatement.setString(3, film.getFilm_genre());
-            preparedStatement.setInt(4, film.getFilm_duration());
-            preparedStatement.setString(5, film.getFilm_synopsis());
-            preparedStatement.setDate(6, new java.sql.Date(film.getFilm_release_date().getTime()));
-            preparedStatement.setBoolean(7, film.getFilm_status());
-            preparedStatement.setInt(8, film.getFilm_id());
-            preparedStatement.setString(9, film.getFilm_poster());
-            preparedStatement.executeUpdate();
+                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setString(1, film.getFilm_title());
+                preparedStatement.setString(2, film.getFilm_director());
+                preparedStatement.setString(3, film.getFilm_genre());
+                preparedStatement.setInt(4, film.getFilm_duration());
+                preparedStatement.setString(5, film.getFilm_synopsis());
+                preparedStatement.setDate(6, new java.sql.Date(film.getFilm_release_date().getTime()));
+                preparedStatement.setBoolean(7, film.getFilm_status());
+                preparedStatement.setString(8, film.getFilm_poster());
+                preparedStatement.setInt(9, film.getFilm_id());
+                preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
     }

@@ -15,7 +15,7 @@ public class ModelMain {
                 System.out.println("Connected to the database!");
 
                 // Créer une instance de FilmDaoImpl
-                FilmDaoImpl filmDao  = new FilmDaoImpl();
+                FilmDaoImpl filmDao = new FilmDaoImpl();
 
                 // Créer un nouvel objet film
                 // Créer un nouvel objet film
@@ -35,7 +35,7 @@ public class ModelMain {
                 filmDao.addFilm(newFilm);
                 System.out.println("Film added to database.");
 
-/*
+
                 // Récupérer le film par son titre
                 Film fetchedFilm = filmDao.getFilmByTitle("Le Titre du Film");
                 if (fetchedFilm != null) {
@@ -48,19 +48,20 @@ public class ModelMain {
                     filmDao.updateFilm(fetchedFilm);
                     System.out.println("Film updated.");
                 }
-
+/*
                 // Supprimer le film
                 if (fetchedFilm != null) {
                     filmDao.deleteFilm(fetchedFilm);
                     System.out.println("Film deleted.");
-                }
+                }*/
 
             } else {
                 System.out.println("Failed to make connection!");
-            }*/
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 }
+
