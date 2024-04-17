@@ -1,18 +1,34 @@
 package Model.Ticket;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Ticket {
     private int ticket_id;
     private Date ticket_date;
-    private Boolean ticket_status;
+    private Boolean ticket_status; // True = payé, False = non payé (panier ?)
     private int ticket_price;
+    private int user_id; // Si user_id = 0 alors c'est un invité
+    private int seance_id;
+    private int offer_id; // Si offer_id = 0 alors pas d'offre
 
-    public Ticket(int ticket_id, Date ticket_date, Boolean ticket_status, int ticket_price) {
+
+
+    public Ticket(java.sql.Date ticket_date, Boolean ticket_status, int ticket_price, int user_id, int seance_id, int offer_id) {
+        this.ticket_date = ticket_date;
+        this.ticket_status = ticket_status;
+        this.ticket_price = ticket_price;
+        this.user_id = user_id;
+        this.seance_id = seance_id;
+        this.offer_id = offer_id;
+    }
+    public Ticket(int ticket_id, java.sql.Date ticket_date, Boolean ticket_status, int ticket_price, int user_id, int seance_id, int offer_id) {
         this.ticket_id = ticket_id;
         this.ticket_date = ticket_date;
         this.ticket_status = ticket_status;
         this.ticket_price = ticket_price;
+        this.user_id = user_id;
+        this.seance_id = seance_id;
+        this.offer_id = offer_id;
     }
 
     // Getters
@@ -32,6 +48,18 @@ public class Ticket {
         return ticket_price;
     }
 
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public int getSeance_id() {
+        return seance_id;
+    }
+
+    public int getOffer_id() {
+        return offer_id;
+    }
+
     // Setters
 
     public void setTicket_id(int ticket_id) {
@@ -49,6 +77,32 @@ public class Ticket {
     public void setTicket_price(int ticket_price) {
         this.ticket_price = ticket_price;
     }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+
+    public void setSeance_id(int seance_id) {
+        this.seance_id = seance_id;
+    }
+
+    public void setOffer_id(int offer_id) {
+        this.offer_id = offer_id;
+    }
+
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "ticket_id=" + ticket_id +
+                ", ticket_date=" + ticket_date +
+                ", ticket_status=" + ticket_status +
+                ", ticket_price=" + ticket_price +
+                ", user_id=" + user_id +
+                ", seance_id=" + seance_id +
+                ", offer_id=" + offer_id +
+                '}';
+    }
+
 
 
 
