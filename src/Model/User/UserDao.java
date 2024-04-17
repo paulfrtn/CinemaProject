@@ -18,4 +18,9 @@ public interface UserDao {
     public void deleteUserById(int id);
     public void deleteUserByPseudo(String pseudo);
 
+    //Méthodes verifiant si un pseudo est déjà utilisé ou un mail est déjà utilisé
+    public boolean DoesPseudoExist(String pseudo);
+    public boolean DoesMailExist(String mail);
+    public Boolean DoesPasswordExist(String mail, String password);
+
 }

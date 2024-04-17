@@ -2,6 +2,7 @@ package Model.Film;
 import java.sql.*;
 
 import Model.DataBase.ConnectionDb;
+import Model.Seance.Seance;
 
 public class FilmDaoImpl implements FilmDao {
     //Nous allons réaliser le CRUD (Create, Read, Update, Delete)

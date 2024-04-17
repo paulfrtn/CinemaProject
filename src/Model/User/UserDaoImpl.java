@@ -244,4 +244,118 @@ public class UserDaoImpl implements UserDao {
             }
         }
     }
+
+    //Méthodes verifiant si un pseudo est déjà utilisé ou un mail est déjà utilisé
+    public boolean DoesPseudoExist(String pseudo) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        boolean isUsed = false;
+
+        try {
+            con = ConnectionDb.getConnection();
+            String query = "SELECT COUNT(*) FROM user WHERE user_pseudo = ?";
+            ps = con.prepareStatement(query);
+            ps.setString(1, pseudo);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                if (rs.getInt(1) > 0) {
+                    isUsed = true;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return isUsed;
+    }
+
+    public boolean DoesMailExist(String mail) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        boolean isUsed = false;
+
+        try {
+            con = ConnectionDb.getConnection();
+            String query = "SELECT COUNT(*) FROM user WHERE user_mail = ?";
+            ps = con.prepareStatement(query);
+            ps.setString(1, mail);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                if (rs.getInt(1) > 0) {
+                    isUsed = true;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return isUsed;
+    }
+
+    public Boolean DoesPasswordExist(String mail, String password){
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Boolean isUsed = false;
+
+        try {
+            con = ConnectionDb.getConnection();
+            String query = "SELECT COUNT(*) FROM user WHERE user_mail = ? AND user_password = ?";
+            ps = con.prepareStatement(query);
+            ps.setString(1, mail);
+            ps.setString(2, password);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                if (rs.getInt(1) > 0) {
+                    isUsed = true;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return isUsed;
+    }
+
 }
