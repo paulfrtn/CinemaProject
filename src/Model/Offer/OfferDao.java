@@ -4,7 +4,7 @@ public interface OfferDao {
     //Nous allons réaliser le CRUD (Create, Read, Update, Delete)
 
     // Create
-    public void addOffer(Offer offer);
+    public void addOffer(Offer offer, int user_id);
 
     // Read
     public Offer getOfferById(int id);
@@ -16,5 +16,5 @@ public interface OfferDao {
     // Delete
     public void deleteOfferbyId(int id);
 
-    public void deleteofferByName(String name);
+    public void deleteOfferByName(String name);
 }

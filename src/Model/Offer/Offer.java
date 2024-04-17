@@ -1,8 +1,10 @@
 package Model.Offer;
 
-import java.util.Date;
+
+import java.sql.Date;
 
 public class Offer {
+
     private int offer_id;
     private String offer_name;
     private String offer_description;
@@ -11,9 +13,11 @@ public class Offer {
     private float offer_price; // Peut être null
     private float offer_discount; //Peut être null
     private int offer_limit; //Peut être null
+
+    private int offer_user_type; //Peut être null
     private Boolean offer_status;
 
-    public Offer(int offer_id, String offer_name, String offer_description, Date offer_start_date, Date offer_end_date, float offer_price, float offer_discount, int offer_limit, Boolean offer_status) {
+    public Offer(int offer_id, String offer_name, String offer_description, Date offer_start_date, Date offer_end_date, float offer_price, float offer_discount, int offer_limit, int offer_user_type, Boolean offer_status) {
         this.offer_id = offer_id;
         this.offer_name = offer_name;
         this.offer_description = offer_description;
@@ -22,6 +26,19 @@ public class Offer {
         this.offer_price = offer_price;
         this.offer_discount = offer_discount;
         this.offer_limit = offer_limit;
+        this.offer_user_type = offer_user_type;
+        this.offer_status = offer_status;
+    }
+
+    public Offer(String offer_name, String offer_description, Date offer_start_date, Date offer_end_date, float offer_price, float offer_discount, int offer_limit, int offer_user_type, Boolean offer_status) {
+        this.offer_name = offer_name;
+        this.offer_description = offer_description;
+        this.offer_start_date = offer_start_date;
+        this.offer_end_date = offer_end_date;
+        this.offer_price = offer_price;
+        this.offer_discount = offer_discount;
+        this.offer_limit = offer_limit;
+        this.offer_user_type = offer_user_type;
         this.offer_status = offer_status;
     }
 
@@ -56,6 +73,10 @@ public class Offer {
 
     public int getOffer_limit() {
         return offer_limit;
+    }
+
+    public int getOffer_user_type() {
+        return offer_user_type;
     }
 
     public Boolean getOffer_status() {
@@ -93,6 +114,10 @@ public class Offer {
 
     public void setOffer_limit(int offer_limit) {
         this.offer_limit = offer_limit;
+    }
+
+    public void setOffer_user_type(int offer_user_type) {
+        this.offer_user_type = offer_user_type;
     }
 
     public void setOffer_status(Boolean offer_status) {

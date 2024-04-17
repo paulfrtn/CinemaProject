@@ -14,6 +14,7 @@ public class User {
     private int user_type;
     private String user_token;
 
+
     public User(String user_firstname, String user_lastname, String user_mail, String user_pseudo, String user_password, Boolean user_role, Date user_birthday, int user_type) {
         this.user_firstname = user_firstname;
         this.user_lastname = user_lastname;
