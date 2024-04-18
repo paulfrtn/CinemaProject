@@ -1,8 +1,6 @@
 package View;
 
-import Controller.ControllerSignUp;
-import View.SignUp;
-import View.SignUp2;
+import Controller.SignUp.ControllerSignUp;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,15 +26,17 @@ public class MainFrame extends JFrame {
         ControllerSignUp controller = new ControllerSignUp();
         SignUp signUpPanel = new SignUp(controller);
         SignUp2 signUp2Panel = new SignUp2();
+        SignInTest signInPanel = new SignInTest();
 
         // Ajout des pages au conteneur principal
         cardsPanel.add(signUpPanel, "SignUpPanel");
         cardsPanel.add(signUp2Panel, "SignUp2Panel");
+        cardsPanel.add(signInPanel, "SignInPanel");
 
-        // Afficher la page SignUp au démarrage
+        // Afficher la page Controller.SignUp au démarrage
         cardLayout.show(cardsPanel, "SignUpPanel");
 
-        // ActionListener pour changer de page de SignUp à SignUp2
+        // ActionListener pour changer de page de Controller.SignUp à SignUp2
         signUpPanel.getSignUpButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -51,6 +51,12 @@ public class MainFrame extends JFrame {
                 if (success) {
                     cardLayout.show(cardsPanel, "SignUp2Panel");
                 }
+            }
+        });
+        signUpPanel.getalreadyMemberButton().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(cardsPanel, "SignInPanel");
             }
         });
     }

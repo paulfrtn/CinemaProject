@@ -3,11 +3,8 @@ package View;
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.EmptyBorder;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import Controller.ControllerSignUp;
-import Controller.ControllerSignUpInterface;
+import Controller.SignUp.ControllerSignUp;
 
 public class SignUp extends JPanel {
     private ControllerSignUp controller;
@@ -19,6 +16,7 @@ public class SignUp extends JPanel {
     private JPasswordField passwordField;
     private JTextField birthdayField;
     private JButton signUpButton; // Ajout du champ pour le bouton d'inscription
+    private JButton alreadyMemberButton;
 
     public SignUp(ControllerSignUp controller) {
         this.controller = controller;
@@ -77,7 +75,7 @@ public class SignUp extends JPanel {
         }
 
         signUpButton = new JButton("S'inscrire"); // Initialisation du bouton d'inscription
-        JButton alreadyMemberButton = new JButton("Déjà membre ?");
+        alreadyMemberButton = new JButton("Déjà membre ?");
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
@@ -129,5 +127,9 @@ public class SignUp extends JPanel {
 
     public JButton getSignUpButton() {
         return signUpButton;
+    }
+
+    public JButton getalreadyMemberButton() {
+        return alreadyMemberButton;
     }
 }

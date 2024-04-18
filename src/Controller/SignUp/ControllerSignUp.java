@@ -1,4 +1,4 @@
-package Controller;
+package Controller.SignUp;
 
 import Model.User.User;
 import Model.User.UserDaoImpl;
