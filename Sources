@@ -1,1 +1,24 @@
 Mettre les sources que l'on utilise
+
+
+Explication de la fonction Hash et de la méthode utilisée pour créer cette fonction :
+
+1. Hachage avec SHA-256 :
+SHA-256 est une fonction de hachage cryptographique qui prend une entrée, comme un mot de passe, et produit une empreinte numérique fixe de 256 bits (32 octets). 
+Cette empreinte est unique pour chaque entrée différente et il est pratiquement impossible de retrouver l'entrée originale à partir de cette empreinte, rendant le processus 
+irréversible et sécurisé.
+
+2. Encodage en Base64 :
+Les résultats de SHA-256 sont des données binaires qui peuvent contenir des caractères non imprimables ou spéciaux. Pour faciliter le stockage ou la transmission de ces données, 
+on utilise l'encodage Base64. Ce dernier convertit les données binaires en une chaîne de caractères composée uniquement de caractères alphanumériques, plus quelques symboles 
+supplémentaires, rendant le résultat sûr pour le stockage en texte clair.
+
+3. Méthode hashPassword :
+Cette méthode prend un mot de passe en texte clair comme entrée. Elle effectue les étapes suivantes :
+Hachage : Le mot de passe est transformé en utilisant SHA-256, produisant une empreinte de 256 bits.
+Encodage Base64 : L'empreinte binaire obtenue est encodée en une chaîne Base64, facilitant ainsi son stockage dans des bases de données ou d'autres types de stockage de données.
+
+4. Méthode checkPassword :
+Cette méthode permet de vérifier si un mot de passe fourni par l'utilisateur correspond au hachage stocké. Elle procède comme suit :
+Hachage du mot de passe de l'utilisateur : Le mot de passe à vérifier est d'abord haché avec SHA-256, de la même manière que lors de l'enregistrement initial du mot de passe.
+Comparaison : L'empreinte obtenue est comparée à l'empreinte hachée et stockée (après décodage du Base64 si nécessaire). Si les deux empreintes sont identiques, le mot de passe entré est correct.
