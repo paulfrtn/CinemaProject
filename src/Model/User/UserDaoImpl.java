@@ -7,6 +7,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+
+import Model.DataBase.ConnectionDb;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 public class UserDaoImpl implements UserDao {
     //Nous allons réaliser le CRUD (Create, Read, Update, Delete)
 
@@ -358,4 +370,20 @@ public class UserDaoImpl implements UserDao {
         return isUsed;
     }
 
-}
+    
+
+ }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

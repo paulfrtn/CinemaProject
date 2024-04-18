@@ -1,4 +1,4 @@
-package View;
+package View.TestPage;
 
 import javax.swing.*;
 import java.awt.*;
