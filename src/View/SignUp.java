@@ -3,16 +3,26 @@ package View;
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import Controller.ControllerSignUp;
+import Controller.ControllerSignUpInterface;
 
 public class SignUp extends JPanel {
+    private ControllerSignUp controller;
+
     private JTextField firstNameField;
     private JTextField lastNameField;
     private JTextField emailField;
     private JTextField pseudoField;
-    private JTextField passwordField;
+    private JPasswordField passwordField;
     private JTextField birthdayField;
+    private JButton signUpButton; // Ajout du champ pour le bouton d'inscription
 
-    public SignUp() {
+    public SignUp(ControllerSignUp controller) {
+        this.controller = controller;
+
         setBackground(Color.decode("#2a2d43"));
 
         JPanel centralPanel = new JPanel();
@@ -35,10 +45,15 @@ public class SignUp extends JPanel {
         for (String label : labels) {
             JLabel formLabel = new JLabel(label);
             formLabel.setForeground(Color.WHITE);
-            JTextField formField = new JTextField();
+            JTextField formField;
+            if (label.equals("Mot de passe:")) {
+                formField = new JPasswordField();
+            } else {
+                formField = new JTextField();
+            }
             formPanel.add(formLabel);
             formPanel.add(formField);
-            // Stockez les références aux champs dans les variables membres privées
+
             switch (label) {
                 case "Prénom:":
                     firstNameField = formField;
@@ -53,15 +68,15 @@ public class SignUp extends JPanel {
                     pseudoField = formField;
                     break;
                 case "Mot de passe:":
-                    passwordField = formField;
+                    passwordField = (JPasswordField) formField;
                     break;
-                case "Date de naissance (yyyy-MM-dd):":
+                case "Date de naissance (YYYY-MM-DD):":
                     birthdayField = formField;
                     break;
             }
         }
 
-        JButton signUpButton = new JButton("S'inscrire");
+        signUpButton = new JButton("S'inscrire"); // Initialisation du bouton d'inscription
         JButton alreadyMemberButton = new JButton("Déjà membre ?");
 
         JPanel buttonPanel = new JPanel();
@@ -69,7 +84,7 @@ public class SignUp extends JPanel {
         buttonPanel.setBackground(Color.decode("#7A82AB"));
         signUpButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonPanel.add(signUpButton);
-        buttonPanel.add(Box.createVerticalStrut(10)); // Espace vertical entre les boutons
+        buttonPanel.add(Box.createVerticalStrut(10));
         alreadyMemberButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonPanel.add(alreadyMemberButton);
         buttonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -80,14 +95,14 @@ public class SignUp extends JPanel {
         centralPanel.add(buttonPanel, BorderLayout.SOUTH);
 
         int vgap = 20;
-        formPanel.setBorder(new EmptyBorder(0, 0, vgap, 0)); // Ajout d'un espace en bas du formulaire
+        formPanel.setBorder(new EmptyBorder(0, 0, vgap, 0));
 
         centralPanel.setBorder(new EmptyBorder(vgap, 0, vgap, 0));
 
         add(centralPanel);
+
     }
 
-    // Méthodes pour récupérer les valeurs des champs du formulaire
     public String getFirstName() {
         return firstNameField.getText();
     }
@@ -105,22 +120,14 @@ public class SignUp extends JPanel {
     }
 
     public String getPassword() {
-        return passwordField.getText();
+        return new String(passwordField.getPassword());
     }
 
     public String getBirthday() {
         return birthdayField.getText();
     }
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame();
-        frame.setSize(1200, 800);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
-
-        SignUp signUpPanel = new SignUp();
-        frame.add(signUpPanel);
-        frame.setVisible(true);
-
+    public JButton getSignUpButton() {
+        return signUpButton;
     }
 }
