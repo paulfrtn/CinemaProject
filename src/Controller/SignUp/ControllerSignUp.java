@@ -16,6 +16,10 @@ public class ControllerSignUp implements ControllerSignUpInterface {
         // Vérifiez si le pseudo existe
         boolean pseudoExists = userDao.DoesPseudoExist(pseudo);
 
+        //Hashage du mot de passe
+        Hash hash = new Hash();
+        String HashedPassword;
+
         // Si le mail existe
         if (mailExists && !pseudoExists) {
             popUpMessage.showErrorMessage("L'adresse e-mail est déjà utilisée.");
@@ -31,6 +35,16 @@ public class ControllerSignUp implements ControllerSignUpInterface {
             popUpMessage.showErrorMessage("L'adresse e-mail et le pseudo sont déjà utilisés.");
             return false; // Indiquer que l'inscription a échoué
         }
+
+
+        // Hashage du mot de passe
+        try {
+            HashedPassword = hash.hashPassword(password);
+        } catch (RuntimeException e) {
+            popUpMessage.showErrorMessage("Erreur lors du hashage du mot de passe.");
+            return false; // Indiquer que l'inscription a échoué
+        }
+
 
         Date user_birthday = Date.valueOf(birthday);
         Date currentDate = new Date(System.currentTimeMillis());
@@ -59,7 +73,9 @@ public class ControllerSignUp implements ControllerSignUpInterface {
         }
 
         // Après avoir déterminé le user_type, créez l'objet User
-        User user = new User(firstName, lastName, email, pseudo, password, user_role, user_birthday, user_type);
+
+        User user = new User(firstName, lastName, email, pseudo, HashedPassword, user_role, user_birthday, user_type);
+
         userDao.addUser(user);
 
         //popUpMessage.showSuccessMessage("Inscription réussie !");

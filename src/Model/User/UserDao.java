@@ -1,5 +1,6 @@
 package Model.User;
 
+
 public interface UserDao {
     //Nous allons réaliser le CRUD (Create, Read, Update, Delete)
 
