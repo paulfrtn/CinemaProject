@@ -2,6 +2,7 @@ package View;
 
 import Controller.SignIn.ControllerSignIn;
 import Controller.SignUp.ControllerSignUp;
+import Controller.ControllerFilmSchedule;
 import View.TestPage.InvitePage;
 import View.TestPage.SignInTest;
 import View.TestPage.SignUp2;
@@ -35,15 +36,23 @@ public class MainFrame extends JFrame {
         SignInTest signInTestPanel = new SignInTest();
         InvitePage invitePage = new InvitePage();
 
+        ControllerFilmSchedule controller = new ControllerFilmSchedule();
+        FilmNSchedulePage filmNSchedulePage = new FilmNSchedulePage(controller);
+
+
         // Ajout des pages au conteneur principal
+        cardsPanel.add(filmNSchedulePage, "FilmNSchedulePage");
         cardsPanel.add(signUpPanel, "SignUpPanel");
         cardsPanel.add(signUp2Panel, "SignUp2Panel");
         cardsPanel.add(signInPanel, "SignInPanel");
         cardsPanel.add(signInTestPanel, "SignInTestPanel");
         cardsPanel.add(invitePage, "InvitePage");
 
+
         // Afficher la page Controller.SignUp au démarrage
-        cardLayout.show(cardsPanel, "SignInPanel");
+        //cardLayout.show(cardsPanel, "SignInPanel");
+        cardLayout.show(cardsPanel, "filmNSchedulePage");
+
 
         // ActionListener pour changer de page de Controller.SignUp à SignUp2
         signUpPanel.getSignUpButton().addActionListener(new ActionListener() {
