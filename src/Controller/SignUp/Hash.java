@@ -32,17 +32,5 @@ public class Hash {
             return false;
         }
     }
-
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Entrez un mot de passe : ");
-        String password = sc.nextLine();
-        String hashedPassword = hashPassword(password);
-        System.out.println("Mot de passe haché : " + hashedPassword);
-
-        System.out.println("Entrez un mot de passe à vérifier : ");
-        String passwordToCheck = sc.nextLine();
-        comparePassword(passwordToCheck, hashedPassword);
-    }
 }
 
