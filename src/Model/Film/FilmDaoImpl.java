@@ -1,11 +1,14 @@
 package Model.Film;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import Model.DataBase.ConnectionDb;
-import Model.Seance.Seance;
 
 public class FilmDaoImpl implements FilmDao {
     //Nous allons réaliser le CRUD (Create, Read, Update, Delete)
+    private Connection connection;
+
 
     // Create
 
@@ -120,4 +123,77 @@ public class FilmDaoImpl implements FilmDao {
         }
 
     }
+
+    public FilmDaoImpl(Connection connection) {
+        this.connection = connection;
+    }
+
+
+    public List<Film> getNowShowingFilms(int limit) {
+        String sql = "SELECT * FROM film WHERE film_release_date <= CURRENT_DATE LIMIT ?";
+        return executeFilmQuery(sql, limit);
+    }
+
+    public List<Film> getPremieresFilms(int limit) {
+        String sql = "SELECT * FROM film WHERE film_release_date BETWEEN CURRENT_DATE AND DATE_ADD(CURRENT_DATE, INTERVAL 1 WEEK) LIMIT ?";
+        return executeFilmQuery(sql, limit);
+    }
+
+    public List<Film> getComingSoonFilms(int limit) {
+        String sql = "SELECT * FROM film WHERE film_release_date > DATE_ADD(CURRENT_DATE, INTERVAL 1 WEEK) LIMIT ?";
+        return executeFilmQuery(sql, limit);
+    }
+
+    private List<Film> executeFilmQuery(String sql, int limit) {
+        List<Film> films = new ArrayList<>();
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, limit);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                Film film = new Film(
+                        resultSet.getInt("film_id"),
+                        resultSet.getString("film_title"),
+                        resultSet.getString("film_director"),
+                        resultSet.getString("film_genre"),
+                        resultSet.getInt("film_duration"),
+                        resultSet.getString("film_synopsis"),
+                        resultSet.getDate("film_release_date"),
+                        resultSet.getBoolean("film_status"),
+                        resultSet.getString("film_poster")
+                );
+                films.add(film);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle this more robustly in production
+        }
+        return films;
+    }
+
+public List<Film> getAllFilms() {
+        String sql = "SELECT * FROM film";
+        List<Film> films = new ArrayList<>();
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                Film film = new Film(
+                        resultSet.getInt("film_id"),
+                        resultSet.getString("film_title"),
+                        resultSet.getString("film_director"),
+                        resultSet.getString("film_genre"),
+                        resultSet.getInt("film_duration"),
+                        resultSet.getString("film_synopsis"),
+                        resultSet.getDate("film_release_date"),
+                        resultSet.getBoolean("film_status"),
+                        resultSet.getString("film_poster")
+                );
+                films.add(film);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle this more robustly in production
+        }
+        return films;
+    }
+
 }

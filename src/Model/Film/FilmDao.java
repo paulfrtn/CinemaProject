@@ -1,5 +1,7 @@
 package Model.Film;
 
+import java.util.List;
+
 public interface FilmDao {
     //Nous allons réaliser le CRUD (Create, Read, Update, Delete)
 
@@ -15,5 +17,19 @@ public interface FilmDao {
 
     // Delete
     public void deleteFilm(Film film);
+
+    // Read
+    public static List<Film> getNowShowingFilms() {
+        return null;
+    }
+
+    public static List<Film> getPremieresFilms() {
+        return null;
+    }
+
+    public static List<Film> getComingSoonFilms() {
+        return null;
+    }
+
 
 }
