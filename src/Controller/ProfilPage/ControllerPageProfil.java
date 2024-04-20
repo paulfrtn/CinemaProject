@@ -27,4 +27,16 @@ public class ControllerPageProfil {
             JOptionPane.showMessageDialog(view, e.getMessage());
         }
     }
+
+    public void displaySeanceUser(int userId) throws UserNotFoundException{
+        try {
+            User user = model.getUserById(userId);
+            if (user == null) {
+                throw new UserNotFoundException("User not found with ID: " + userId);
+            }
+
+        } catch (UserNotFoundException e) {
+            JOptionPane.showMessageDialog(view, e.getMessage());
+        }
+    }
 }
