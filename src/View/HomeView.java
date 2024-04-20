@@ -111,10 +111,6 @@ public class HomeView extends JFrame {
         });
 
 
-
-
-
-
         topPanel.add(searchPanel, BorderLayout.EAST);
         mainPanel.add(topPanel, BorderLayout.NORTH);
 
