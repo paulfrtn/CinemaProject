@@ -24,7 +24,6 @@ public class ControllerSignIn {
                 return false; // Indiquer que la connexion a échoué
             }else{
                 //popUpMessage.showSuccessMessage("Connexion réussie."+user.toString());
-
                 return true;
             }
         }
