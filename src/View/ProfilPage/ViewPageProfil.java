@@ -15,6 +15,8 @@ public class ViewPageProfil extends JFrame {
     private JLabel lblBirthday;
     private JLabel lblType;
 
+    private JLabel lblSeance;
+
     public ViewPageProfil() {
         setTitle("Votre Profil Utilisateur");
         setSize(1200, 800);
@@ -31,6 +33,7 @@ public class ViewPageProfil extends JFrame {
         lblRole = new JLabel(" Role: ");
         lblBirthday = new JLabel(" Date de naissance: ");
         lblType = new JLabel(" Type d'utilisateur: ");
+        lblSeance = new JLabel(" Séance: ");
 
         lblFirstName.setFont(new Font("Arial", Font.BOLD, 24));
         lblFirstName.setForeground(Color.decode("#FFFFFF"));
@@ -69,6 +72,19 @@ public class ViewPageProfil extends JFrame {
         add(createUserInfoPanel(lblType, loadIcon("/user.png", iconSize, iconSize), panelSize));
 
         setVisible(true);
+    }
+
+    private JPanel createUserSeancePanel(JLabel label){
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        panel.setBackground(Color.decode("#FFFFFF"));
+        panel.setBorder(new EmptyBorder(10, 10, 10, 10));
+        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+        return panel;
+    }
+
+    public void setUserSeance(String seance){
+        lblSeance.setText(" Séance: " + seance);
     }
 
     private JPanel createUserInfoPanel(JLabel label, ImageIcon icon, Dimension size) {
