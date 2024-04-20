@@ -34,7 +34,6 @@ public class ControllerPageProfil {
             if (user == null) {
                 throw new UserNotFoundException("User not found with ID: " + userId);
             }
-
         } catch (UserNotFoundException e) {
             JOptionPane.showMessageDialog(view, e.getMessage());
         }
