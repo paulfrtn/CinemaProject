@@ -124,9 +124,6 @@ public class FilmDaoImpl implements FilmDao {
 
     }
 
-    public FilmDaoImpl(Connection connection) {
-        this.connection = connection;
-    }
 
 
     public List<Film> getNowShowingFilms(int limit) {
@@ -146,7 +143,8 @@ public class FilmDaoImpl implements FilmDao {
 
     private List<Film> executeFilmQuery(String sql, int limit) {
         List<Film> films = new ArrayList<>();
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+        try (Connection connection = ConnectionDb.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, limit);
             ResultSet resultSet = statement.executeQuery();
 
@@ -173,7 +171,8 @@ public class FilmDaoImpl implements FilmDao {
 public List<Film> getAllFilms() {
         String sql = "SELECT * FROM film";
         List<Film> films = new ArrayList<>();
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+        try (Connection connection = ConnectionDb.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {

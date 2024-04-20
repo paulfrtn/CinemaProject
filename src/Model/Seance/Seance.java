@@ -1,7 +1,7 @@
 package Model.Seance;
 
 import java.sql.Time;
-import java.util.Date;
+import java.sql.Date;
 
 public class Seance {
     private int seance_id;

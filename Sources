@@ -22,3 +22,9 @@ Encodage Base64 : L'empreinte binaire obtenue est encodée en une chaîne Base64
 Cette méthode permet de vérifier si un mot de passe fourni par l'utilisateur correspond au hachage stocké. Elle procède comme suit :
 Hachage du mot de passe de l'utilisateur : Le mot de passe à vérifier est d'abord haché avec SHA-256, de la même manière que lors de l'enregistrement initial du mot de passe.
 Comparaison : L'empreinte obtenue est comparée à l'empreinte hachée et stockée (après décodage du Base64 si nécessaire). Si les deux empreintes sont identiques, le mot de passe entré est correct.
+
+5. Classe BorderRadButton :
+Cette classe permet de créer un bouton personnalisé avec des coins arrondis.
+Elle hérite de la classe JButton de Swing et arrondis ses bords d'un rayon spécifié.
+Source : https://gist.github.com/henriqueblang/1f7890fce85883e9f0c97005eed46ffa
+Source : https://stackoverflow.com/questions/16343098/rounded-jbutton-in-java

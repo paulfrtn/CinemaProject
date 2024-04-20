@@ -1,14 +1,13 @@
 package View;
 
-import Model.DataBase.ConnectionDb;
 import Model.Film.Film;
 import Model.Film.FilmDaoImpl;
+import View.BorderRadCompenent.RoundButton;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.SQLException;
 import java.util.List;
 
 public class HomeView extends JFrame {
@@ -54,11 +53,7 @@ public class HomeView extends JFrame {
 
         btnFilms.addActionListener(e -> {
             FilmDaoImpl filmDao = null;
-            try {
-                filmDao = new FilmDaoImpl(ConnectionDb.getConnection());
-            } catch (SQLException ex) {
-                throw new RuntimeException(ex);
-            }
+            filmDao = new FilmDaoImpl();
             List<Film> films = filmDao.getAllFilms();
             StringBuilder filmList = new StringBuilder();
             for (Film film : films) {
@@ -91,19 +86,14 @@ public class HomeView extends JFrame {
 
             if (searchText != null && !searchText.trim().isEmpty()) {
                 FilmDaoImpl filmDao;
-                try {
-                    filmDao = new FilmDaoImpl(ConnectionDb.getConnection());
-                    Film film = filmDao.getFilmByTitle(searchText.trim());
-                    if (film != null) {
-                        JOptionPane.showMessageDialog(this, "Film trouvé : " + film.getFilm_title() +
-                                "\nRéalisateur: " + film.getFilm_director() +
-                                "\nGenre: " + film.getFilm_genre(), "Résultat de la recherche", JOptionPane.INFORMATION_MESSAGE);
-                    } else {
-                        JOptionPane.showMessageDialog(this, "Aucun film trouvé avec ce titre.", "Résultat de la recherche", JOptionPane.INFORMATION_MESSAGE);
-                    }
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                    JOptionPane.showMessageDialog(this, "Erreur lors de la recherche de films.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                filmDao = new FilmDaoImpl();
+                Film film = filmDao.getFilmByTitle(searchText.trim());
+                if (film != null) {
+                    JOptionPane.showMessageDialog(this, "Film trouvé : " + film.getFilm_title() +
+                            "\nRéalisateur: " + film.getFilm_director() +
+                            "\nGenre: " + film.getFilm_genre(), "Résultat de la recherche", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Aucun film trouvé avec ce titre.", "Résultat de la recherche", JOptionPane.INFORMATION_MESSAGE);
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "La recherche ne peut être vide.", "Erreur", JOptionPane.ERROR_MESSAGE);

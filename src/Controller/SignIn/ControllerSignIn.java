@@ -5,7 +5,7 @@ import Model.User.User;
 import Model.User.UserDaoImpl;
 import View.PopUpMessage;
 
-public class ControllerSignIn {
+public class ControllerSignIn implements ControllerSignInInterface{
     public boolean onSignIn(String email, String password) {
         UserDaoImpl userDao = new UserDaoImpl();
         Hash hash = new Hash();

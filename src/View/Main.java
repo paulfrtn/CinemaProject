@@ -13,7 +13,7 @@ public class Main {
         SwingUtilities.invokeLater(() -> {
             try {
                 ConnectionDb dbConnection = new ConnectionDb();
-                FilmDaoImpl filmDao = new FilmDaoImpl(dbConnection.getConnection());
+                FilmDaoImpl filmDao = new FilmDaoImpl();
 
                 int filmLimit = 100; // Définissez le nombre de films à afficher dans chaque carousel
 

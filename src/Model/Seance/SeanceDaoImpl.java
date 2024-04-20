@@ -4,15 +4,19 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import Model.Film.*;
 import Model.Salle.Salle;
 import Model.DataBase.ConnectionDb;
 
 
-public class SeanceDaoImpl {
+public class SeanceDaoImpl implements SeanceDao {
     //Nous allons réaliser le CRUD (Create, Read, Update, Delete)
-    
+
     // Create
     public void addSeance(Seance seance) {
         String sql = "INSERT INTO Seance (seance_date, seance_time, seance_language, seance_nb_reservation, film_id, salle_id) VALUES (?, ?, ?, ?, ?, ?)";
@@ -29,7 +33,6 @@ public class SeanceDaoImpl {
             e.printStackTrace();
         }
     }
-
 
 
     // Read
@@ -53,8 +56,8 @@ public class SeanceDaoImpl {
         } catch (SQLException e) {
             e.printStackTrace();
 
-            }
-    return null;
+        }
+        return null;
     }
 
     // Update
@@ -84,4 +87,58 @@ public class SeanceDaoImpl {
             e.printStackTrace();
         }
     }
+
+    public List<Seance> getSeanceByDateNFilmId(java.sql.Date date, int film_id) {
+        String query = "SELECT * FROM Seance WHERE seance_date = ? AND film_id = ?";
+        List<Seance> seances = new ArrayList<>();
+        //Récupérer une séance par sa date
+        try (Connection connection = ConnectionDb.getConnection();
+
+             java.sql.PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setDate(1, date);
+            preparedStatement.setInt(2, film_id);
+            java.sql.ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                seances.add(new Seance(
+                        resultSet.getInt("seance_id"),
+                        resultSet.getDate("seance_date"),
+                        resultSet.getTime("seance_time"),
+                        resultSet.getString("seance_language"),
+                        resultSet.getInt("seance_nb_reservation"),
+                        resultSet.getInt("film_id"),
+                        resultSet.getInt("salle_id"))
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return seances;
+    }
+
+    public Seance getSeanceByTimeNFilmIdNDate(Time time, int film_id, Date date) {
+        String query = "SELECT * FROM Seance WHERE seance_time = ? AND film_id = ? AND seance_date = ?";
+        Seance seance = null;
+        //Récupérer une séance par son heure
+        try (Connection connection = ConnectionDb.getConnection();
+             java.sql.PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setTime(1, time);
+            preparedStatement.setInt(2, film_id);
+            preparedStatement.setDate(3, date);
+            java.sql.ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                seance = new Seance(
+                        resultSet.getInt("seance_id"),
+                        resultSet.getDate("seance_date"),
+                        resultSet.getTime("seance_time"),
+                        resultSet.getString("seance_language"),
+                        resultSet.getInt("seance_nb_reservation"),
+                        resultSet.getInt("film_id"),
+                        resultSet.getInt("salle_id"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return seance;
+    }
+
 }

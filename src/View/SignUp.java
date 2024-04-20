@@ -5,6 +5,10 @@ import java.awt.*;
 import javax.swing.border.EmptyBorder;
 
 import Controller.SignUp.ControllerSignUp;
+import View.BorderRadCompenent.BorderRadButton;
+import View.BorderRadCompenent.BorderRadPanel;
+import View.BorderRadCompenent.BorderRadPasswordField;
+import View.BorderRadCompenent.BorderRadTextField;
 
 public class SignUp extends JPanel {
     private ControllerSignUp controller;
@@ -18,14 +22,28 @@ public class SignUp extends JPanel {
     private JButton signUpButton; // Ajout du champ pour le bouton d'inscription
     private JButton alreadyMemberButton;
 
+
     public SignUp(ControllerSignUp controller) {
         this.controller = controller;
 
-        setBackground(Color.decode("#2a2d43"));
+        setLayout(new BorderLayout());
 
-        JPanel centralPanel = new JPanel();
+        // Charger l'image de fond
+        Image backgroundImage = new ImageIcon("src/Model/Images/SignInUp/Background.jpg").getImage();
+
+        JPanel FirstPanel = new BorderRadPanel(10) {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.drawImage(backgroundImage, 0, 0, this);
+            }
+        };
+
+        JPanel centralPanel = new BorderRadPanel(10);
         centralPanel.setPreferredSize(new Dimension(400, 600));
-        centralPanel.setBackground(Color.decode("#7A82AB"));
+        centralPanel.setLayout(new BoxLayout(centralPanel, BoxLayout.Y_AXIS));
+        centralPanel.setBorder(new EmptyBorder(50, 50, 50, 50));
+        centralPanel.setBackground(Color.decode("#000000"));
 
         JLabel title = new JLabel("Inscription");
         title.setFont(new Font("Arial", Font.BOLD, 20));
@@ -33,21 +51,26 @@ public class SignUp extends JPanel {
         title.setHorizontalAlignment(JLabel.CENTER);
 
         JPanel titlePanel = new JPanel(new BorderLayout());
-        titlePanel.setBackground(Color.decode("#7A82AB"));
+        titlePanel.setBackground(Color.decode("#000000"));
         titlePanel.add(title, BorderLayout.CENTER);
 
-        JPanel formPanel = new JPanel(new GridLayout(6, 2, 5, 60));
-        formPanel.setBackground(Color.decode("#7A82AB"));
+        JPanel formPanel = new JPanel(new GridLayout(12, 1, 5, 10));
+        formPanel.setBackground(Color.decode("#000000"));
 
         String[] labels = {"Prénom:", "Nom de famille:", "E-mail:", "Pseudo:", "Mot de passe:", "Date de naissance (YYYY-MM-DD):"};
         for (String label : labels) {
             JLabel formLabel = new JLabel(label);
             formLabel.setForeground(Color.WHITE);
             JTextField formField;
+
             if (label.equals("Mot de passe:")) {
-                formField = new JPasswordField();
+                formField = new BorderRadPasswordField(10);
+                formField.setPreferredSize(new Dimension(200, 25));
+                formField.setBorder(null);
             } else {
-                formField = new JTextField();
+                formField = new BorderRadTextField(10);
+                formField.setPreferredSize(new Dimension(200, 20));
+                formField.setBorder(null);
             }
             formPanel.add(formLabel);
             formPanel.add(formField);
@@ -74,13 +97,14 @@ public class SignUp extends JPanel {
             }
         }
 
-        signUpButton = new JButton("S'inscrire"); // Initialisation du bouton d'inscription
-        alreadyMemberButton = new JButton("Déjà membre ?");
+        signUpButton = new BorderRadButton("S'inscrire",15); // Initialisation du bouton d'inscription
+        alreadyMemberButton = new BorderRadButton("Déjà membre ?",15);
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
-        buttonPanel.setBackground(Color.decode("#7A82AB"));
+        buttonPanel.setBackground(Color.decode("#000000"));
         signUpButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        signUpButton.setBackground(Color.decode("#FDF0D5"));
         buttonPanel.add(signUpButton);
         buttonPanel.add(Box.createVerticalStrut(10));
         alreadyMemberButton.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -97,7 +121,12 @@ public class SignUp extends JPanel {
 
         centralPanel.setBorder(new EmptyBorder(vgap, 0, vgap, 0));
 
-        add(centralPanel);
+        centralPanel.setLayout(new BorderLayout());
+        centralPanel.add(titlePanel, BorderLayout.NORTH);
+        centralPanel.add(formPanel, BorderLayout.CENTER);
+        centralPanel.add(buttonPanel, BorderLayout.SOUTH);
+
+        add(centralPanel, BorderLayout.CENTER);
 
     }
 
