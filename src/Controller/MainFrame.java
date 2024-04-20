@@ -1,15 +1,13 @@
 package Controller;
 
+import Controller.Panier.ControllerPanier;
 import Controller.SignIn.ControllerSignIn;
 import Controller.SignUp.ControllerSignUp;
 import Controller.FilmSchedule.ControllerFilmSchedule;
 import Model.Film.Film;
 import Model.Film.FilmDaoImpl;
 import Model.Seance.SeanceDaoImpl;
-import View.FilmNSchedulePage;
-import View.SignIn;
-import View.SignUp;
-import View.SignUp5;
+import View.*;
 import View.TestPage.*;
 
 import javax.swing.*;
@@ -45,6 +43,7 @@ public class MainFrame extends JFrame {
         ///////////////////////////CONFIGURATION DES PAGES///////////////////////////
         ControllerSignUp controllerSignUp = new ControllerSignUp();
         ControllerSignIn controllerSignIn = new ControllerSignIn();
+        ControllerPanier controllerPanier = new ControllerPanier();
         SignUp signUpPanel = new SignUp(controllerSignUp);
         SignUp2 signUp2Panel = new SignUp2();
         SignUp5 signUp5Panel = new SignUp5(controllerSignUp);
@@ -92,6 +91,7 @@ public class MainFrame extends JFrame {
         //cardLayout.show(cardsPanel, "SignInPanel");
         //cardLayout.show(cardsPanel, "SignUp5Panel");
         cardLayout.show(cardsPanel, "filmNSchedulePage");
+
 
 
         // ActionListener pour changer de page de Controller.SignUp à SignUp2
@@ -159,9 +159,9 @@ public class MainFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JButton button = (JButton) e.getSource();
                 CurrentSeanceId = Integer.parseInt(button.getName());
-                FauxPanier fauxPanier = new FauxPanier(CurrentSeanceId);
-                cardsPanel.add(fauxPanier, "FauxPanier");
-                cardLayout.show(cardsPanel, "FauxPanier");
+                Panier panierPanel = new Panier(controllerPanier, CurrentSeanceId);
+                cardsPanel.add(panierPanel, "Panier");
+                cardLayout.show(cardsPanel, "Panier");
                 System.out.println("CurrentSeanceId : " + CurrentSeanceId);
             }
         };

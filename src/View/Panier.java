@@ -1,9 +1,12 @@
 package View;
 
+import Controller.Panier.ControllerPanier;
 import Model.Film.Film;
 import Model.Film.FilmDao;
 import Model.Film.FilmDaoImpl;
 import Model.Seance.Seance;
+import Model.Seance.SeanceDaoImpl;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -20,15 +23,16 @@ public class Panier extends JFrame {
     private int prixParBillet = 12;
     private int nombreBillets = 0;
 
-    public Panier() {
+    public Panier(ControllerPanier controllerPanier, int seanceId) {
         setTitle("Panier");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
         getContentPane().setBackground(Color.decode("#2a2d43")); // Couleur de fond
         setSize(1200, 800);
 
-        // Création d'une instance de Seance pour le film "Dune"
-        Seance seance = new Seance(2, new java.sql.Date(2024,3,24), new java.sql.Time(19, 0, 0), "VOSTFR", 0, 1, 14);
+        // Création d'une instance de Seance pour le film
+        SeanceDaoImpl seanceDao = new SeanceDaoImpl();
+           Seance seance = seanceDao.getSeanceById(seanceId);
         FilmDaoImpl filmDao = new FilmDaoImpl();
         Film film = filmDao.getFilmById(seance.getFilm_id());
 
@@ -165,12 +169,12 @@ public class Panier extends JFrame {
     }
 
     //sera dans controller
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            Panier panier = new Panier();
-
-        });
-    }
+//    public static void main(String[] args) {
+//        SwingUtilities.invokeLater(() -> {
+//            Panier panier = new Panier();
+//
+//        });
+   // }
 }
 
 
