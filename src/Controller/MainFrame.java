@@ -197,6 +197,19 @@ public class MainFrame extends JFrame {
             }
         });
 
+        accueilPanel.getbtnFilms().addActionListener(e -> {
+            // Récupérez les 3 films les plus réservés
+            List<Film> top3Films = filmDao.Top3();
+
+            // Construisez le message à afficher dans le pop-up
+            StringBuilder message = new StringBuilder("Les 3 films les plus réservés :\n");
+            for (Film film : top3Films) {
+                message.append("- ").append(film.getFilm_title()).append("\n");
+            }
+
+            // Affichez le pop-up avec le message
+            JOptionPane.showMessageDialog(null, message.toString(), "Top 3 des films les plus réservés", JOptionPane.INFORMATION_MESSAGE);
+        });
         SeanceButtonListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
