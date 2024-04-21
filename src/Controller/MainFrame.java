@@ -7,22 +7,40 @@ import Controller.FilmSchedule.ControllerFilmSchedule;
 import Model.Film.Film;
 import Model.Film.FilmDaoImpl;
 import Model.Seance.SeanceDaoImpl;
+import Model.User.User;
+import Model.User.UserDaoImpl;
 import View.*;
-import View.TestPage.*;
+import View.Accueil.Accueil;
+import View.Accueil.JCarousel;
+import View.FilmNSeance.FilmNSchedulePage;
+import View.Offres.OffersPage;
+import View.Reservation.Paiement;
+import View.Reservation.Panier;
+import View.SignInSignUp.SignIn;
+import View.SignInSignUp.SignUp;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
-
+import java.util.List;
 
 public class MainFrame extends JFrame {
     private CardLayout cardLayout;
     private JPanel cardsPanel;
+    private User CurrentUser;
     private int CurrentFilmId;
     private int CurrentSeanceId;
     private ActionListener SeanceButtonListener;
+    private ActionListener FilmButtonListener;
+    private FilmNSchedulePage filmNSchedulePage ;
+    private Film film;
+    private FilmDaoImpl filmDao;
+    private OffersPage offersPage;
+    private Paiement paiementPage;
+    private ActionListener PaiementButtonListener;
+
 
     public MainFrame() {
 
@@ -31,70 +49,51 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1200, 800);
         setLocationRelativeTo(null);
+        setResizable(false);
         // Création du conteneur principal avec CardLayout
         cardLayout = new CardLayout();
         cardsPanel = new JPanel(cardLayout);
         getContentPane().add(cardsPanel, BorderLayout.CENTER);
         /////////////////////////////////////////////////////////////////////////////////
 
-
+        UserDaoImpl userdao = new UserDaoImpl();
+        filmDao = new FilmDaoImpl();
+        PopUpMessage popUP = new PopUpMessage();
         CurrentFilmId=5;
+        int filmLimit = 100;
+        java.util.List<Film> nowShowingFilms = filmDao.getNowShowingFilms(filmLimit);
+        java.util.List<Film> premieresFilms = filmDao.getPremieresFilms(filmLimit);
+        List<Film> comingSoonFilms = filmDao.getComingSoonFilms(filmLimit);
 
         ///////////////////////////CONFIGURATION DES PAGES///////////////////////////
         ControllerSignUp controllerSignUp = new ControllerSignUp();
         ControllerSignIn controllerSignIn = new ControllerSignIn();
         ControllerPanier controllerPanier = new ControllerPanier();
+        ControllerFilmSchedule controller = new ControllerFilmSchedule();
         SignUp signUpPanel = new SignUp(controllerSignUp);
-        SignUp2 signUp2Panel = new SignUp2();
-        SignUp5 signUp5Panel = new SignUp5(controllerSignUp);
         SignIn signInPanel = new SignIn(controllerSignIn);
-        SignInTest signInTestPanel = new SignInTest();
-        InvitePage invitePage = new InvitePage();
+        Accueil accueilPanel = new Accueil(this,nowShowingFilms, premieresFilms, comingSoonFilms, filmLimit);
         FauxAccueil fauxAccueil = new FauxAccueil();
+        JCarousel jCarousel = new JCarousel(this, "Now Showing", nowShowingFilms);
         /////////////////////////////////////////////////////////////////////////////
 
 
-        ///////////////////////////TEST///////////////////////////
-        //Il faudra mettre cette partie dans un actionListener ensuite
-        ControllerFilmSchedule controller = new ControllerFilmSchedule();
-        FilmDaoImpl filmDao = new FilmDaoImpl();
-        Film film = filmDao.getFilmById(CurrentFilmId);
-        String film_title = film.getFilm_title();
-        String film_director = film.getFilm_director();
-        String film_genre = film.getFilm_genre();
-        int film_duration = film.getFilm_duration();
-        String film_synopsis = film.getFilm_synopsis();
-        Date film_release_date = film.getFilm_release_date();
-        Boolean film_status = film.getFilm_status();
-        String film_poster = film.getFilm_poster();
-        SeanceDaoImpl seanceDao = new SeanceDaoImpl();
-        FilmNSchedulePage filmNSchedulePage = new FilmNSchedulePage(this, CurrentFilmId, film_title, film_director, film_genre, film_duration, film_synopsis, film_release_date, film_status, film_poster);
-        ///////////////////////////////////////////////////////////
-
-
         ///////////////////////////AJOUT DES PAGES///////////////////////////
-        cardsPanel.add(filmNSchedulePage, "FilmNSchedulePage");
-        cardsPanel.add(signUpPanel, "SignUpPanel");
-        cardsPanel.add(signUp2Panel, "SignUp2Panel");
-        cardsPanel.add(signUp5Panel, "SignUp5Panel");
+        cardsPanel.add(signUpPanel, "signUpPanel");
         cardsPanel.add(signInPanel, "SignInPanel");
+        cardsPanel.add(accueilPanel, "Accueil");
         /////////////////////////////////////////////////////////////////////
 
         //Fausses pages pour les tests
-        cardsPanel.add(signInTestPanel, "SignInTestPanel");
-        cardsPanel.add(invitePage, "InvitePage");
         cardsPanel.add(fauxAccueil, "FauxAccueil");
 
 
 
-        // Afficher la page Controller.SignUp au démarrage
         //cardLayout.show(cardsPanel, "SignInPanel");
-        //cardLayout.show(cardsPanel, "SignUp5Panel");
-        cardLayout.show(cardsPanel, "filmNSchedulePage");
+        cardLayout.show(cardsPanel, "Accueil");
 
 
 
-        // ActionListener pour changer de page de Controller.SignUp à SignUp2
         signUpPanel.getSignUpButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -104,10 +103,11 @@ public class MainFrame extends JFrame {
                 String pseudo = signUpPanel.getPseudo();
                 String password = signUpPanel.getPassword();
                 String birthday = signUpPanel.getBirthday();
+                System.out.println("Birthday : " + birthday);
 
                 boolean success = controllerSignUp.onSignUp(firstName, lastName, email, pseudo, password, birthday);
                 if (success) {
-                    cardLayout.show(cardsPanel, "SignUp2Panel");
+                    cardLayout.show(cardsPanel, "SignInPanel");
                 }
             }
         });
@@ -127,7 +127,8 @@ public class MainFrame extends JFrame {
 
                 boolean isAuthenticated = controllerSignIn.onSignIn(email, password);
                 if (isAuthenticated) {
-                    cardLayout.show(cardsPanel, "SignInTestPanel");
+                    CurrentUser = userdao.getUserByMail(email);
+                    cardLayout.show(cardsPanel, "Accueil");
                 }
 
             }
@@ -136,21 +137,37 @@ public class MainFrame extends JFrame {
         signInPanel.getSignUpButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(cardsPanel, "SignUpPanel");
+                cardLayout.show(cardsPanel, "signUpPanel");
             }
         });
 
         signInPanel.getInviteButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(cardsPanel, "InvitePage");
+                CurrentUser = null;
+                cardLayout.show(cardsPanel, "Accueil");
             }
         });
 
-        filmNSchedulePage.getButtonProfil().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cardLayout.show(cardsPanel, "FauxAccueil");
+
+
+
+
+        accueilPanel.getbtnSearch().addActionListener(e -> {
+            String searchText = JOptionPane.showInputDialog(this, "Entrez le titre du film à rechercher:");
+
+            if (searchText != null && !searchText.trim().isEmpty()) {
+                filmDao = new FilmDaoImpl();
+                Film film2 = filmDao.getFilmByTitle(searchText.trim());
+                if (film != null) {
+                    JOptionPane.showMessageDialog(this, "Film trouvé : " + film.getFilm_title() +
+                            "\nRéalisateur: " + film.getFilm_director() +
+                            "\nGenre: " + film.getFilm_genre(), "Résultat de la recherche", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Aucun film trouvé avec ce titre.", "Résultat de la recherche", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "La recherche ne peut être vide.", "Erreur", JOptionPane.ERROR_MESSAGE);
             }
         });
 
@@ -159,13 +176,74 @@ public class MainFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JButton button = (JButton) e.getSource();
                 CurrentSeanceId = Integer.parseInt(button.getName());
-                Panier panierPanel = new Panier(controllerPanier, CurrentSeanceId);
+                Panier panierPanel = new Panier(MainFrame.this,controllerPanier, CurrentSeanceId);
                 cardsPanel.add(panierPanel, "Panier");
                 cardLayout.show(cardsPanel, "Panier");
-                System.out.println("CurrentSeanceId : " + CurrentSeanceId);
+
             }
         };
-        filmNSchedulePage.buttonListeners(SeanceButtonListener);
+        FilmButtonListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JPanel filmPanel = (JPanel) e.getSource();
+
+                CurrentFilmId = Integer.parseInt(filmPanel.getName());
+                film = filmDao.getFilmById(CurrentFilmId);
+                String film_title = film.getFilm_title();
+                String film_director = film.getFilm_director();
+                String film_genre = film.getFilm_genre();
+                int film_duration = film.getFilm_duration();
+                String film_synopsis = film.getFilm_synopsis();
+                Date film_release_date = film.getFilm_release_date();
+                Boolean film_status = film.getFilm_status();
+                String film_poster = film.getFilm_poster();
+                SeanceDaoImpl seanceDao = new SeanceDaoImpl();
+
+                filmNSchedulePage = new FilmNSchedulePage(MainFrame.this, CurrentFilmId, film_title, film_director, film_genre, film_duration, film_synopsis, film_release_date, film_status, film_poster);
+                cardsPanel.add(filmNSchedulePage, "FilmNSchedulePage");
+                cardLayout.show(cardsPanel, "FilmNSchedulePage");
+
+                filmNSchedulePage.getButtonProfil().addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        cardLayout.show(cardsPanel, "FauxAccueil");
+                    }
+                });
+                filmNSchedulePage.buttonListeners(SeanceButtonListener);
+            }
+
+        };
+
+
+        accueilPanel.getbtnOffers().addActionListener(e -> {
+            JOptionPane.showMessageDialog(this, "Offres");
+            if(CurrentUser != null){
+                offersPage = new OffersPage(CurrentUser.getUser_type());
+                cardsPanel.add(offersPage, "OffersPage");
+                cardLayout.show(cardsPanel, "OffersPage");
+            }
+            else{
+                offersPage = new OffersPage(-1);
+                cardsPanel.add(offersPage, "OffersPage");
+                cardLayout.show(cardsPanel, "OffersPage");
+            }
+        });
+
+
+        paiementPage = new Paiement(this);
+        PaiementButtonListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+//                if (paiementPage.getValiderInformation()) {
+                controllerPanier.addPanier(CurrentSeanceId, 1, 0, paiementPage.getPrice(), true, paiementPage.getQuantity());
+                popUP.showSuccessMessage("Paiement effectué avec succès");
+//                } else {
+//                    popUP.showErrorMessage("Informations de paiement invalides");
+//                }
+            }
+        };
+
+
 
 
     }
@@ -174,6 +252,13 @@ public class MainFrame extends JFrame {
         return SeanceButtonListener;
     }
 
+    public ActionListener getFilmButtonListener() {
+        return FilmButtonListener;
+    }
+
+    public ActionListener getPaiementButtonListener() {
+        return PaiementButtonListener;
+    }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {

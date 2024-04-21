@@ -1,7 +1,6 @@
-package View;
+package View.Offres;
 
 import Model.DataBase.ConnectionDb;
-import Model.Film.Film;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,16 +9,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class OffersPage extends JFrame {
+public class OffersPage extends JPanel {
     private JPanel mainPanel;
     private JButton btnFilms, btnProfile, btnBack;
 
-    public OffersPage() {
-        setTitle("Page des Offres");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1200, 800);
-
-        setLocationRelativeTo(null);
+    public OffersPage(int userType) {
         initializeUI();
     }
 
@@ -138,11 +132,4 @@ public class OffersPage extends JFrame {
         offersListPanel.repaint();
     }
 
-
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            new OffersPage().setVisible(true);
-        });
-    }
 }

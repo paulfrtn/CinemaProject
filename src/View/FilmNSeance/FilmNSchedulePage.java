@@ -1,4 +1,4 @@
-package View;
+package View.FilmNSeance;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,6 +25,7 @@ import java.util.Collections;
 import Controller.MainFrame;
 import Model.Seance.Seance;
 import Model.Seance.SeanceDaoImpl;
+import View.BandeADiffuser;
 import View.BorderRadCompenent.BorderRadButton;
 import View.BorderRadCompenent.BorderRadLabel;
 
@@ -425,7 +426,6 @@ public class FilmNSchedulePage extends JPanel {
         }
 
         buttonListeners(mainFrame.getSeanceButtonListener());
-        // Rafraîchit l'affichage des boutons
         line2.revalidate();
         line2.repaint();
         line4.revalidate();
@@ -449,25 +449,5 @@ public class FilmNSchedulePage extends JPanel {
             }
         }
     }
-
-    public void addLine2ButtonListener(ActionListener actionListener) {
-        Component[] components = line2.getComponents();
-        for (Component component : components) {
-            if (component instanceof JButton) {
-                ((JButton) component).addActionListener(actionListener);
-            }
-        }
-    }
-
-    public void addLine4ButtonListener(ActionListener actionListener) {
-        Component[] components = line4.getComponents();
-        for (Component component : components) {
-            if (component instanceof JButton) {
-                ((JButton) component).addActionListener(actionListener);
-            }
-        }
-    }
-
-
 
 }

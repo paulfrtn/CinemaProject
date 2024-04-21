@@ -1,18 +1,19 @@
-package View;
+package View.Reservation;
 
+import Controller.MainFrame;
 import Controller.Panier.ControllerPanier;
 import Model.Film.Film;
-import Model.Film.FilmDao;
 import Model.Film.FilmDaoImpl;
 import Model.Seance.Seance;
 import Model.Seance.SeanceDaoImpl;
+import View.BorderRadCompenent.BorderRadButton;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 import java.text.SimpleDateFormat;
 
-public class Panier extends JFrame {
+public class Panier extends JPanel {
+    private MainFrame controller;
     private JLabel filmLabel;
     private JLabel seanceLabel;
     private JLabel prixTotalLabel;
@@ -22,27 +23,38 @@ public class Panier extends JFrame {
     private JSpinner spinner;
     private int prixParBillet = 12;
     private int nombreBillets = 0;
+    private int seanceId;
+    private int offerId;
+    private Boolean validerPaiement;
+    private JButton PaiementButton;
+    private String couleur1;
+    private String couleur2;
+    private String couleur3;
 
-    public Panier(ControllerPanier controllerPanier, int seanceId) {
-        setTitle("Panier");
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    public Panier(MainFrame controller, ControllerPanier controllerPanier, int seanceId) {
+        this.controller = controller;
+        this.seanceId = seanceId;
+        this.offerId = 0;
+        couleur1 = "#003049";
+        couleur3 = "#669BBC";
+        couleur2 = "#FDF0D5";
         setLayout(new BorderLayout());
-        getContentPane().setBackground(Color.decode("#2a2d43")); // Couleur de fond
+        setBackground(Color.decode(couleur1)); // Couleur de fond
         setSize(1200, 800);
 
         // Création d'une instance de Seance pour le film
         SeanceDaoImpl seanceDao = new SeanceDaoImpl();
-           Seance seance = seanceDao.getSeanceById(seanceId);
+        Seance seance = seanceDao.getSeanceById(seanceId);
         FilmDaoImpl filmDao = new FilmDaoImpl();
         Film film = filmDao.getFilmById(seance.getFilm_id());
 
         // Création d'un JPanel pour contenir les informations du film et le poster
         JPanel infoPosterPanel = new JPanel(new GridLayout(1, 2));
-        infoPosterPanel.setBackground(Color.decode("#2a2d43")); // Couleur de fond
+        infoPosterPanel.setBackground(Color.decode(couleur1)); // Couleur de fond
 
         // Création d'un JPanel pour contenir les informations du film
         JPanel infoPanel = new JPanel(new GridLayout(12, 1)); // GridLayout avec 12 lignes pour les informations
-        infoPanel.setBackground(Color.decode("#2a2d43")); // Couleur de fond
+        infoPanel.setBackground(Color.decode(couleur1)); // Couleur de fond
 
         // Affichage des informations du film
         filmLabel = new JLabel("Film : " + film.getFilm_title());
@@ -85,7 +97,7 @@ public class Panier extends JFrame {
         posterLabel = new JLabel(new ImageIcon(film.getFilm_poster()));
         // Redimensionnement de l'image du poster
         Image img = ((ImageIcon) posterLabel.getIcon()).getImage();
-        Image newimg = img.getScaledInstance(200, 300,  java.awt.Image.SCALE_SMOOTH);
+        Image newimg = img.getScaledInstance(200, 300, java.awt.Image.SCALE_SMOOTH);
         posterLabel.setIcon(new ImageIcon(newimg));
 
         // Ajout du poster au JPanel contenant informations et poster
@@ -110,7 +122,7 @@ public class Panier extends JFrame {
             updatePrixTotal();
         });
         JPanel spinnerPanel = new JPanel(new BorderLayout());
-        spinnerPanel.setBackground(Color.decode("#2a2d43")); // Couleur de fond
+        spinnerPanel.setBackground(Color.decode(couleur1)); // Couleur de fond
 
         JLabel billetsLabel = new JLabel("Nombre de billets : ");
         billetsLabel.setForeground(Color.WHITE); // Texte en blanc
@@ -120,7 +132,7 @@ public class Panier extends JFrame {
 
         // Création du conteneur principal avec un GridBagLayout
         JPanel mainPanel = new JPanel(new GridBagLayout());
-        mainPanel.setBackground(Color.decode("#2a2d43")); // Couleur de fond
+        mainPanel.setBackground(Color.decode(couleur1)); // Couleur de fond
 
         // Ajout du panel du spinner au conteneur principal avec des contraintes de centrage horizontal
         GridBagConstraints gbc = new GridBagConstraints();
@@ -136,20 +148,18 @@ public class Panier extends JFrame {
         // Ajout du conteneur principal à la frame
         add(mainPanel, BorderLayout.CENTER);
 
-        payerButton = new JButton("Payer");
-        payerButton.setBackground(Color.decode("#BCF4F5")); // Couleur de bouton
+        payerButton = new BorderRadButton("Payer",10);
+        payerButton.setBackground(Color.decode(couleur2)); // Couleur de bouton
         // Définition de la taille de police plus grande pour le bouton "Payer"
         Font boutonFont = new Font("Arial", Font.PLAIN, 18); // Choisir la police et la taille de police désirées
         payerButton.setFont(boutonFont);
         payerButton.setPreferredSize(new Dimension(90, 70)); // Taille du bouton
         payerButton.addActionListener(e -> payer());
         JPanel payerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        payerPanel.setBackground(Color.decode("#2a2d43")); // Couleur de fond
+        payerPanel.setBackground(Color.decode(couleur1)); // Couleur de fond
         payerPanel.add(payerButton);
         add(payerPanel, BorderLayout.SOUTH);
 
-        setLocationRelativeTo(null);
-        setVisible(true);
     }
 
     private void updatePrixTotal() {
@@ -157,28 +167,49 @@ public class Panier extends JFrame {
     }
 
     private void payer() {
-        // Crée une nouvelle instance de Paiement en lui passant la JFrame parent
-        Paiement paiement = new Paiement(this);
-        // Affiche la fenêtre de paiement
+        JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        Paiement paiement = new Paiement(controller);
+        paiement.setPrice(prixParBillet);
+        paiement.setQuantity(nombreBillets);
+        paiement.setIdOffer(offerId);
+        PaiementButton = paiement.getValiderButton();
+        validerPaiement = paiement.getValiderInformation();
         paiement.setVisible(true);
     }
+
 
     private String formatDate(java.util.Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         return sdf.format(date);
     }
 
-    //sera dans controller
-//    public static void main(String[] args) {
-//        SwingUtilities.invokeLater(() -> {
-//            Panier panier = new Panier();
-//
-//        });
-   // }
+    public int getPrice() {
+        return prixParBillet;
+    }
+
+    public int getNumberOfTickets() {
+        return nombreBillets;
+    }
+
+    public int getSeanceId() {
+        return seanceId;
+    }
+
+    public int getOfferId() {
+        return offerId;
+    }
+
+    public JButton getPaiementButton() {
+        return PaiementButton;
+    }
+
+    public Boolean getValiderPaiement() {
+        return validerPaiement;
+
+    }
+
+
 }
-
-
-
 
 
 

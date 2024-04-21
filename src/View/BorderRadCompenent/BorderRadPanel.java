@@ -9,6 +9,12 @@ public class BorderRadPanel extends JPanel {
 
     public BorderRadPanel(int rad) {
         this.borderRadius = rad;
+        setOpaque(false); // Rendre le panel transparent
+    }
+    public BorderRadPanel(LayoutManager layout,int rad) {
+        super(layout);
+        this.borderRadius = rad;
+        setOpaque(false); // Rendre le panel transparent
     }
 
     @Override
