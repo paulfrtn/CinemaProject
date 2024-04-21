@@ -16,6 +16,7 @@ public class Offer {
 
     private int offer_user_type; //Peut être null
     private Boolean offer_status;
+    private int id_user;
 
     public Offer(int offer_id, String offer_name, String offer_description, Date offer_start_date, Date offer_end_date, float offer_price, float offer_discount, int offer_limit, int offer_user_type, Boolean offer_status) {
         this.offer_id = offer_id;
@@ -30,7 +31,7 @@ public class Offer {
         this.offer_status = offer_status;
     }
 
-    public Offer(String offer_name, String offer_description, Date offer_start_date, Date offer_end_date, float offer_price, float offer_discount, int offer_limit, int offer_user_type, Boolean offer_status) {
+    public Offer(String offer_name, String offer_description, Date offer_start_date, Date offer_end_date, float offer_price, float offer_discount, int offer_limit, int offer_user_type, Boolean offer_status, int id_user) {
         this.offer_name = offer_name;
         this.offer_description = offer_description;
         this.offer_start_date = offer_start_date;
@@ -40,6 +41,7 @@ public class Offer {
         this.offer_limit = offer_limit;
         this.offer_user_type = offer_user_type;
         this.offer_status = offer_status;
+        this.id_user = id_user;
     }
 
     // Getters
