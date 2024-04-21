@@ -208,5 +208,38 @@ public class FilmDaoImpl implements FilmDao {
         }
         return films;
     }
+    public List<Film> Top3() {
+        String sql = "SELECT f.*, COUNT(t.ticket_id) AS reservations_count " +
+                "FROM film f " +
+                "LEFT JOIN Seance s ON f.film_id = s.film_id " +
+                "LEFT JOIN ticket t ON s.seance_id = t.seance_id " +
+                "GROUP BY f.film_id " +
+                "ORDER BY reservations_count DESC " +
+                "LIMIT 3";
+
+        List<Film> films = new ArrayList<>();
+        try (Connection connection = ConnectionDb.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                Film film = new Film(
+                        resultSet.getInt("film_id"),
+                        resultSet.getString("film_title"),
+                        resultSet.getString("film_director"),
+                        resultSet.getString("film_genre"),
+                        resultSet.getInt("film_duration"),
+                        resultSet.getString("film_synopsis"),
+                        resultSet.getDate("film_release_date"),
+                        resultSet.getBoolean("film_status"),
+                        resultSet.getString("film_poster")
+                );
+                films.add(film);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Gérer cela de manière plus robuste en production
+        }
+        return films;
+    }
 
 }
