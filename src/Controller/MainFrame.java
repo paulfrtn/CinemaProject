@@ -204,7 +204,7 @@ public class MainFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JButton button = (JButton) e.getSource();
                 CurrentSeanceId = Integer.parseInt(button.getName());
-                Panier panierPanel = new Panier(MainFrame.this, controllerPanier, CurrentSeanceId, CurrentUser);
+                Panier panierPanel = new Panier(MainFrame.this, controllerPanier, CurrentSeanceId);
                 cardsPanel.add(panierPanel, "Panier");
                 cardLayout.show(cardsPanel, "Panier");
 
