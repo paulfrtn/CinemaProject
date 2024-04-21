@@ -87,6 +87,22 @@ public class FilmDaoImpl implements FilmDao {
         return null;
     }
 
+    public boolean filmExists(String filmTitle) {
+        String query = "SELECT COUNT(*) FROM film WHERE film_title = ?";
+        try (Connection connection = ConnectionDb.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, filmTitle);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                int count = resultSet.getInt(1);
+                return count > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     // Update
     @Override
     public void updateFilm(Film film) {

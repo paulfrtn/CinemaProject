@@ -21,6 +21,15 @@ public class Seance {
         this.film_id = film_id; // Initialisation de film_id
         this.salle_id = salle_id; // Initialisation de salle_id
     }
+    public Seance( Date seance_date, Time seance_time, String seance_language, int seance_nb_reservation, int film_id, int salle_id) {
+
+        this.seance_date = seance_date;
+        this.seance_time = seance_time;
+        this.seance_language = seance_language;
+        this.seance_nb_reservation = seance_nb_reservation;
+        this.film_id = film_id; // Initialisation de film_id
+        this.salle_id = salle_id; // Initialisation de salle_id
+    }
 
     // Getters
     public int getSeance_id() {

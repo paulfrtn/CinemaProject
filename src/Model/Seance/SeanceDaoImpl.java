@@ -1,11 +1,6 @@
 package Model.Seance;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Time;
-import java.sql.Date;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -139,6 +134,28 @@ public class SeanceDaoImpl implements SeanceDao {
             e.printStackTrace();
         }
         return seance;
+    }
+
+    public int getSeanceByCriteria(int filmId, Date seanceDate, Time seanceTime, String seanceLanguage, int salleId) {
+        String query = "SELECT COUNT(*) FROM Seance WHERE film_id = ? AND seance_date = ? AND seance_time = ? AND seance_language = ? AND salle_id= ?";
+        int count = 0;
+
+        try (Connection connection = ConnectionDb.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, filmId);
+            preparedStatement.setDate(2, new java.sql.Date(seanceDate.getTime()));
+            preparedStatement.setTime(3, seanceTime);
+            preparedStatement.setString(4, seanceLanguage);
+            preparedStatement.setInt(5, salleId);
+            java.sql.ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                count= resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
     }
 
 }
