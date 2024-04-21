@@ -57,6 +57,21 @@ public class ViewPageProfil extends JPanel {
 
         int iconSize = 24;
 
+        JButton retour = new JButton("Retour");
+        JButton LogOut = new JButton("Déconnexion");
+        retour.setBackground(Color.decode(couleur2));
+        LogOut.setBackground(Color.decode(couleur2));
+        retour.setForeground(Color.decode(couleur3));
+        LogOut.setForeground(Color.decode(couleur3));
+
+        JPanel HeaderPanel = new JPanel();
+        HeaderPanel.setLayout(new BorderLayout());
+        HeaderPanel.setBackground(Color.decode(couleur1));
+        HeaderPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        HeaderPanel.setBorder(new EmptyBorder(10, 0, 0, 0));
+        HeaderPanel.add(retour, BorderLayout.WEST);
+        HeaderPanel.add(LogOut, BorderLayout.EAST);
+        add(HeaderPanel);
         add(Box.createVerticalStrut(40));
 
         JPanel UserPicPanel = new JPanel();
