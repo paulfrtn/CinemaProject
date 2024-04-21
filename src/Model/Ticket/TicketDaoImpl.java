@@ -71,6 +71,51 @@ public class TicketDaoImpl {
         return ticket;
     }
 
+    public List<Ticket> getTicketsByUserId(int userId) {
+        List<Ticket> tickets = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            con = ConnectionDb.getConnection();
+            String query = "SELECT * FROM ticket WHERE user_id = ?";
+            ps = con.prepareStatement(query);
+            ps.setInt(1, userId);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                tickets.add(new Ticket(
+                        rs.getInt("ticket_id"),
+                        rs.getDate("ticket_date"),
+                        rs.getBoolean("ticket_status"),
+                        rs.getInt("ticket_price"),
+                        rs.getInt("user_id"),
+                        rs.getInt("seance_id"),
+                        rs.getInt("offer_id"),
+                        rs.getString("mail")
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return tickets;
+    }
+
     public List<Ticket> getTicketByDate(Date date) {
         Connection con = null;
         PreparedStatement ps = null;

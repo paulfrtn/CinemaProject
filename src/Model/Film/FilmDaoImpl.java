@@ -7,8 +7,6 @@ import Model.DataBase.ConnectionDb;
 
 public class FilmDaoImpl implements FilmDao {
     //Nous allons réaliser le CRUD (Create, Read, Update, Delete)
-    private Connection connection;
-
 
     // Create
 
@@ -110,20 +108,20 @@ public class FilmDaoImpl implements FilmDao {
 
         //Mettre à jour un film
         try (Connection connection = ConnectionDb.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-                preparedStatement.setString(1, film.getFilm_title());
-                preparedStatement.setString(2, film.getFilm_director());
-                preparedStatement.setString(3, film.getFilm_genre());
-                preparedStatement.setInt(4, film.getFilm_duration());
-                preparedStatement.setString(5, film.getFilm_synopsis());
-                preparedStatement.setDate(6, new java.sql.Date(film.getFilm_release_date().getTime()));
-                preparedStatement.setBoolean(7, film.getFilm_status());
-                preparedStatement.setString(8, film.getFilm_poster());
-                preparedStatement.setInt(9, film.getFilm_id());
-                preparedStatement.executeUpdate();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, film.getFilm_title());
+            preparedStatement.setString(2, film.getFilm_director());
+            preparedStatement.setString(3, film.getFilm_genre());
+            preparedStatement.setInt(4, film.getFilm_duration());
+            preparedStatement.setString(5, film.getFilm_synopsis());
+            preparedStatement.setDate(6, new java.sql.Date(film.getFilm_release_date().getTime()));
+            preparedStatement.setBoolean(7, film.getFilm_status());
+            preparedStatement.setString(8, film.getFilm_poster());
+            preparedStatement.setInt(9, film.getFilm_id());
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-    }
+        }
     }
 
     // Delete
@@ -184,7 +182,7 @@ public class FilmDaoImpl implements FilmDao {
         return films;
     }
 
-public List<Film> getAllFilms() {
+    public List<Film> getAllFilms() {
         String sql = "SELECT * FROM film";
         List<Film> films = new ArrayList<>();
         try (Connection connection = ConnectionDb.getConnection();
