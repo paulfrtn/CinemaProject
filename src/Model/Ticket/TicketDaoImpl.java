@@ -11,17 +11,18 @@ public class TicketDaoImpl {
     //Nous allons réaliser le CRUD (Create, Read, Update, Delete)
 
     // Create
-    public void addTicket(Ticket ticket, int user_id, int seance_id, int offer_id) {
+    public void addTicket(Ticket ticket) {
         Connection connection = null;
         try {
             connection = ConnectionDb.getConnection();
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO ticket (ticket_date, ticket_status, ticket_price, user_id, seance_id, offer_id) VALUES (?, ?, ?, ?, ?, ?)");
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO ticket (ticket_date, ticket_status, ticket_price, user_id, seance_id, offer_id, mail) VALUES (?, ?, ?, ?, ?, ?,?)");
             ps.setDate(1, (Date) ticket.getTicket_date());
             ps.setBoolean(2, ticket.getTicket_status());
             ps.setInt(3, ticket.getTicket_price());
-            ps.setInt(4, user_id);
-            ps.setInt(5, seance_id);
-            ps.setInt(6, offer_id);
+            ps.setInt(4, ticket.getUser_id());
+            ps.setInt(5, ticket.getSeance_id());
+            ps.setInt(6, ticket.getOffer_id());
+            ps.setString(7, ticket.getMail());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -48,7 +49,7 @@ public class TicketDaoImpl {
             ps.setInt(1, id);
             rs = ps.executeQuery();
             if (rs.next()) {
-                ticket = new Ticket(rs.getInt("ticket_id"), rs.getDate("ticket_date"), rs.getBoolean("ticket_status"), rs.getInt("ticket_price"), rs.getInt("user_id"), rs.getInt("seance_id"), rs.getInt("offer_id"));
+                ticket = new Ticket(rs.getInt("ticket_id"), rs.getDate("ticket_date"), rs.getBoolean("ticket_status"), rs.getInt("ticket_price"), rs.getInt("user_id"), rs.getInt("seance_id"), rs.getInt("offer_id"), rs.getString("mail"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -83,7 +84,7 @@ public class TicketDaoImpl {
             System.out.println(date);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Ticket ticket = new Ticket(rs.getInt("ticket_id"), rs.getDate("ticket_date"), rs.getBoolean("ticket_status"), rs.getInt("ticket_price"), rs.getInt("user_id"), rs.getInt("seance_id"), rs.getInt("offer_id"));
+                Ticket ticket = new Ticket(rs.getInt("ticket_id"), rs.getDate("ticket_date"), rs.getBoolean("ticket_status"), rs.getInt("ticket_price"), rs.getInt("user_id"), rs.getInt("seance_id"), rs.getInt("offer_id"), rs.getString("mail"));
                 tickets.add(ticket);
             }
         } catch (SQLException e) {

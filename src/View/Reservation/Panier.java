@@ -26,7 +26,7 @@ public class Panier extends JPanel {
     private int seanceId;
     private int offerId;
     private Boolean validerPaiement;
-    private JButton PaiementButton;
+    private JButton ValiderButton;
     private String couleur1;
     private String couleur2;
     private String couleur3;
@@ -35,6 +35,7 @@ public class Panier extends JPanel {
         this.controller = controller;
         this.seanceId = seanceId;
         this.offerId = 0;
+        this.validerPaiement = false;
         couleur1 = "#003049";
         couleur3 = "#669BBC";
         couleur2 = "#FDF0D5";
@@ -53,7 +54,7 @@ public class Panier extends JPanel {
         infoPosterPanel.setBackground(Color.decode(couleur1)); // Couleur de fond
 
         // Création d'un JPanel pour contenir les informations du film
-        JPanel infoPanel = new JPanel(new GridLayout(12, 1)); // GridLayout avec 12 lignes pour les informations
+        JPanel infoPanel = new JPanel(new GridLayout(13, 1)); // GridLayout avec 12 lignes pour les informations
         infoPanel.setBackground(Color.decode(couleur1)); // Couleur de fond
 
         // Affichage des informations du film
@@ -153,11 +154,23 @@ public class Panier extends JPanel {
         // Définition de la taille de police plus grande pour le bouton "Payer"
         Font boutonFont = new Font("Arial", Font.PLAIN, 18); // Choisir la police et la taille de police désirées
         payerButton.setFont(boutonFont);
-        payerButton.setPreferredSize(new Dimension(90, 70)); // Taille du bouton
+        payerButton.setPreferredSize(new Dimension(100, 50)); // Taille du bouton
         payerButton.addActionListener(e -> payer());
         JPanel payerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        payerPanel.setBackground(Color.decode(couleur1)); // Couleur de fond
+        payerPanel.setBackground(Color.decode(couleur1));
+
         payerPanel.add(payerButton);
+
+        ValiderButton = new BorderRadButton("Valider",10);
+        ValiderButton.setBackground(Color.decode(couleur2)); // Couleur de bouton
+// Définition de la taille de police plus grande pour le bouton "Payer"
+        Font boutonFont1 = new Font("Arial", Font.PLAIN, 18); // Choisir la police et la taille de police désirées
+        ValiderButton.setFont(boutonFont1);
+        ValiderButton.setPreferredSize(new Dimension(100, 50)); // Taille du bouton
+        payerPanel.add(ValiderButton);
+
+
+
         add(payerPanel, BorderLayout.SOUTH);
 
     }
@@ -169,11 +182,8 @@ public class Panier extends JPanel {
     private void payer() {
         JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
         Paiement paiement = new Paiement(controller);
-        paiement.setPrice(prixParBillet);
-        paiement.setQuantity(nombreBillets);
-        paiement.setIdOffer(offerId);
-        PaiementButton = paiement.getValiderButton();
         validerPaiement = paiement.getValiderInformation();
+        validerPaiement = paiement.getValiderPaiement();
         paiement.setVisible(true);
     }
 
@@ -199,8 +209,8 @@ public class Panier extends JPanel {
         return offerId;
     }
 
-    public JButton getPaiementButton() {
-        return PaiementButton;
+    public JButton getValiderButton() {
+        return ValiderButton;
     }
 
     public Boolean getValiderPaiement() {

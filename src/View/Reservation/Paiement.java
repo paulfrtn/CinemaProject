@@ -20,6 +20,7 @@ public class Paiement extends JDialog {
     private String couleur1;
     private String couleur2;
     private String couleur3;
+    private Boolean validerPaiement;
 
     public Paiement(MainFrame controller) {
         this.controller = controller;
@@ -34,8 +35,22 @@ public class Paiement extends JDialog {
         expirationDateField = new JTextField(7);
 
         // Créer le bouton Valider
-        validerButton = new BorderRadButton("Valider",10);
-        buttonListener(controller.getPaiementButtonListener());
+        JButton validerButton = new JButton("Valider");
+        validerButton.setBackground(Color.decode("#BCF4F5"));
+        validerButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Vérification des informations de la carte bancaire
+                if (validerInformations()) {
+                    // Afficher un message de paiement effectué
+                    JOptionPane.showMessageDialog(Paiement.this, "Paiement effectué !");
+                    validerPaiement = true;
+                    dispose(); // Fermer la fenêtre modale
+                } else {
+                    // Afficher un message de paiement refusé
+                    JOptionPane.showMessageDialog(Paiement.this, "Paiement refusé ! Veuillez vérifier vos informations.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
 
 
         // Créer le layout
@@ -80,6 +95,7 @@ public class Paiement extends JDialog {
         // Ajouter le panel à la fenêtre modale
         getContentPane().add(panel);
         pack();
+        setLocationRelativeTo(null);
         setPreferredSize(new Dimension(300, 250));
     }
 
@@ -105,42 +121,14 @@ public class Paiement extends JDialog {
         // Si toutes les validations réussissent, retourner true
         return true;
     }
-
-    public JButton getValiderButton() {
-        return validerButton;
-    }
-
     public Boolean getValiderInformation() {
         return validerInformations();
     }
 
-    public void buttonListener(ActionListener listener) {
-        validerButton.addActionListener(listener);
+    public Boolean getValiderPaiement() {
+        return validerPaiement;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public void setIdOffer(int id_offer) {
-        this.id_offer = id_offer;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public int getIdOffer() {
-        return id_offer;
-    }
 
 
 }

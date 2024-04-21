@@ -23,6 +23,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
 import java.sql.Date;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class MainFrame extends JFrame {
     private int CurrentSeanceId;
     private ActionListener SeanceButtonListener;
     private ActionListener FilmButtonListener;
-    private FilmNSchedulePage filmNSchedulePage ;
+    private FilmNSchedulePage filmNSchedulePage;
     private Film film;
     private FilmDaoImpl filmDao;
     private OffersPage offersPage;
@@ -59,7 +60,7 @@ public class MainFrame extends JFrame {
         UserDaoImpl userdao = new UserDaoImpl();
         filmDao = new FilmDaoImpl();
         PopUpMessage popUP = new PopUpMessage();
-        CurrentFilmId=5;
+        CurrentUser = userdao.getUserById(1);
         int filmLimit = 100;
         java.util.List<Film> nowShowingFilms = filmDao.getNowShowingFilms(filmLimit);
         java.util.List<Film> premieresFilms = filmDao.getPremieresFilms(filmLimit);
@@ -72,7 +73,7 @@ public class MainFrame extends JFrame {
         ControllerFilmSchedule controller = new ControllerFilmSchedule();
         SignUp signUpPanel = new SignUp(controllerSignUp);
         SignIn signInPanel = new SignIn(controllerSignIn);
-        Accueil accueilPanel = new Accueil(this,nowShowingFilms, premieresFilms, comingSoonFilms, filmLimit);
+        Accueil accueilPanel = new Accueil(this, nowShowingFilms, premieresFilms, comingSoonFilms, filmLimit);
         FauxAccueil fauxAccueil = new FauxAccueil();
         JCarousel jCarousel = new JCarousel(this, "Now Showing", nowShowingFilms);
         /////////////////////////////////////////////////////////////////////////////
@@ -88,10 +89,8 @@ public class MainFrame extends JFrame {
         cardsPanel.add(fauxAccueil, "FauxAccueil");
 
 
-
         //cardLayout.show(cardsPanel, "SignInPanel");
         cardLayout.show(cardsPanel, "Accueil");
-
 
 
         signUpPanel.getSignUpButton().addActionListener(new ActionListener() {
@@ -150,9 +149,6 @@ public class MainFrame extends JFrame {
         });
 
 
-
-
-
         accueilPanel.getbtnSearch().addActionListener(e -> {
             String searchText = JOptionPane.showInputDialog(this, "Entrez le titre du film à rechercher:");
 
@@ -176,9 +172,32 @@ public class MainFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JButton button = (JButton) e.getSource();
                 CurrentSeanceId = Integer.parseInt(button.getName());
-                Panier panierPanel = new Panier(MainFrame.this,controllerPanier, CurrentSeanceId);
+                Panier panierPanel = new Panier(MainFrame.this, controllerPanier, CurrentSeanceId);
                 cardsPanel.add(panierPanel, "Panier");
                 cardLayout.show(cardsPanel, "Panier");
+
+
+                panierPanel.getValiderButton().addActionListener(new ActionListener() {
+
+
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+
+                        int quantity = panierPanel.getNumberOfTickets();
+                        int price = panierPanel.getPrice();
+                        int offerId = panierPanel.getOfferId();
+
+
+                        if(quantity>0) {
+                            if (CurrentUser != null) {
+
+                                controllerPanier.addPanier(CurrentSeanceId, CurrentUser.getUser_id(), offerId, price, true, quantity, CurrentUser.getUser_mail());
+                                popUP.showSuccessMessage("T'as réussi" + CurrentUser.getUser_firstname());
+                            }
+                        }
+                    }
+                });
+
 
             }
         };
@@ -188,6 +207,7 @@ public class MainFrame extends JFrame {
                 JPanel filmPanel = (JPanel) e.getSource();
 
                 CurrentFilmId = Integer.parseInt(filmPanel.getName());
+                System.out.println("CurrentFilmId : " + CurrentFilmId);
                 film = filmDao.getFilmById(CurrentFilmId);
                 String film_title = film.getFilm_title();
                 String film_director = film.getFilm_director();
@@ -217,33 +237,16 @@ public class MainFrame extends JFrame {
 
         accueilPanel.getbtnOffers().addActionListener(e -> {
             JOptionPane.showMessageDialog(this, "Offres");
-            if(CurrentUser != null){
+            if (CurrentUser != null) {
                 offersPage = new OffersPage(CurrentUser.getUser_type());
                 cardsPanel.add(offersPage, "OffersPage");
                 cardLayout.show(cardsPanel, "OffersPage");
-            }
-            else{
+            } else {
                 offersPage = new OffersPage(-1);
                 cardsPanel.add(offersPage, "OffersPage");
                 cardLayout.show(cardsPanel, "OffersPage");
             }
         });
-
-
-        paiementPage = new Paiement(this);
-        PaiementButtonListener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-//                if (paiementPage.getValiderInformation()) {
-                controllerPanier.addPanier(CurrentSeanceId, 1, 0, paiementPage.getPrice(), true, paiementPage.getQuantity());
-                popUP.showSuccessMessage("Paiement effectué avec succès");
-//                } else {
-//                    popUP.showErrorMessage("Informations de paiement invalides");
-//                }
-            }
-        };
-
-
 
 
     }
