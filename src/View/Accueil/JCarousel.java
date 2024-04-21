@@ -153,10 +153,10 @@ public class JCarousel extends JPanel{
         Color bgColor = Color.decode(couleur1);
         filmPanel.setBackground(bgColor);
 
-
+        filmsPanel.add(filmPanel);
         addFilmListener();
 
-        filmsPanel.add(filmPanel);
+
         filmsPanel.revalidate();
         filmsPanel.repaint();
 
