@@ -23,7 +23,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
 import java.sql.Date;
 import java.util.List;
 
@@ -35,7 +34,7 @@ public class MainFrame extends JFrame {
     private int CurrentSeanceId;
     private ActionListener SeanceButtonListener;
     private ActionListener FilmButtonListener;
-    private FilmNSchedulePage filmNSchedulePage;
+    private FilmNSchedulePage filmNSchedulePage ;
     private Film film;
     private FilmDaoImpl filmDao;
     private OffersPage offersPage;
@@ -149,6 +148,9 @@ public class MainFrame extends JFrame {
         });
 
 
+
+
+
         accueilPanel.getbtnSearch().addActionListener(e -> {
             String searchText = JOptionPane.showInputDialog(this, "Entrez le titre du film à rechercher:");
 
@@ -172,7 +174,7 @@ public class MainFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JButton button = (JButton) e.getSource();
                 CurrentSeanceId = Integer.parseInt(button.getName());
-                Panier panierPanel = new Panier(MainFrame.this, controllerPanier, CurrentSeanceId);
+                Panier panierPanel = new Panier(MainFrame.this,controllerPanier, CurrentSeanceId);
                 cardsPanel.add(panierPanel, "Panier");
                 cardLayout.show(cardsPanel, "Panier");
 
@@ -207,7 +209,6 @@ public class MainFrame extends JFrame {
                 JPanel filmPanel = (JPanel) e.getSource();
 
                 CurrentFilmId = Integer.parseInt(filmPanel.getName());
-                System.out.println("CurrentFilmId : " + CurrentFilmId);
                 film = filmDao.getFilmById(CurrentFilmId);
                 String film_title = film.getFilm_title();
                 String film_director = film.getFilm_director();
@@ -237,11 +238,12 @@ public class MainFrame extends JFrame {
 
         accueilPanel.getbtnOffers().addActionListener(e -> {
             JOptionPane.showMessageDialog(this, "Offres");
-            if (CurrentUser != null) {
+            if(CurrentUser != null){
                 offersPage = new OffersPage(CurrentUser.getUser_type());
                 cardsPanel.add(offersPage, "OffersPage");
                 cardLayout.show(cardsPanel, "OffersPage");
-            } else {
+            }
+            else{
                 offersPage = new OffersPage(-1);
                 cardsPanel.add(offersPage, "OffersPage");
                 cardLayout.show(cardsPanel, "OffersPage");
@@ -269,5 +271,9 @@ public class MainFrame extends JFrame {
                 new MainFrame().setVisible(true);
             }
         });
+    }
+
+    public void showAccueilView() {
+        cardLayout.show(cardsPanel, "Accueil");
     }
 }

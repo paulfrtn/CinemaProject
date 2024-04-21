@@ -1,5 +1,6 @@
 package View.Offres;
 
+import Controller.MainFrame;
 import Model.DataBase.ConnectionDb;
 
 import javax.swing.*;
@@ -19,12 +20,11 @@ public class OffersPage extends JPanel {
 
     private void initializeUI() {
         mainPanel = new JPanel(new BorderLayout());
-        Color bgColor = new Color(0x2a2d43); // Couleur bleu marine
+        Color bgColor = new Color(0x003049); // Couleur bleu marine
         mainPanel.setBackground(bgColor);
 
         // Panel for navigation buttons
-        JPanel topPanel = new JPanel();
-        topPanel.setLayout(new BorderLayout());
+        JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.setBackground(bgColor);
 
         JPanel leftPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -34,11 +34,12 @@ public class OffersPage extends JPanel {
         btnProfile = new JButton("Profil");
 
         btnFilms.setBackground(bgColor);
-        btnFilms.setForeground(Color.WHITE); // Texte en blanc pour contraster avec le fond
+        btnFilms.setForeground(Color.WHITE);
         btnProfile.setBackground(bgColor);
-        btnProfile.setForeground(Color.WHITE); // Texte en blanc pour contraster avec le fond
+        btnProfile.setForeground(Color.WHITE);
 
         btnFilms.addActionListener(e -> navigateToHomeView());
+
         btnProfile.addActionListener(e -> navigateToProfileView());
 
         leftPanel.add(btnFilms);
@@ -66,11 +67,40 @@ public class OffersPage extends JPanel {
 
         mainPanel.add(scrollPane, BorderLayout.CENTER);
         add(mainPanel);
+
+        // Apply background color recursively to all components
+        applyBackgroundColor(this, bgColor);
+
     }
 
-    private void navigateToHomeView() {
-        // Méthode pour naviguer vers la page d'accueil
+    private void applyBackgroundColor(Component component, Color bgColor) {
+        component.setBackground(bgColor);
+        if (component instanceof Container) {
+            for (Component child : ((Container) component).getComponents()) {
+                applyBackgroundColor(child, bgColor);
+            }
+        }
     }
+
+
+    private void navigateToHomeView() {
+        // Traverse the parent hierarchy to find an instance of MainFrame
+        Container parent = this.getParent();
+        while (parent != null && !(parent instanceof MainFrame)) {
+            parent = parent.getParent();
+        }
+
+        // If we found the MainFrame, we can invoke a method to switch views
+        if (parent != null) {
+            MainFrame mainFrame = (MainFrame) parent;
+            mainFrame.showAccueilView(); // Call the method that will show the Accueil view
+        } else {
+            // Handle error - MainFrame was not found in the hierarchy
+            JOptionPane.showMessageDialog(this, "Navigation error: MainFrame not found.", "Navigation Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+
 
     private void navigateToProfileView() {
         // Méthode pour naviguer vers la page de profil
@@ -113,6 +143,7 @@ public class OffersPage extends JPanel {
                                 JLabel offerDescription = new JLabel("<html><b>" + rs.getString("descriptions") + "</b></html>");
 
                 offerDescription.setForeground(Color.WHITE);
+
                 userTypeLabel.setForeground(Color.WHITE);
 
                 userOffersPanel.add(userTypeLabel);
@@ -121,6 +152,7 @@ public class OffersPage extends JPanel {
                 userTypePanel.add(userOffersPanel, BorderLayout.CENTER); // Ajout des offres au centre du panneau utilisateur
 
                 offersListPanel.add(userTypePanel);
+
                 offersListPanel.add(Box.createVerticalStrut(10)); // Espace entre les cases
             }
         } catch (SQLException e) {
@@ -130,6 +162,10 @@ public class OffersPage extends JPanel {
 
         offersListPanel.revalidate();
         offersListPanel.repaint();
+
     }
 
+
+
 }
+
