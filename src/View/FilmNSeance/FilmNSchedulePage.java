@@ -79,7 +79,7 @@ public class FilmNSchedulePage extends JPanel {
         gbc.gridy = 0;
         gbc.gridwidth = 1; // Remplit toute la largeur
         gbc.weightx = 1.0; // Poids pour étendre sur toute la largeur
-        gbc.weighty = 0.01; // 2/10 de la hauteur
+        gbc.weighty = 0.01;
         gbc.insets = new Insets(3, 3, 3, 3); // Marge de 0 partout
 
         backButton = new BorderRadButton("Retour",10);
@@ -92,9 +92,7 @@ public class FilmNSchedulePage extends JPanel {
         profil.setContentAreaFilled(false); // Supprime le remplissage pour que l'image soit visible
         profil.setBorder(null); // Supprime la bordure
         try {
-            // Chargez votre image ici
             BufferedImage originalImage = ImageIO.read(new File("src/Model/Images/Icon/utilisateur.png"));
-            // Redimensionner l'image
             int width = 35; // Largeur souhaitée
             int height = 35; // Hauteur souhaitée
             Image resizedImage = originalImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
@@ -105,7 +103,6 @@ public class FilmNSchedulePage extends JPanel {
         }
         //profil.setText(null); // Supprime le texte
 
-        // Ajouter le bouton tout en haut à droite
         topPanel.add(backButton, BorderLayout.WEST);
         topPanel.add(profil, BorderLayout.EAST);
 
@@ -409,7 +406,6 @@ public class FilmNSchedulePage extends JPanel {
         }
     }
 
-    // Ajoutez cette méthode à votre classe FilmNSchedulePage
     private void updateSeanceButtons() {
         line2.removeAll(); // Supprime tous les boutons actuels de line2
         line4.removeAll(); // Supprime tous les boutons actuels de line4

@@ -208,6 +208,8 @@ public class Panier extends JPanel {
         // Ajout du conteneur principal à la frame
         row2.add(mainPanel, BorderLayout.CENTER);
 
+
+
         payerButton = new BorderRadButton("Payer", 10);
         payerButton.setBackground(Color.decode(couleur2)); // Couleur de bouton
         // Définition de la taille de police plus grande pour le bouton "Payer"
