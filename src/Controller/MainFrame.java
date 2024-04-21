@@ -156,7 +156,7 @@ public class MainFrame extends JFrame {
 
             if (searchText != null && !searchText.trim().isEmpty()) {
                 filmDao = new FilmDaoImpl();
-                Film film2 = filmDao.getFilmByTitle(searchText.trim());
+                Film film = filmDao.getFilmByTitle(searchText.trim());
                 if (film != null) {
                     JOptionPane.showMessageDialog(this, "Film trouvé : " + film.getFilm_title() +
                             "\nRéalisateur: " + film.getFilm_director() +
@@ -237,7 +237,7 @@ public class MainFrame extends JFrame {
 
 
         accueilPanel.getbtnOffers().addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "Offres");
+
             if(CurrentUser != null){
                 offersPage = new OffersPage(CurrentUser.getUser_type());
                 cardsPanel.add(offersPage, "OffersPage");

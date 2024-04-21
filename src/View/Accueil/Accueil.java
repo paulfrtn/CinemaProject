@@ -19,7 +19,6 @@ public class Accueil extends JPanel {
     private JCarousel carouselPremieres;
     private JCarousel carouselComingSoon;
     private MainFrame controller;
-    private JTextField searchField;
     private String couleur1;
     private String couleur2;
     private String couleur3;
