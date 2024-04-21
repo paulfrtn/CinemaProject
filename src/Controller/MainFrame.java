@@ -25,6 +25,7 @@ import View.Admin.AdminPrincipal;
 import View.Admin.AdminUser;
 import View.FilmNSeance.FilmNSchedulePage;
 import View.Offres.OffersPage;
+import View.ProfilPage.Stat;
 import View.ProfilPage.ViewPageProfil;
 import View.Reservation.Paiement;
 import View.Reservation.Panier;
@@ -197,25 +198,13 @@ public class MainFrame extends JFrame {
             }
         });
 
-        accueilPanel.getbtnFilms().addActionListener(e -> {
-            // Récupérez les 3 films les plus réservés
-            List<Film> top3Films = filmDao.Top3();
 
-            // Construisez le message à afficher dans le pop-up
-            StringBuilder message = new StringBuilder("Les 3 films les plus réservés :\n");
-            for (Film film : top3Films) {
-                message.append("- ").append(film.getFilm_title()).append("\n");
-            }
-
-            // Affichez le pop-up avec le message
-            JOptionPane.showMessageDialog(null, message.toString(), "Top 3 des films les plus réservés", JOptionPane.INFORMATION_MESSAGE);
-        });
         SeanceButtonListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JButton button = (JButton) e.getSource();
                 CurrentSeanceId = Integer.parseInt(button.getName());
-                Panier panierPanel = new Panier(MainFrame.this, controllerPanier, CurrentSeanceId);
+                Panier panierPanel = new Panier(MainFrame.this, controllerPanier, CurrentSeanceId, CurrentUser);
                 cardsPanel.add(panierPanel, "Panier");
                 cardLayout.show(cardsPanel, "Panier");
 
@@ -396,7 +385,12 @@ public class MainFrame extends JFrame {
         viewPageProfil.getStatistiques().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                Stat stat = new Stat("Film Durations and Reservations",CurrentUser.getUser_id());
+                stat.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                stat.setSize(1200, 800);
+                stat.setResizable(false);
+                stat.setLocationRelativeTo(null);
+                stat.setVisible(true);
             }
         });
 

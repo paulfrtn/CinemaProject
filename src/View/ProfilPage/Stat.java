@@ -162,17 +162,17 @@ public class Stat extends JFrame {
         }
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                Stat stat = new Stat("Film Durations and Reservations", 1);
-                stat.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                stat.setSize(1200, 800);
-                stat.setResizable(false);
-                stat.setLocationRelativeTo(null);
-                stat.setVisible(true);
-            }
-        });
-    }
+//    public static void main(String[] args) {
+//        SwingUtilities.invokeLater(new Runnable() {
+//            @Override
+//            public void run() {
+//                Stat stat = new Stat("Film Durations and Reservations",1);
+//                stat.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//                stat.setSize(1200, 800);
+//                stat.setResizable(false);
+//                stat.setLocationRelativeTo(null);
+//                stat.setVisible(true);
+//            }
+//        });
+//    }
 }

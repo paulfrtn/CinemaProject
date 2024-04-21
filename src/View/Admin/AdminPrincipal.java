@@ -1,13 +1,19 @@
 package View.Admin;
 
+import Model.Film.Film;
+import Model.Film.FilmDaoImpl;
 import Model.Seance.SeanceDaoImpl;
 import View.Accueil.JCarousel;
 import View.BandeADiffuser;
 import View.BorderRadCompenent.BorderRadButton;
 import View.BorderRadCompenent.BorderRadLabel;
+import View.BorderRadCompenent.BorderRadPanel;
+
+import java.util.List;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class AdminPrincipal extends JPanel {
     String couleur1;
@@ -68,18 +74,33 @@ public class AdminPrincipal extends JPanel {
 
         mainPanel.add(row1, gbc);
 
-        JPanel row2 = new JPanel(new BorderLayout());
-        //row2.setOpaque(false);
-        row2.setBackground(Color.decode(couleur3));
+        JPanel row2 = new JPanel(new FlowLayout()); // Utiliser un FlowLayout pour aligner les films côte à côte
+        row2.setOpaque(false);
         gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.gridwidth = 1;
         gbc.weightx = 1;
         gbc.weighty = 0.60;
-        //gbc.insets = new Insets(3, 3, 3, 3);
         gbc.fill = GridBagConstraints.BOTH;
 
+        FilmDaoImpl filmdao = new FilmDaoImpl();
+        List<Film> top3Films = filmdao.Top3();
 
+        for(Film film : top3Films){
+            JPanel panel = new JPanel(new BorderLayout()); // Utiliser un BorderLayout pour aligner le titre en haut et le poster au centre
+            JLabel titre = new JLabel(film.getFilm_title());
+            titre.setFont(new Font("Arial", Font.BOLD, 20));
+            panel.add(titre, BorderLayout.NORTH);
+            JPanel poster = new BorderRadPanel(10);
+            ImageIcon posterIcon = new ImageIcon(film.getFilm_poster());
+            Image scaledPosterImage = posterIcon.getImage().getScaledInstance(200, 300, Image.SCALE_SMOOTH);
+            ImageIcon scaledPosterIcon = new ImageIcon(scaledPosterImage);
+            JLabel posterLabel = new JLabel(scaledPosterIcon);
+            poster.add(posterLabel);
+            panel.add(poster, BorderLayout.CENTER);
+            row2.add(Box.createHorizontalStrut(20));
+            row2.add(panel); // Ajouter le panel contenant le titre et le poster à row2
+        }
 
         mainPanel.add(row2, gbc);
 
@@ -90,7 +111,6 @@ public class AdminPrincipal extends JPanel {
         gbc.gridwidth = 1;
         gbc.weightx = 1;
         gbc.weighty = 0.39;
-        //gbc.insets = new Insets(3, 3, 3, 3);
         gbc.fill = GridBagConstraints.NONE;
 
         GestionOffre = new BorderRadButton("Gestion des Offres", 10);
@@ -108,7 +128,6 @@ public class AdminPrincipal extends JPanel {
         row3.add(GestionFilm, BorderLayout.CENTER);
         row3.add(Box.createHorizontalStrut(100));
         row3.add(GestionUser, BorderLayout.EAST);
-
 
         mainPanel.add(row3, gbc);
 
@@ -134,3 +153,4 @@ public class AdminPrincipal extends JPanel {
     }
 
 }
+

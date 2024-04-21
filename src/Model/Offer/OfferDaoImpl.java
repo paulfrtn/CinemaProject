@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Implémentation de l'interface OfferDao pour les opérations CRUD sur les offres dans la base de données.
  */
-public class OfferDaoImpl implements OfferDao{
+public class OfferDaoImpl implements OfferDao {
     //Nous allons réaliser le CRUD (Create, Read, Update, Delete)
 
     // Create
@@ -19,7 +19,7 @@ public class OfferDaoImpl implements OfferDao{
         Connection con = null;
         PreparedStatement ps = null;
 
-        try{
+        try {
             con = ConnectionDb.getConnection();
             String query = "INSERT INTO offer (offer_name, offer_description, offer_start_date, offer_end_date, offer_price, offer_discount, offer_limit, offer_user_type, offer_status, user_id) VALUES (?,?,?,?,?,?,?,?,?,?)";
             ps = con.prepareStatement(query);
@@ -35,9 +35,9 @@ public class OfferDaoImpl implements OfferDao{
             ps.setInt(10, user_id); // ID de l'utilisateur associé à l'offre
             ps.executeUpdate();
             System.out.println("Offre ajoutée avec succès !");
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
                 if (ps != null) {
                     ps.close();
@@ -110,7 +110,7 @@ public class OfferDaoImpl implements OfferDao{
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
                 if (rs != null) {
                     rs.close();
@@ -248,6 +248,42 @@ public class OfferDaoImpl implements OfferDao{
                 }
                 if (stmt != null) {
                     stmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return offers;
+    }
+
+    public List<Offer> getOffersByUserType(int user_type) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<Offer> offers = new ArrayList<>();
+
+        try {
+            con = ConnectionDb.getConnection();
+            String query = "SELECT * FROM offer WHERE offer_user_type = ?";
+            ps = con.prepareStatement(query);
+            ps.setInt(1, user_type);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Offer offer = new Offer(rs.getInt("offer_id"), rs.getString("offer_name"), rs.getString("offer_description"), rs.getDate("offer_start_date"), rs.getDate("offer_end_date"), rs.getFloat("offer_price"), rs.getFloat("offer_discount"), rs.getInt("offer_limit"), rs.getInt("offer_user_type"), rs.getBoolean("offer_status"));
+                offers.add(offer);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
                 }
                 if (con != null) {
                     con.close();

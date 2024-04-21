@@ -215,16 +215,10 @@ public class FilmDaoImpl implements FilmDao {
         }
         return films;
     }
-    public List<Film> Top3() {
-        String sql = "SELECT f.*, COUNT(t.ticket_id) AS reservations_count " +
-                "FROM film f " +
-                "LEFT JOIN Seance s ON f.film_id = s.film_id " +
-                "LEFT JOIN ticket t ON s.seance_id = t.seance_id " +
-                "GROUP BY f.film_id " +
-                "ORDER BY reservations_count DESC " +
-                "LIMIT 3";
 
-        List<Film> films2 = new ArrayList<>();
+    public List<Film> getAllFilms() {
+        String sql = "SELECT * FROM film";
+        List<Film> films = new ArrayList<>();
         try (Connection connection = ConnectionDb.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
             ResultSet resultSet = statement.executeQuery();
@@ -241,12 +235,12 @@ public class FilmDaoImpl implements FilmDao {
                         resultSet.getBoolean("film_status"),
                         resultSet.getString("film_poster")
                 );
-                films2.add(film);
+                films.add(film);
             }
         } catch (SQLException e) {
             e.printStackTrace(); // Gérer cela de manière plus robuste en production
         }
-        return films2;
+        return films;
     }
 
 
