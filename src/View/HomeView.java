@@ -29,8 +29,10 @@ public class HomeView extends JFrame {
     public HomeView(List<Film> nowShowingFilms, List<Film> premieresFilms, List<Film> comingSoonFilms, int filmLimit) {
         super("Home Page");
 
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setSize(1200, 800); // Définissez la taille souhaitée ici
+        setResizable(false);
 
         mainPanel = new JPanel(new BorderLayout());
         Color bgColor = new Color(0x2a2d43);
@@ -38,6 +40,7 @@ public class HomeView extends JFrame {
 
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.setBackground(bgColor);
+
         ImageIcon logoIcon = new ImageIcon("src/Model/Images/logo.jpg");
         Image scaledLogoImage = logoIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         ImageIcon scaledLogoIcon = new ImageIcon(scaledLogoImage);
@@ -135,8 +138,13 @@ public class HomeView extends JFrame {
         mainPanel.add(carouselPanel, BorderLayout.CENTER);
         this.add(mainPanel);
 
-        pack();
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+
+        //pack();
+        add(mainPanel);
+        setSize(1200, 800);
+        //setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setLocationRelativeTo(null); // Centrer la fenêtre
         setVisible(true);
     }
 
@@ -149,6 +157,9 @@ class JCarousel extends JPanel {
     private JPanel filmsPanel;
 
     public JCarousel(String category, List<Film> films) {
+
+
+
         setLayout(new BorderLayout());
         JLabel label = new JLabel(category);
         label.setHorizontalAlignment(JLabel.CENTER);
@@ -175,17 +186,20 @@ class JCarousel extends JPanel {
         nextPanel.setBackground(new Color(0x2a2d43));
 
         // Utiliser un FlowLayout pour permettre aux films de s'afficher côte à côte
-        filmsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 50, 50));
+        // Dans votre JCarousel, quand vous initialisez filmsPanel
+        filmsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 10));
         filmsPanel.setBackground(new Color(0x2a2d43));
+
         for (Film film : films) {
             addFilm(film);
         }
 
         JScrollPane scrollPane = new JScrollPane(filmsPanel);
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
         scrollPane.getViewport().setBackground(new Color(0x2a2d43));
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
+
 
         // Action listeners pour les boutons de navigation
         btnPrevious.addActionListener(e -> {
@@ -209,10 +223,34 @@ class JCarousel extends JPanel {
     }
     private void addFilm(Film film) {
         ImageIcon originalIcon = new ImageIcon(film.getFilm_poster());
-        Image scaledImage = originalIcon.getImage().getScaledInstance(200, 300, Image.SCALE_SMOOTH);
+        Image scaledImage = originalIcon.getImage().getScaledInstance(100, 150, Image.SCALE_AREA_AVERAGING);
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
 
-        JLabel lblImage = new JLabel(scaledIcon);
+
+        JLabel lblImage = new JLabel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Graphics2D g2d = (Graphics2D) g;
+
+                int x = (this.getWidth() - scaledIcon.getIconWidth()) / 2;
+                int y = (this.getHeight() - scaledIcon.getIconHeight()) / 2;
+
+                float borderWidth = 3.0f;
+                g2d.setStroke(new BasicStroke(borderWidth));
+                scaledIcon.paintIcon(this, g2d, x, y);
+
+
+                // Dessiner une bordure noire autour de l'image
+                g.setColor(Color.BLACK);
+                g.drawRect(x, y, scaledIcon.getIconWidth() - 1, scaledIcon.getIconHeight() - 1);
+            }
+        };
+
+
+        int borderWidth = 3; // Doit correspondre à la valeur de borderWidth dans paintComponent
+        lblImage.setPreferredSize(new Dimension(scaledIcon.getIconWidth() + borderWidth, scaledIcon.getIconHeight() + borderWidth));
+
 
         // Créer un JLabel pour le titre avec un texte HTML pour forcer le retour à la ligne
         JLabel lblTitle = new JLabel("<html><center>" + film.getFilm_title() + "</center></html>");
@@ -220,8 +258,8 @@ class JCarousel extends JPanel {
         lblTitle.setFont(UIManager.getFont("Label.font"));
         lblTitle.setHorizontalAlignment(JLabel.CENTER);
 
-        // Définir une largeur maximale pour le lblTitle pour forcer le retour à la ligne
-        lblTitle.setMaximumSize(new Dimension(200, 60)); // Largeur basée sur la largeur de l'image
+
+        lblTitle.setMaximumSize(new Dimension(200, 60));
 
         JPanel titlePanel = new JPanel();
         titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.PAGE_AXIS));
@@ -231,8 +269,6 @@ class JCarousel extends JPanel {
         titlePanel.setOpaque(false);
 
         JPanel filmPanel = new JPanel(new BorderLayout());
-        filmPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
-
         filmPanel.add(lblImage, BorderLayout.CENTER);
         filmPanel.add(titlePanel, BorderLayout.SOUTH);
 
@@ -246,9 +282,11 @@ class JCarousel extends JPanel {
             }
         });
 
+
         filmsPanel.add(filmPanel);
         filmsPanel.revalidate();
         filmsPanel.repaint();
+
     }
 
 
