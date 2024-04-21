@@ -1,11 +1,21 @@
 package Model.Salle;
 
+/**
+ * Représente une salle dans un cinéma.
+ */
 public class Salle {
-    private int salle_id;
-    private int salle_number;
-    private int salle_capa_max;
-    private boolean salle_dispo;
+    private int salle_id; // Identifiant de la salle
+    private int salle_number; // Numéro de la salle
+    private int salle_capa_max; // Capacité maximale de la salle
+    private boolean salle_dispo; // Disponibilité de la salle
 
+    /**
+     * Constructeur avec tous les attributs.
+     * @param salle_id L'identifiant de la salle.
+     * @param salle_number Le numéro de la salle.
+     * @param salle_capa_max La capacité maximale de la salle.
+     * @param salle_dispo La disponibilité de la salle.
+     */
     public Salle(int salle_id, int salle_number, int salle_capa_max, boolean salle_dispo) {
         this.salle_id = salle_id;
         this.salle_number = salle_number;
@@ -13,7 +23,13 @@ public class Salle {
         this.salle_dispo = salle_dispo;
     }
 
-    public Salle( int salle_number, int salle_capa_max, boolean salle_dispo) {
+    /**
+     * Constructeur sans l'identifiant de la salle.
+     * @param salle_number Le numéro de la salle.
+     * @param salle_capa_max La capacité maximale de la salle.
+     * @param salle_dispo La disponibilité de la salle.
+     */
+    public Salle(int salle_number, int salle_capa_max, boolean salle_dispo) {
         this.salle_number = salle_number;
         this.salle_capa_max = salle_capa_max;
         this.salle_dispo = salle_dispo;

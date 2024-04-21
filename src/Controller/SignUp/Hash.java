@@ -3,34 +3,43 @@ package Controller.SignUp;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
-import java.util.*;
 
-// Nous allons créer deux fonctions :
-// - hashPassword : qui prend un mot de passe en paramètre et le hash en SHA-256
-// - checkPassword : qui prend un mot de passe et un hash en SHA-256 et vérifie si le mot de passe correspond au hash
-
-// SHA-256 est une fonction de hachage cryptographique qui prend un mot de passe et le transforme en une chaîne de caractères de 64 caractères
-// Plus précisément, SHA-256 prend un mot de passe et le transforme en une chaîne de caractères de 256 bits (32 octets) qui est ensuite encodée en base64 pour être stockée dans la base de données.
-// Base64 est un encodage qui permet de stocker des données binaires dans une chaîne de caractères.
+/**
+ * Cette classe fournit des méthodes pour le hachage des mots de passe et la vérification des mots de passe hachés.
+ */
 public class Hash {
+
+    /**
+     * Hache le mot de passe en utilisant l'algorithme SHA-256.
+     *
+     * @param password le mot de passe à hacher
+     * @return le mot de passe haché encodé en base64
+     * @throws RuntimeException si l'algorithme de hachage SHA-256 n'est pas trouvé
+     */
     public static String hashPassword(String password) throws RuntimeException {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] encodedhash = digest.digest(password.getBytes());
             return Base64.getEncoder().encodeToString(encodedhash);
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("SHA-256 algorithm not found", e);
+            throw new RuntimeException("Algorithme de hachage SHA-256 non trouvé", e);
         }
     }
 
+    /**
+     * Compare un mot de passe brut avec un mot de passe haché pour vérifier s'ils correspondent.
+     *
+     * @param password       le mot de passe brut à comparer
+     * @param hashedPassword le mot de passe haché à comparer
+     * @return true si les mots de passe correspondent, sinon false
+     */
     public static boolean comparePassword(String password, String hashedPassword) {
-        if(hashPassword(password).equals(hashedPassword)){
+        if (hashPassword(password).equals(hashedPassword)) {
             System.out.println("Mot de passe correct");
             return true;
-        }else{
+        } else {
             System.out.println("Mot de passe incorrect");
             return false;
         }
     }
 }
-

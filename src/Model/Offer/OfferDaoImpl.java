@@ -5,6 +5,9 @@ import Model.User.User;
 
 import java.sql.*;
 
+/**
+ * Implémentation de l'interface OfferDao pour les opérations CRUD sur les offres dans la base de données.
+ */
 public class OfferDaoImpl implements OfferDao{
     //Nous allons réaliser le CRUD (Create, Read, Update, Delete)
 
@@ -18,16 +21,16 @@ public class OfferDaoImpl implements OfferDao{
             con = ConnectionDb.getConnection();
             String query = "INSERT INTO offer (offer_name, offer_description, offer_start_date, offer_end_date, offer_price, offer_discount, offer_limit, offer_user_type, offer_status, user_id) VALUES (?,?,?,?,?,?,?,?,?,?)";
             ps = con.prepareStatement(query);
-            ps.setString(1, offer.getOffer_name());
-            ps.setString(2, offer.getOffer_description());
-            ps.setDate(3, (Date) offer.getOffer_start_date());
-            ps.setDate(4, (Date) offer.getOffer_end_date());
-            ps.setFloat(5, offer.getOffer_price());
-            ps.setFloat(6, offer.getOffer_discount());
-            ps.setInt(7, offer.getOffer_limit());
-            ps.setInt(8, offer.getOffer_user_type());
-            ps.setBoolean(9, offer.getOffer_status());
-            ps.setInt(10, user_id);
+            ps.setString(1, offer.getOffer_name()); // Nom de l'offre
+            ps.setString(2, offer.getOffer_description()); // Description de l'offre
+            ps.setDate(3, (Date) offer.getOffer_start_date()); // Date de début de l'offre
+            ps.setDate(4, (Date) offer.getOffer_end_date()); // Date de fin de l'offre
+            ps.setFloat(5, offer.getOffer_price()); // Prix de l'offre
+            ps.setFloat(6, offer.getOffer_discount()); // Réduction de l'offre
+            ps.setInt(7, offer.getOffer_limit()); // Limite de l'offre
+            ps.setInt(8, offer.getOffer_user_type()); // Type d'utilisateur pour l'offre
+            ps.setBoolean(9, offer.getOffer_status()); // Statut de l'offre
+            ps.setInt(10, user_id); // ID de l'utilisateur associé à l'offre
             ps.executeUpdate();
             System.out.println("Offre ajoutée avec succès !");
         }catch (SQLException e) {
@@ -62,6 +65,7 @@ public class OfferDaoImpl implements OfferDao{
             ps.setInt(1, id);
             rs = ps.executeQuery();
             if (rs.next()) {
+                // Création de l'objet Offer à partir des données récupérées de la base de données
                 offer = new Offer(rs.getInt("offer_id"), rs.getString("offer_name"), rs.getString("offer_description"), rs.getDate("offer_start_date"), rs.getDate("offer_end_date"), rs.getFloat("offer_price"), rs.getFloat("offer_discount"), rs.getInt("offer_limit"), rs.getInt("offer_user_type"), rs.getBoolean("offer_status"));
             }
         } catch (SQLException e) {
@@ -99,6 +103,7 @@ public class OfferDaoImpl implements OfferDao{
             ps.setString(1, name);
             rs = ps.executeQuery();
             if (rs.next()) {
+                // Création de l'objet Offer à partir des données récupérées de la base de données
                 offer = new Offer(rs.getInt("offer_id"), rs.getString("offer_name"), rs.getString("offer_description"), rs.getDate("offer_start_date"), rs.getDate("offer_end_date"), rs.getFloat("offer_price"), rs.getFloat("offer_discount"), rs.getInt("offer_limit"), rs.getInt("offer_user_type"), rs.getBoolean("offer_status"));
             }
         } catch (SQLException e) {

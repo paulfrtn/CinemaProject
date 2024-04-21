@@ -7,10 +7,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Implémentation de l'interface SalleDao pour les opérations CRUD sur les salles.
+ */
 public class SalleDaoImpl implements SalleDao {
     //Nous allons réaliser le CRUD (Create, Read, Update, Delete)
 
     // Create
+
+    /**
+     * Ajoute une nouvelle salle à la base de données.
+     *
+     * @param salle La salle à ajouter.
+     */
     public void addSalle(Salle salle) {
 
         Connection con = null;
@@ -37,10 +46,17 @@ public class SalleDaoImpl implements SalleDao {
     }
 
     // Read
+
     /*public Salle getSalleById(int id) {
         return null;
     }*/
 
+    /**
+     * Récupère une salle de la base de données en fonction de son numéro.
+     *
+     * @param number Le numéro de la salle à récupérer.
+     * @return La salle correspondant au numéro spécifié, null si aucune salle trouvée.
+     */
     public Salle getSalleByNumber(int number) {
         Connection con = null;
         PreparedStatement ps = null;
@@ -71,6 +87,11 @@ public class SalleDaoImpl implements SalleDao {
 
     // Update
 
+    /**
+     * Met à jour les informations d'une salle dans la base de données.
+     *
+     * @param salle La salle avec les nouvelles informations.
+     */
     public void updateSalle(Salle salle) {
 
         Connection con = null;
@@ -97,28 +118,32 @@ public class SalleDaoImpl implements SalleDao {
         }
     }
 
-        // Delete
+    // Delete
 
-        public void deleteSalleByNumber ( int number){
-            Connection con = null;
-            PreparedStatement ps = null;
+    /**
+     * Supprime une salle de la base de données en fonction de son numéro.
+     *
+     * @param number Le numéro de la salle à supprimer.
+     */
+    public void deleteSalleByNumber(int number) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        try {
+            con = ConnectionDb.getConnection();
+            String query = "DELETE FROM salle WHERE salle_number = ?";
+            ps = con.prepareStatement(query);
+            ps.setInt(1, number);
+            ps.executeUpdate();
+            System.out.println("Salle supprimée avec succès");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
             try {
-                con = ConnectionDb.getConnection();
-                String query = "DELETE FROM salle WHERE salle_number = ?";
-                ps = con.prepareStatement(query);
-                ps.setInt(1, number);
-                ps.executeUpdate();
-                System.out.println("Salle supprimée avec succès");
+                ps.close();
+                con.close();
             } catch (SQLException e) {
                 e.printStackTrace();
-            } finally {
-                try {
-                    ps.close();
-                    con.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
             }
         }
-
     }
+}
