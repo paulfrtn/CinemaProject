@@ -1,5 +1,8 @@
 package View;
 
+import View.BorderRadCompenent.BorderRadButton;
+import View.BorderRadCompenent.BorderRadTextField;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -22,10 +25,10 @@ public class SuppUser extends JFrame {
 
         JLabel label = new JLabel("Entrez l'adresse e-mail de l'utilisateur à supprimer : ");
         label.setForeground(Color.WHITE); // Texte en blanc
-        emailField = new JTextField();
+        emailField = new BorderRadTextField(10);
         emailField.setPreferredSize(new Dimension(200, 10));
         emailField.setBorder(BorderFactory.createLineBorder(Color.decode("#BCF4F5"))); // Bordure plus fine
-        supprimerButton = new JButton("Supprimer");
+        supprimerButton = new BorderRadButton("Supprimer",10);
         supprimerButton.setBackground(Color.decode("#BCF4F5")); // Couleur de fond bleu
         supprimerButton.setForeground(Color.BLACK); // Couleur du texte en blanc
 

@@ -1,6 +1,7 @@
 package View.ProfilPage;
 
 import Controller.ProfilPage.SeanceDetails;
+import View.BorderRadCompenent.BorderRadButton;
 import View.BorderRadCompenent.BorderRadLabel;
 
 import javax.imageio.ImageIO;
@@ -25,7 +26,9 @@ public class ViewPageProfil extends JPanel {
     private JLabel lblDateSeance;
     private JLabel lblLanguageFilm;
     private ImageIcon Poster;
-
+    JButton Statistiques;
+    JButton LogOut;
+    JButton retour;
     private String couleur1;
     private String couleur2;
     private String couleur3;
@@ -57,9 +60,9 @@ public class ViewPageProfil extends JPanel {
 
         int iconSize = 24;
 
-        JButton retour = new JButton("Retour");
-        JButton LogOut = new JButton("Déconnexion");
-        JButton Statistiques = new JButton("Statistiques");
+        retour = new BorderRadButton("Retour",15);
+        LogOut = new BorderRadButton("Déconnexion",15);
+        Statistiques = new BorderRadButton("Statistiques",15);
         retour.setBackground(Color.decode(couleur2));
         LogOut.setBackground(Color.decode(couleur2));
         Statistiques.setBackground(Color.decode(couleur2));
@@ -67,7 +70,7 @@ public class ViewPageProfil extends JPanel {
         LogOut.setForeground(Color.decode(couleur1));
         Statistiques.setForeground(Color.decode(couleur1));
 
-        Dimension HeaderDimension = new Dimension(300, 10);
+        Dimension HeaderDimension = new Dimension(300, 20);
         JPanel HeaderPanel = new JPanel();
         HeaderPanel.setLayout(new BorderLayout());
         HeaderPanel.setBackground(Color.decode(couleur1));
@@ -256,4 +259,18 @@ public class ViewPageProfil extends JPanel {
         lblEmail.setText(" Email: " + email);
         lblBirthday.setText(" Date de naissance: " + birthday);
     }
+
+    public JButton getRetour() {
+        return retour;
+    }
+
+    public JButton getLogOut() {
+        return LogOut;
+    }
+
+    public JButton getStatistiques() {
+        return Statistiques;
+    }
+
+
 }

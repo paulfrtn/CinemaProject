@@ -15,6 +15,12 @@ public class BorderRadLabel extends JLabel {
         setOpaque(false);
     }
 
+    public BorderRadLabel(String string, int rad) {
+        super(string);
+        this.borderRadius = rad;
+        setOpaque(false);
+    }
+
     public BorderRadLabel(ImageIcon icon, int rad, Color color) {
         super(icon);
         this.borderRadius = rad;

@@ -33,6 +33,7 @@ public class FilmNSchedulePage extends JPanel {
     private ControllerFilmSchedule controller;
     private MainFrame mainFrame;
     private JButton profil;
+    private JButton backButton;
     private JButton CurrentButtonDate;
     private Boolean Start;
     List<Seance> seances;
@@ -81,8 +82,13 @@ public class FilmNSchedulePage extends JPanel {
         gbc.weighty = 0.01; // 2/10 de la hauteur
         gbc.insets = new Insets(3, 3, 3, 3); // Marge de 0 partout
 
+        backButton = new BorderRadButton("Retour",10);
+        backButton.setBackground(Color.decode(couleur3));
+
+
+
         // Création du bouton avec une image redimensionnée et sans texte
-        profil = new BorderRadButton(10);
+        profil = new BorderRadButton("Profil",10);
         profil.setContentAreaFilled(false); // Supprime le remplissage pour que l'image soit visible
         profil.setBorder(null); // Supprime la bordure
         try {
@@ -93,13 +99,14 @@ public class FilmNSchedulePage extends JPanel {
             int height = 35; // Hauteur souhaitée
             Image resizedImage = originalImage.getScaledInstance(width, height, Image.SCALE_SMOOTH);
             ImageIcon icon = new ImageIcon(resizedImage);
-            profil.setIcon(icon);
+            //profil.setIcon(icon);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        profil.setText(null); // Supprime le texte
+        //profil.setText(null); // Supprime le texte
 
         // Ajouter le bouton tout en haut à droite
+        topPanel.add(backButton, BorderLayout.WEST);
         topPanel.add(profil, BorderLayout.EAST);
 
         add(topPanel, gbc);
@@ -449,5 +456,14 @@ public class FilmNSchedulePage extends JPanel {
             }
         }
     }
+
+    public JButton getBackButton() {
+        return backButton;
+    }
+
+    public JButton getProfil() {
+        return profil;
+    }
+
 
 }

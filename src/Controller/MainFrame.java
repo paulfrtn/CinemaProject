@@ -1,19 +1,31 @@
 package Controller;
 
 import Controller.Panier.ControllerPanier;
+import Controller.ProfilPage.ControllerPageProfil;
 import Controller.SignIn.ControllerSignIn;
 import Controller.SignUp.ControllerSignUp;
 import Controller.FilmSchedule.ControllerFilmSchedule;
+import CustomExceptions.UserNotFoundException;
 import Model.Film.Film;
 import Model.Film.FilmDaoImpl;
+import Model.Offer.Offer;
+import Model.Offer.OfferDaoImpl;
+import Model.Salle.SalleDaoImpl;
+import Model.Seance.Seance;
 import Model.Seance.SeanceDaoImpl;
+import Model.Ticket.TicketDaoImpl;
 import Model.User.User;
 import Model.User.UserDaoImpl;
 import View.*;
 import View.Accueil.Accueil;
 import View.Accueil.JCarousel;
+import View.Admin.AdminFilm;
+import View.Admin.AdminOffer;
+import View.Admin.AdminPrincipal;
+import View.Admin.AdminUser;
 import View.FilmNSeance.FilmNSchedulePage;
 import View.Offres.OffersPage;
+import View.ProfilPage.ViewPageProfil;
 import View.Reservation.Paiement;
 import View.Reservation.Panier;
 import View.SignInSignUp.SignIn;
@@ -34,15 +46,21 @@ public class MainFrame extends JFrame {
     private int CurrentSeanceId;
     private ActionListener SeanceButtonListener;
     private ActionListener FilmButtonListener;
-    private FilmNSchedulePage filmNSchedulePage ;
+    private FilmNSchedulePage filmNSchedulePage;
     private Film film;
+    private SeanceDaoImpl seanceDao;
     private FilmDaoImpl filmDao;
+    private OfferDaoImpl offerDao;
     private OffersPage offersPage;
+    private TicketDaoImpl ticketDao;
+    private SalleDaoImpl salleDao;
+    private UserDaoImpl userdao;
     private Paiement paiementPage;
     private ActionListener PaiementButtonListener;
+    ControllerPageProfil ControllerProfil;
 
 
-    public MainFrame() {
+    public MainFrame() throws UserNotFoundException {
 
         ///////////////////////////CONFIGURATION DE LA FENETRE ///////////////////////////
         setTitle("Cinema");
@@ -56,22 +74,32 @@ public class MainFrame extends JFrame {
         getContentPane().add(cardsPanel, BorderLayout.CENTER);
         /////////////////////////////////////////////////////////////////////////////////
 
-        UserDaoImpl userdao = new UserDaoImpl();
+        userdao = new UserDaoImpl();
         filmDao = new FilmDaoImpl();
+        offerDao = new OfferDaoImpl();
+        seanceDao = new SeanceDaoImpl();
+        ticketDao = new TicketDaoImpl();
+        salleDao = new SalleDaoImpl();
+
+
         PopUpMessage popUP = new PopUpMessage();
-        CurrentUser = userdao.getUserById(1);
+        //CurrentUser = userdao.getUserById(5);
         int filmLimit = 100;
         java.util.List<Film> nowShowingFilms = filmDao.getNowShowingFilms(filmLimit);
         java.util.List<Film> premieresFilms = filmDao.getPremieresFilms(filmLimit);
         List<Film> comingSoonFilms = filmDao.getComingSoonFilms(filmLimit);
 
         ///////////////////////////CONFIGURATION DES PAGES///////////////////////////
+
+        ViewPageProfil viewPageProfil = new ViewPageProfil();
+        ControllerProfil = new ControllerPageProfil(viewPageProfil,userdao, ticketDao, seanceDao, filmDao, salleDao);
         ControllerSignUp controllerSignUp = new ControllerSignUp();
         ControllerSignIn controllerSignIn = new ControllerSignIn();
         ControllerPanier controllerPanier = new ControllerPanier();
         ControllerFilmSchedule controller = new ControllerFilmSchedule();
         SignUp signUpPanel = new SignUp(controllerSignUp);
         SignIn signInPanel = new SignIn(controllerSignIn);
+        AdminPrincipal adminPrincipal = new AdminPrincipal();
         Accueil accueilPanel = new Accueil(this, nowShowingFilms, premieresFilms, comingSoonFilms, filmLimit);
         FauxAccueil fauxAccueil = new FauxAccueil();
         JCarousel jCarousel = new JCarousel(this, "Now Showing", nowShowingFilms);
@@ -82,15 +110,18 @@ public class MainFrame extends JFrame {
         cardsPanel.add(signUpPanel, "signUpPanel");
         cardsPanel.add(signInPanel, "SignInPanel");
         cardsPanel.add(accueilPanel, "Accueil");
+        cardsPanel.add(adminPrincipal, "AdminPrincipal");
+        cardsPanel.add(viewPageProfil, "ProfilePage");
         /////////////////////////////////////////////////////////////////////
 
         //Fausses pages pour les tests
         cardsPanel.add(fauxAccueil, "FauxAccueil");
 
 
-        //cardLayout.show(cardsPanel, "SignInPanel");
-        cardLayout.show(cardsPanel, "Accueil");
-
+        cardLayout.show(cardsPanel, "SignInPanel");
+        //cardLayout.show(cardsPanel, "ProfilePage");
+        //cardLayout.show(cardsPanel, "Accueil");
+        //cardLayout.show(cardsPanel, "Panier");
 
         signUpPanel.getSignUpButton().addActionListener(new ActionListener() {
             @Override
@@ -148,9 +179,6 @@ public class MainFrame extends JFrame {
         });
 
 
-
-
-
         accueilPanel.getbtnSearch().addActionListener(e -> {
             String searchText = JOptionPane.showInputDialog(this, "Entrez le titre du film à rechercher:");
 
@@ -174,7 +202,7 @@ public class MainFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JButton button = (JButton) e.getSource();
                 CurrentSeanceId = Integer.parseInt(button.getName());
-                Panier panierPanel = new Panier(MainFrame.this,controllerPanier, CurrentSeanceId);
+                Panier panierPanel = new Panier(MainFrame.this, controllerPanier, CurrentSeanceId);
                 cardsPanel.add(panierPanel, "Panier");
                 cardLayout.show(cardsPanel, "Panier");
 
@@ -190,16 +218,47 @@ public class MainFrame extends JFrame {
                         int offerId = panierPanel.getOfferId();
 
 
-                        if(quantity>0) {
+                        if (quantity > 0) {
                             if (CurrentUser != null) {
-
                                 controllerPanier.addPanier(CurrentSeanceId, CurrentUser.getUser_id(), offerId, price, true, quantity, CurrentUser.getUser_mail());
-                                popUP.showSuccessMessage("T'as réussi" + CurrentUser.getUser_firstname());
+                                popUP.showSuccessMessage("Votre réservation a été effectuée avec succès");
+                                cardLayout.show(cardsPanel, "Accueil");
                             }
                         }
                     }
+
+
                 });
 
+                panierPanel.getBtnBack().addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        cardLayout.show(cardsPanel, "FilmNSchedulePage");
+                    }
+                });
+
+                panierPanel.getBtnProfile().addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (CurrentUser != null) {
+                            if (CurrentUser.getUser_role()) {
+                                cardLayout.show(cardsPanel, "AdminPrincipal");
+                            } else {
+                                cardLayout.show(cardsPanel, "ProfilPage");
+
+                            }
+                        }
+                        if (CurrentUser == null) {
+                            cardLayout.show(cardsPanel, "SignInPanel");
+                        }
+                    }
+                });
+                panierPanel.getBtnFilm().addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        cardLayout.show(cardsPanel, "Accueil");
+                    }
+                });
 
             }
         };
@@ -218,38 +277,210 @@ public class MainFrame extends JFrame {
                 Date film_release_date = film.getFilm_release_date();
                 Boolean film_status = film.getFilm_status();
                 String film_poster = film.getFilm_poster();
-                SeanceDaoImpl seanceDao = new SeanceDaoImpl();
+                seanceDao = new SeanceDaoImpl();
 
                 filmNSchedulePage = new FilmNSchedulePage(MainFrame.this, CurrentFilmId, film_title, film_director, film_genre, film_duration, film_synopsis, film_release_date, film_status, film_poster);
                 cardsPanel.add(filmNSchedulePage, "FilmNSchedulePage");
                 cardLayout.show(cardsPanel, "FilmNSchedulePage");
 
-                filmNSchedulePage.getButtonProfil().addActionListener(new ActionListener() {
+                filmNSchedulePage.buttonListeners(SeanceButtonListener);
+
+                filmNSchedulePage.getBackButton().addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        cardLayout.show(cardsPanel, "FauxAccueil");
+                        cardLayout.show(cardsPanel, "Accueil");
                     }
                 });
-                filmNSchedulePage.buttonListeners(SeanceButtonListener);
+
+                filmNSchedulePage.getProfil().addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        System.out.println(CurrentUser);
+                        if (CurrentUser != null) {
+                            if (CurrentUser.getUser_role()) {
+                                cardLayout.show(cardsPanel, "AdminPrincipal");
+                            } else {
+                                try {
+                                    ControllerProfil.displayUser(CurrentUser.getUser_id());
+                                } catch (UserNotFoundException ex) {
+                                    throw new RuntimeException(ex);
+                                }
+                                cardLayout.show(cardsPanel, "ProfilePage");
+                            }
+                        }
+                        if (CurrentUser == null) {
+                            System.out.println("Current user is null");
+                            cardLayout.show(cardsPanel, "SignInPanel");
+                        }
+                    }
+                });
+
+
             }
 
         };
 
 
         accueilPanel.getbtnOffers().addActionListener(e -> {
-
-            if(CurrentUser != null){
+            if (CurrentUser != null) {
                 offersPage = new OffersPage(CurrentUser.getUser_type());
                 cardsPanel.add(offersPage, "OffersPage");
                 cardLayout.show(cardsPanel, "OffersPage");
-            }
-            else{
+            } else {
                 offersPage = new OffersPage(-1);
                 cardsPanel.add(offersPage, "OffersPage");
                 cardLayout.show(cardsPanel, "OffersPage");
+
+                offersPage.getProfile().addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if(CurrentUser != null){
+                            if(CurrentUser.getUser_role()){
+                                cardLayout.show(cardsPanel,"AdminPrincipal");
+                            }
+                            else{
+                                cardLayout.show(cardsPanel,"ProfilePage");
+
+                            }
+                        }
+                        if(CurrentUser == null){
+                            cardLayout.show(cardsPanel,"SignInPanel");
+                        }
+
+                    }
+                });
             }
         });
 
+        accueilPanel.getbtnProfile().addActionListener(e -> {
+            if (CurrentUser != null) {
+                if (CurrentUser.getUser_role()) {
+                    cardLayout.show(cardsPanel, "AdminPrincipal");
+                } else {
+                    try {
+                        ControllerProfil.displayUser(CurrentUser.getUser_id());
+                    } catch (UserNotFoundException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    cardLayout.show(cardsPanel, "ProfilePage");
+
+                }
+            }
+            if (CurrentUser == null) {
+                cardLayout.show(cardsPanel, "SignInPanel");
+            }
+        });
+
+
+
+        viewPageProfil.getRetour().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(cardsPanel, "Accueil");
+            }
+        });
+
+        viewPageProfil.getStatistiques().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        viewPageProfil.getLogOut().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CurrentUser = null;
+                cardLayout.show(cardsPanel, "SignInPanel");
+            }
+        });
+        ////////////////////////ADMIN///////////////////////////////
+
+        adminPrincipal.getBtnFilms().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(cardsPanel, "Accueil");
+            }
+
+        });
+
+
+        adminPrincipal.getGestionFilm().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                List<Film> films = filmDao.getAllFilms();
+                List<Seance> seances = new SeanceDaoImpl().getAllSeances();
+                AdminFilm adminFilm = new AdminFilm(films, seances);
+                cardsPanel.add(adminFilm, "AdminFilm");
+                cardLayout.show(cardsPanel, "AdminFilm");
+
+
+                adminFilm.getBtnBack().addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        cardLayout.show(cardsPanel, "AdminPrincipal");
+                    }
+                });
+
+                adminFilm.getBtnFilms().addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        cardLayout.show(cardsPanel, "Accueil");
+                    }
+                });
+
+            }
+        });
+
+        adminPrincipal.getGestionOffre().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                List<Offer> offers = offerDao.getAllOffers();
+                AdminOffer adminOffer = new AdminOffer(offers, CurrentUser.getUser_id());
+                cardsPanel.add(adminOffer, "AdminOffer");
+                cardLayout.show(cardsPanel, "AdminOffer");
+
+                adminOffer.getBtnBack().addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        cardLayout.show(cardsPanel, "AdminPrincipal");
+                    }
+                });
+
+                adminOffer.getBtnFilms().addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        cardLayout.show(cardsPanel, "Accueil");
+                    }
+                });
+
+            }
+        });
+
+        adminPrincipal.getGestionUser().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                List<User> users = userdao.getAllUsers();
+                AdminUser adminUser = new AdminUser(users);
+                cardsPanel.add(adminUser, "AdminUser");
+                cardLayout.show(cardsPanel, "AdminUser");
+
+                adminUser.getBtnBack().addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        cardLayout.show(cardsPanel, "AdminPrincipal");
+                    }
+                });
+
+                adminUser.getBtnFilms().addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        cardLayout.show(cardsPanel, "Accueil");
+                    }
+                });
+
+            }
+        });
 
     }
 
@@ -261,14 +492,15 @@ public class MainFrame extends JFrame {
         return FilmButtonListener;
     }
 
-    public ActionListener getPaiementButtonListener() {
-        return PaiementButtonListener;
-    }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new MainFrame().setVisible(true);
+                try {
+                    new MainFrame().setVisible(true);
+                } catch (UserNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
     }
@@ -277,3 +509,5 @@ public class MainFrame extends JFrame {
         cardLayout.show(cardsPanel, "Accueil");
     }
 }
+
+

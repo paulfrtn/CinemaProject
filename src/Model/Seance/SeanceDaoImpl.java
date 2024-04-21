@@ -1,6 +1,11 @@
 package Model.Seance;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Time;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -157,5 +162,30 @@ public class SeanceDaoImpl implements SeanceDao {
         }
         return count;
     }
+
+    public List<Seance> getAllSeances() {
+        String query = "SELECT * FROM Seance";
+        List<Seance> seances = new ArrayList<>();
+        //Récupérer toutes les séances
+        try (Connection connection = ConnectionDb.getConnection();
+             java.sql.Statement statement = connection.createStatement();
+             java.sql.ResultSet resultSet = statement.executeQuery(query)) {
+            while (resultSet.next()) {
+                seances.add(new Seance(
+                        resultSet.getInt("seance_id"),
+                        resultSet.getDate("seance_date"),
+                        resultSet.getTime("seance_time"),
+                        resultSet.getString("seance_language"),
+                        resultSet.getInt("seance_nb_reservation"),
+                        resultSet.getInt("film_id"),
+                        resultSet.getInt("salle_id"))
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return seances;
+    }
+
 
 }

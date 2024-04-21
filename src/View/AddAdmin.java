@@ -1,5 +1,9 @@
 package View;
 
+import View.BorderRadCompenent.BorderRadButton;
+import View.BorderRadCompenent.BorderRadPasswordField;
+import View.BorderRadCompenent.BorderRadTextField;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -21,28 +25,28 @@ public class AddAdmin extends JFrame {
         setLocationRelativeTo(null);
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(7, 2));
+        panel.setLayout(new GridLayout(7, 2, 5, 5));
         panel.setBackground(Color.decode("#2a2d43")); // Couleur de fond
 
         JLabel firstNameLabel = new JLabel("Prénom : ");
         firstNameLabel.setForeground(Color.WHITE); // Texte en blanc
-        firstNameField = new JTextField();
+        firstNameField = new BorderRadTextField(10);
         JLabel lastNameLabel = new JLabel("Nom : ");
         lastNameLabel.setForeground(Color.WHITE); // Texte en blanc
-        lastNameField = new JTextField();
+        lastNameField = new BorderRadTextField(10);
         JLabel mailLabel = new JLabel("E-mail : ");
         mailLabel.setForeground(Color.WHITE); // Texte en blanc
-        mailField = new JTextField();
+        mailField = new BorderRadTextField(10);
         JLabel pseudoLabel = new JLabel("Pseudo : ");
         pseudoLabel.setForeground(Color.WHITE); // Texte en blanc
-        pseudoField = new JTextField();
+        pseudoField = new BorderRadTextField(10);
         JLabel passwordLabel = new JLabel("Mot de passe : ");
         passwordLabel.setForeground(Color.WHITE); // Texte en blanc
-        passwordField = new JPasswordField();
+        passwordField = new BorderRadPasswordField(10);
         JLabel birthdayLabel = new JLabel("Date de naissance : ");
         birthdayLabel.setForeground(Color.WHITE); // Texte en blanc
-        birthdayField = new JTextField();
-        addButton = new JButton("Ajouter");
+        birthdayField = new BorderRadTextField(10);
+        addButton = new BorderRadButton("Ajouter",10);
         addButton.setBackground(Color.decode("#BCF4F5")); // Couleur de bouton
         addButton.setForeground(Color.BLACK); // Texte en noir
 

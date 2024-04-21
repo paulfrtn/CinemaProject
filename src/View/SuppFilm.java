@@ -1,5 +1,8 @@
 package View;
 
+import View.BorderRadCompenent.BorderRadButton;
+import View.BorderRadCompenent.BorderRadTextField;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -21,10 +24,10 @@ public class SuppFilm extends JFrame {
 
         JLabel titleLabel = new JLabel("Nom du film à supprimer : ");
         titleLabel.setForeground(Color.WHITE);
-        filmTitleField = new JTextField();
+        filmTitleField = new BorderRadTextField(10);
         filmTitleField.setBorder(BorderFactory.createLineBorder(Color.decode("#BCF4F5"))); // Bordure plus fine
 
-        deleteButton = new JButton("Supprimer");
+        deleteButton = new BorderRadButton("Supprimer",10);
         deleteButton.setBackground(Color.decode("#BCF4F5"));
         JPanel buttonPanel = new JPanel(); // Panel pour le bouton
         buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER)); // Alignement milieu

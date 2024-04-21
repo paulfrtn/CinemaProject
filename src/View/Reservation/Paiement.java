@@ -35,7 +35,7 @@ public class Paiement extends JDialog {
         expirationDateField = new JTextField(7);
 
         // Créer le bouton Valider
-        JButton validerButton = new JButton("Valider");
+        JButton validerButton = new BorderRadButton("Valider",10);
         validerButton.setBackground(Color.decode("#BCF4F5"));
         validerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

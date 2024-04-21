@@ -1,5 +1,8 @@
 package View;
 
+import View.BorderRadCompenent.BorderRadButton;
+import View.BorderRadCompenent.BorderRadTextField;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -19,33 +22,33 @@ public class AddSeance extends JFrame {
         setLocationRelativeTo(null);
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(6, 2)); // Ajustement du nombre de lignes pour le nouveau champ
+        panel.setLayout(new GridLayout(6, 2, 10,10)); // Ajustement du nombre de lignes pour le nouveau champ
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         panel.setBackground(Color.decode("#2a2d43"));
 
         JLabel filmTitleLabel = new JLabel("Titre du film : ");
         filmTitleLabel.setForeground(Color.WHITE);
-        filmTitleField = new JTextField();
+        filmTitleField = new BorderRadTextField(10);
 
         JLabel dateLabel = new JLabel("Date de la séance (yyyy-MM-dd) : ");
         dateLabel.setForeground(Color.WHITE);
-        dateField = new JTextField();
+        dateField = new BorderRadTextField(10);
 
         JLabel timeLabel = new JLabel("Horaire de la séance (HH:mm:ss) : ");
         timeLabel.setForeground(Color.WHITE);
-        timeField = new JTextField();
+        timeField = new BorderRadTextField(10);
 
         JLabel languageLabel = new JLabel("Langue : ");
         languageLabel.setForeground(Color.WHITE);
-        languageField = new JTextField();
+        languageField = new BorderRadTextField(10);
 
 
         JLabel salleNumberLabel = new JLabel("Numéro de salle (1 à 5) : "); // Label pour le numéro de salle
         salleNumberLabel.setForeground(Color.WHITE);
-        salleNumberField = new JTextField();
+        salleNumberField = new BorderRadTextField(10);
 
 
-        addButton = new JButton("Ajouter");
+        addButton = new BorderRadButton("Ajouter",10);
 
         panel.add(filmTitleLabel);
         panel.add(filmTitleField);

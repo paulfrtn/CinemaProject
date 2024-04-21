@@ -7,6 +7,7 @@ import Model.Film.FilmDaoImpl;
 import Model.Seance.Seance;
 import Model.Seance.SeanceDaoImpl;
 import View.BorderRadCompenent.BorderRadButton;
+import View.BorderRadCompenent.BorderRadLabel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,6 +31,10 @@ public class Panier extends JPanel {
     private String couleur1;
     private String couleur2;
     private String couleur3;
+    private JPanel mainCardPanel;
+    private JButton BtnBack;
+    private JButton BtnFilm;
+    private JButton BtnProfile;
 
     public Panier(MainFrame controller, ControllerPanier controllerPanier, int seanceId) {
         this.controller = controller;
@@ -37,17 +42,70 @@ public class Panier extends JPanel {
         this.offerId = 0;
         this.validerPaiement = false;
         couleur1 = "#003049";
-        couleur3 = "#669BBC";
-        couleur2 = "#FDF0D5";
+        couleur2 = "#669BBC";
+        couleur3 = "#FDF0D5";
         setLayout(new BorderLayout());
         setBackground(Color.decode(couleur1)); // Couleur de fond
-        setSize(1200, 800);
 
         // Création d'une instance de Seance pour le film
         SeanceDaoImpl seanceDao = new SeanceDaoImpl();
         Seance seance = seanceDao.getSeanceById(seanceId);
         FilmDaoImpl filmDao = new FilmDaoImpl();
         Film film = filmDao.getFilmById(seance.getFilm_id());
+
+        mainCardPanel = new JPanel();
+        mainCardPanel.setLayout(new GridBagLayout());
+        mainCardPanel.setOpaque(false);
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        JPanel row1 = new JPanel(new BorderLayout());
+        row1.setOpaque(false);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        gbc.weightx = 1;
+        gbc.weighty = 0.01;
+        gbc.insets = new Insets(7, 7, 7, 7);
+        gbc.fill = GridBagConstraints.BOTH;
+
+        ImageIcon logoIcon = new ImageIcon("src/Model/Images/logo.jpg");
+        Image scaledLogoImage = logoIcon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        ImageIcon scaledLogoIcon = new ImageIcon(scaledLogoImage);
+        JLabel logo = new BorderRadLabel(scaledLogoIcon, 10);
+        row1.add(logo, BorderLayout.WEST);
+
+        JPanel buttonsPanel = new JPanel();
+        buttonsPanel.setOpaque(false);
+        buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
+
+        BtnBack = new BorderRadButton("Retour", 10);
+        BtnBack.setBackground(Color.decode(couleur2));
+        BtnFilm = new BorderRadButton("Films", 10);
+        BtnFilm.setBackground(Color.decode(couleur2));
+        BtnProfile = new BorderRadButton("Profil", 10);
+        BtnProfile.setBackground(Color.decode(couleur2));
+
+        buttonsPanel.add(Box.createHorizontalStrut(10));
+        buttonsPanel.add(BtnBack);
+        buttonsPanel.add(Box.createHorizontalStrut(10));
+        buttonsPanel.add(BtnFilm);
+        buttonsPanel.add(Box.createHorizontalGlue()); // Ajout d'un espace flexible
+        buttonsPanel.add(BtnProfile); // Aligner le bouton "Profil" à droite
+        row1.add(buttonsPanel, BorderLayout.CENTER);
+
+        mainCardPanel.add(row1, gbc);
+
+        JPanel row2 = new JPanel(new BorderLayout());
+        row2.setOpaque(false);
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 1;
+        gbc.weightx = 1;
+        gbc.weighty = 0.90;
+        gbc.insets = new Insets(7, 7, 7, 7);
+        gbc.fill = GridBagConstraints.BOTH;
+
 
         // Création d'un JPanel pour contenir les informations du film et le poster
         JPanel infoPosterPanel = new JPanel(new GridLayout(1, 2));
@@ -105,12 +163,12 @@ public class Panier extends JPanel {
         infoPosterPanel.add(posterLabel);
 
         // Ajout du JPanel contenant informations et poster à la fenêtre
-        add(infoPosterPanel, BorderLayout.NORTH);
+        row2.add(infoPosterPanel, BorderLayout.NORTH);
 
         prixTotalLabel = new JLabel("Prix total : " + nombreBillets * prixParBillet + " euros");
         prixTotalLabel.setForeground(Color.WHITE); // Texte en blanc
         prixTotalLabel.setFont(font); // Taille de police plus grande
-        add(prixTotalLabel, BorderLayout.CENTER);
+        row2.add(prixTotalLabel, BorderLayout.CENTER);
         // Ajout de labels vides pour créer de l'espace
         infoPanel.add(new JLabel(""));
         infoPanel.add(new JLabel(""));
@@ -136,20 +194,21 @@ public class Panier extends JPanel {
         mainPanel.setBackground(Color.decode(couleur1)); // Couleur de fond
 
         // Ajout du panel du spinner au conteneur principal avec des contraintes de centrage horizontal
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0; // Position en X
-        gbc.gridy = 0; // Position en Y
-        gbc.weightx = 1.0; // Poids horizontal (pour le centrage)
-        gbc.weighty = 1.0; // Poids vertical (pour le centrage)
-        gbc.anchor = GridBagConstraints.CENTER; // Ancrage au centre horizontal
-        mainPanel.add(prixTotalLabel, gbc);
-        gbc.gridy = 100; // Position en Y
-        mainPanel.add(spinnerPanel, gbc);
+        GridBagConstraints gbc2 = new GridBagConstraints();
+        gbc2.gridx = 0; // Position en X
+        gbc2.gridy = 0; // Position en Y
+        gbc2.weightx = 1.0; // Poids horizontal (pour le centrage)
+        gbc2.weighty = 1.0; // Poids vertical (pour le centrage)
+        gbc2.fill = GridBagConstraints.VERTICAL;
+        gbc2.anchor = GridBagConstraints.CENTER; // Ancrage au centre horizontal
+        mainPanel.add(prixTotalLabel, gbc2);
+        gbc2.gridy = 100; // Position en Y
+        mainPanel.add(spinnerPanel, gbc2);
 
         // Ajout du conteneur principal à la frame
-        add(mainPanel, BorderLayout.CENTER);
+        row2.add(mainPanel, BorderLayout.CENTER);
 
-        payerButton = new BorderRadButton("Payer",10);
+        payerButton = new BorderRadButton("Payer", 10);
         payerButton.setBackground(Color.decode(couleur2)); // Couleur de bouton
         // Définition de la taille de police plus grande pour le bouton "Payer"
         Font boutonFont = new Font("Arial", Font.PLAIN, 18); // Choisir la police et la taille de police désirées
@@ -161,7 +220,7 @@ public class Panier extends JPanel {
 
         payerPanel.add(payerButton);
 
-        ValiderButton = new BorderRadButton("Valider",10);
+        ValiderButton = new BorderRadButton("Valider", 10);
         ValiderButton.setBackground(Color.decode(couleur2)); // Couleur de bouton
 // Définition de la taille de police plus grande pour le bouton "Payer"
         Font boutonFont1 = new Font("Arial", Font.PLAIN, 18); // Choisir la police et la taille de police désirées
@@ -170,8 +229,12 @@ public class Panier extends JPanel {
         payerPanel.add(ValiderButton);
 
 
+        row2.add(payerPanel, BorderLayout.SOUTH);
 
-        add(payerPanel, BorderLayout.SOUTH);
+
+        mainCardPanel.add(row2, gbc);
+
+        add(mainCardPanel, BorderLayout.NORTH);
 
     }
 
@@ -213,10 +276,18 @@ public class Panier extends JPanel {
         return ValiderButton;
     }
 
-    public Boolean getValiderPaiement() {
-        return validerPaiement;
-
+    public JButton getBtnBack() {
+        return BtnBack;
     }
+
+    public JButton getBtnFilm() {
+        return BtnFilm;
+    }
+
+    public JButton getBtnProfile() {
+        return BtnProfile;
+    }
+
 
 
 }

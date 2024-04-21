@@ -35,7 +35,6 @@ public class ControllerPanier implements ControllerPanierInterface {
 
         for (int i = 0; i < quantity; i++) {
             Ticket ticket = new Ticket(date, status, price, idUser, idSeance, idOffer, mail);
-            System.out.println(ticket.toString());
             ticketDao.addTicket(ticket);
         }
     }

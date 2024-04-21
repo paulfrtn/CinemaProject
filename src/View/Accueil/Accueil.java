@@ -111,8 +111,9 @@ public class Accueil extends JPanel {
         return btnSearch;
     }
 
-    public JButton getbtnFilms(){
-        return btnFilms;
+
+    public JButton getbtnProfile(){
+        return btnProfile;
     }
 
     public JButton getbtnOffers(){

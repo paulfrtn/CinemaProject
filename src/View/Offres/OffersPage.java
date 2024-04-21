@@ -2,8 +2,10 @@ package View.Offres;
 
 import Controller.MainFrame;
 import Model.DataBase.ConnectionDb;
+import View.BorderRadCompenent.BorderRadButton;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -21,6 +23,7 @@ public class OffersPage extends JPanel {
     private void initializeUI() {
         mainPanel = new JPanel(new BorderLayout());
         Color bgColor = new Color(0x003049); // Couleur bleu marine
+
         mainPanel.setBackground(bgColor);
 
         // Panel for navigation buttons
@@ -30,17 +33,15 @@ public class OffersPage extends JPanel {
         JPanel leftPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         leftPanel.setBackground(bgColor);
 
-        btnFilms = new JButton("Films");
-        btnProfile = new JButton("Profil");
+        btnFilms = new BorderRadButton("Films",15);
+        btnProfile = new BorderRadButton("Profil",15);
 
-        btnFilms.setBackground(bgColor);
+        btnFilms.setBackground(Color.decode("#FDF0D5"));
         btnFilms.setForeground(Color.WHITE);
-        btnProfile.setBackground(bgColor);
+        btnProfile.setBackground(Color.decode("#FDF0D5"));
         btnProfile.setForeground(Color.WHITE);
 
         btnFilms.addActionListener(e -> navigateToHomeView());
-
-        btnProfile.addActionListener(e -> navigateToProfileView());
 
         leftPanel.add(btnFilms);
 
@@ -102,10 +103,6 @@ public class OffersPage extends JPanel {
 
 
 
-    private void navigateToProfileView() {
-        // Méthode pour naviguer vers la page de profil
-    }
-
     private void loadOffersFromDatabase(JPanel offersListPanel) {
         Color bgColor = new Color(0x2a2d43); // Couleur bleu marine
 
@@ -165,6 +162,9 @@ public class OffersPage extends JPanel {
 
     }
 
+    public JButton getProfile() {
+        return btnProfile;
+    }
 
 
 }

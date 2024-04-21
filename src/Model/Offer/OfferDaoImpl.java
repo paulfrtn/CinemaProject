@@ -4,6 +4,8 @@ import Model.DataBase.ConnectionDb;
 import Model.User.User;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Implémentation de l'interface OfferDao pour les opérations CRUD sur les offres dans la base de données.
@@ -221,5 +223,39 @@ public class OfferDaoImpl implements OfferDao{
                 e.printStackTrace();
             }
         }
+    }
+
+    public List<Offer> getAllOffers() {
+        Connection con = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        List<Offer> offers = new ArrayList<>();
+
+        try {
+            con = ConnectionDb.getConnection();
+            stmt = con.createStatement();
+            rs = stmt.executeQuery("SELECT * FROM offer");
+            while (rs.next()) {
+                Offer offer = new Offer(rs.getInt("offer_id"), rs.getString("offer_name"), rs.getString("offer_description"), rs.getDate("offer_start_date"), rs.getDate("offer_end_date"), rs.getFloat("offer_price"), rs.getFloat("offer_discount"), rs.getInt("offer_limit"), rs.getInt("offer_user_type"), rs.getBoolean("offer_status"));
+                offers.add(offer);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return offers;
     }
 }

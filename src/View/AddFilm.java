@@ -2,6 +2,10 @@ package View;
 
 
 
+import View.BorderRadCompenent.BorderRadButton;
+import View.BorderRadCompenent.BorderRadLabel;
+import View.BorderRadCompenent.BorderRadTextField;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
@@ -28,26 +32,26 @@ public class AddFilm extends JFrame {
         setLocationRelativeTo(null);
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(11, 2));
+        panel.setLayout(new GridLayout(11, 2, 10, 10));
         panel.setBackground(Color.decode("#2a2d43"));
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         // Titre du film
         JLabel titleLabel = new JLabel("Nom du film : ");
         titleLabel.setForeground(Color.WHITE);
-        titleField = new JTextField();
+        titleField = new BorderRadTextField(10);
         titleField.setBorder(BorderFactory.createLineBorder(Color.decode("#BCF4F5"))); // Bordure plus fine
 
         // Réalisateur
         JLabel directorLabel = new JLabel("Réalisateur : ");
         directorLabel.setForeground(Color.WHITE);
-        directorField = new JTextField();
+        directorField = new BorderRadTextField(10);
 
 
         // Genre
         JLabel genreLabel = new JLabel("Genre : ");
         genreLabel.setForeground(Color.WHITE);
-        genreField = new JTextField();
+        genreField = new BorderRadTextField(10);
 
 
         // Synopsis
@@ -60,13 +64,13 @@ public class AddFilm extends JFrame {
         // Durée
         JLabel durationLabel = new JLabel("Durée (en minutes) : ");
         durationLabel.setForeground(Color.WHITE);
-        durationField = new JTextField();
+        durationField = new BorderRadTextField(10);
 
 
         // Date de sortie
         JLabel releaseDateLabel = new JLabel("Date de sortie : ");
         releaseDateLabel.setForeground(Color.WHITE);
-        releaseDateField = new JTextField();
+        releaseDateField = new BorderRadTextField(10);
 
 
         // Statut
@@ -76,10 +80,15 @@ public class AddFilm extends JFrame {
 
         JLabel statusLabel = new JLabel("Choisissez un statut : ");
         statusLabel.setForeground(Color.WHITE);
+        statusLabel.setOpaque(false);
 
         atAfficheButton = new JRadioButton("À l'affiche");
         aVenirButton = new JRadioButton("À venir");
         enAvantPremiereButton = new JRadioButton("En Avant Première");
+
+        atAfficheButton.setBackground(new Color(0,0,0,0));
+        aVenirButton.setBackground(new Color(0,0,0,0));
+        enAvantPremiereButton.setBackground(new Color(0,0,0,0));
 
         ButtonGroup statusGroup = new ButtonGroup();
         statusGroup.add(atAfficheButton);
@@ -93,9 +102,10 @@ public class AddFilm extends JFrame {
         statusPanel.add(atAfficheButton);
         statusPanel.add(aVenirButton);
         statusPanel.add(enAvantPremiereButton);
+        statusPanel.setOpaque(false);
 
         // Bouton pour insérer le poster
-        insertPosterButton = new JButton("Insérer Poster");
+        insertPosterButton = new BorderRadButton("Insérer Poster",10);
 
         // Label pour afficher le chemin du poster sélectionné
         posterLabel = new JLabel("Aucun fichier sélectionné");
@@ -105,7 +115,7 @@ public class AddFilm extends JFrame {
         posterTextLabel.setForeground(Color.WHITE);
 
         // Bouton pour ajouter un film
-        addButton = new JButton("Ajouter");
+        addButton = new BorderRadButton("Ajouter",10);
         addButton.setBackground(Color.decode("#BCF4F5"));
 
         // Ajout des composants au panel
