@@ -429,6 +429,14 @@ public class MainFrame extends JFrame {
                     }
                 });
 
+                adminFilm.getBtnLogOut().addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        CurrentUser = null;
+                        cardLayout.show(cardsPanel, "SignInPanel");
+                    }
+                });
+
             }
         });
 
@@ -451,6 +459,14 @@ public class MainFrame extends JFrame {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         cardLayout.show(cardsPanel, "Accueil");
+                    }
+                });
+
+                adminOffer.getbtnLogOut().addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        CurrentUser = null;
+                        cardLayout.show(cardsPanel, "SignInPanel");
                     }
                 });
 
@@ -479,8 +495,25 @@ public class MainFrame extends JFrame {
                     }
                 });
 
+                adminUser.getBtnLogOut().addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        CurrentUser = null;
+                        cardLayout.show(cardsPanel, "SignInPanel");
+                    }
+                });
+
             }
         });
+
+        adminPrincipal.getBtnLogOut().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CurrentUser = null;
+                cardLayout.show(cardsPanel, "SignInPanel");
+            }
+        });
+
 
     }
 

@@ -22,7 +22,7 @@ public class AdminOffer extends JPanel {
     private JButton btnBack;
     private JButton btnFilms;
     private JButton btnOffers;
-    private JButton btnProfile;
+    private JButton btnLogOut;
     private JButton btnAddOffer;
     private JButton btnDeleteOffer;
     private JPanel offersPanel;
@@ -71,15 +71,15 @@ public class AdminOffer extends JPanel {
         btnFilms.setBackground(Color.decode(couleur2));
         btnOffers = new BorderRadButton("Offres", 10);
         btnOffers.setBackground(Color.decode(couleur2));
-        btnProfile = new BorderRadButton("Profil", 10);
-        btnProfile.setBackground(Color.decode(couleur2));
+        btnLogOut = new BorderRadButton("Déconnexion", 10);
+        btnLogOut.setBackground(Color.decode(couleur2));
 
         buttonsPanel.add(Box.createHorizontalStrut(10));
         buttonsPanel.add(btnBack, BorderLayout.WEST);
         buttonsPanel.add(Box.createHorizontalStrut(10));
         buttonsPanel.add(btnFilms, BorderLayout.WEST);
         buttonsPanel.add(Box.createHorizontalGlue()); // Ajout d'un espace flexible
-        buttonsPanel.add(btnProfile, BorderLayout.EAST); // Aligner le bouton "Profil" à droite
+        buttonsPanel.add(btnLogOut, BorderLayout.EAST); // Aligner le bouton "Profil" à droite
         row1.add(buttonsPanel, BorderLayout.CENTER);
 
         mainPanel.add(row1, gbc);
@@ -213,8 +213,8 @@ public class AdminOffer extends JPanel {
         return btnFilms;
     }
 
-    public JButton getBtnProfile() {
-        return btnProfile;
+    public JButton getbtnLogOut() {
+        return btnLogOut;
     }
 
 }

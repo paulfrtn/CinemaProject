@@ -79,6 +79,8 @@ public class AdminPrincipal extends JPanel {
         //gbc.insets = new Insets(3, 3, 3, 3);
         gbc.fill = GridBagConstraints.BOTH;
 
+
+
         mainPanel.add(row2, gbc);
 
         JPanel row3 = new JPanel();

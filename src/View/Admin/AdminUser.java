@@ -28,7 +28,7 @@ public class AdminUser extends JPanel {
     private JButton btnBack;
     private JButton btnFilms;
     private JButton btnOffers;
-    private JButton btnProfile;
+    private JButton btnLogOut;
     private JButton btnAddUser;
     private JButton btnDeleteUser;
     private JPanel FilmsPanel;
@@ -71,15 +71,15 @@ public class AdminUser extends JPanel {
         btnBack.setBackground(Color.decode(couleur2));
         btnFilms = new BorderRadButton("Films", 10);
         btnFilms.setBackground(Color.decode(couleur2));
-        btnProfile = new BorderRadButton("Profil", 10);
-        btnProfile.setBackground(Color.decode(couleur2));
+        btnLogOut = new BorderRadButton("Déconnexion", 10);
+        btnLogOut.setBackground(Color.decode(couleur2));
 
         buttonsPanel.add(Box.createHorizontalStrut(10));
         buttonsPanel.add(btnBack);
         buttonsPanel.add(Box.createHorizontalStrut(10));
         buttonsPanel.add(btnFilms);
         buttonsPanel.add(Box.createHorizontalGlue());
-        buttonsPanel.add(btnProfile);
+        buttonsPanel.add(btnLogOut);
         row1.add(buttonsPanel, BorderLayout.CENTER);
 
         mainPanel.add(row1, gbc);
@@ -191,6 +191,11 @@ public class AdminUser extends JPanel {
 
     public JButton getBtnFilms() {
         return btnFilms;
+    }
+
+
+    public JButton getBtnLogOut() {
+        return btnLogOut;
     }
 
 }
