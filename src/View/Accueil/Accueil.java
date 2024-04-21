@@ -89,7 +89,7 @@ public class Accueil extends JPanel {
         gbc.weightx = 1;
         gbc.weighty = 0.90;
         //gbc.insets = new Insets(3, 3, 3, 3);
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.fill = GridBagConstraints.BOTH;
 
 
         carouselNowShowing = new JCarousel(this.controller,"Now Showing", nowShowingFilms.subList(0, Math.min(nowShowingFilms.size(), filmLimit)));

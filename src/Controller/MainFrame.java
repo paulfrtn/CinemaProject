@@ -216,7 +216,7 @@ public class MainFrame extends JFrame {
 
 
         accueilPanel.getbtnOffers().addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "Offres");
+            //JOptionPane.showMessageDialog(this, "Offres");
             if(CurrentUser != null){
                 offersPage = new OffersPage(CurrentUser.getUser_type());
                 cardsPanel.add(offersPage, "OffersPage");
@@ -246,6 +246,7 @@ public class MainFrame extends JFrame {
 
 
 
+
     }
 
     public ActionListener getSeanceButtonListener() {
@@ -266,5 +267,9 @@ public class MainFrame extends JFrame {
                 new MainFrame().setVisible(true);
             }
         });
+    }
+
+    public void showAccueilView() {
+        cardLayout.show(cardsPanel, "Accueil");
     }
 }
