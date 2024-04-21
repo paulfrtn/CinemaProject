@@ -115,14 +115,9 @@ public class MainFrame extends JFrame {
         cardsPanel.add(viewPageProfil, "ProfilePage");
         /////////////////////////////////////////////////////////////////////
 
-        //Fausses pages pour les tests
-        cardsPanel.add(fauxAccueil, "FauxAccueil");
 
 
         cardLayout.show(cardsPanel, "SignInPanel");
-        //cardLayout.show(cardsPanel, "ProfilePage");
-        //cardLayout.show(cardsPanel, "Accueil");
-        //cardLayout.show(cardsPanel, "Panier");
 
         signUpPanel.getSignUpButton().addActionListener(new ActionListener() {
             @Override
