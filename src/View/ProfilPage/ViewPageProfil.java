@@ -67,10 +67,13 @@ public class ViewPageProfil extends JPanel {
         LogOut.setForeground(Color.decode(couleur1));
         Statistiques.setForeground(Color.decode(couleur1));
 
+        Dimension HeaderDimension = new Dimension(300, 10);
         JPanel HeaderPanel = new JPanel();
         HeaderPanel.setLayout(new BorderLayout());
         HeaderPanel.setBackground(Color.decode(couleur1));
         HeaderPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        HeaderPanel.setPreferredSize(HeaderDimension);
+        HeaderPanel.setMaximumSize(HeaderDimension);
         HeaderPanel.setBorder(new EmptyBorder(10, 0, 0, 0));
         HeaderPanel.add(retour, BorderLayout.WEST);
         HeaderPanel.add(LogOut, BorderLayout.EAST);
