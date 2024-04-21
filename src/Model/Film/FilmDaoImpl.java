@@ -217,7 +217,7 @@ public class FilmDaoImpl implements FilmDao {
                 "ORDER BY reservations_count DESC " +
                 "LIMIT 3";
 
-        List<Film> films = new ArrayList<>();
+        List<Film> films2 = new ArrayList<>();
         try (Connection connection = ConnectionDb.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
             ResultSet resultSet = statement.executeQuery();
@@ -234,12 +234,12 @@ public class FilmDaoImpl implements FilmDao {
                         resultSet.getBoolean("film_status"),
                         resultSet.getString("film_poster")
                 );
-                films.add(film);
+                films2.add(film);
             }
         } catch (SQLException e) {
             e.printStackTrace(); // Gérer cela de manière plus robuste en production
         }
-        return films;
+        return films2;
     }
 
 }
