@@ -59,10 +59,13 @@ public class ViewPageProfil extends JPanel {
 
         JButton retour = new JButton("Retour");
         JButton LogOut = new JButton("Déconnexion");
+        JButton Statistiques = new JButton("Statistiques");
         retour.setBackground(Color.decode(couleur2));
         LogOut.setBackground(Color.decode(couleur2));
-        retour.setForeground(Color.decode(couleur3));
-        LogOut.setForeground(Color.decode(couleur3));
+        Statistiques.setBackground(Color.decode(couleur2));
+        retour.setForeground(Color.decode(couleur1));
+        LogOut.setForeground(Color.decode(couleur1));
+        Statistiques.setForeground(Color.decode(couleur1));
 
         JPanel HeaderPanel = new JPanel();
         HeaderPanel.setLayout(new BorderLayout());
@@ -71,6 +74,7 @@ public class ViewPageProfil extends JPanel {
         HeaderPanel.setBorder(new EmptyBorder(10, 0, 0, 0));
         HeaderPanel.add(retour, BorderLayout.WEST);
         HeaderPanel.add(LogOut, BorderLayout.EAST);
+        HeaderPanel.add(Statistiques, BorderLayout.CENTER);
         add(HeaderPanel);
         add(Box.createVerticalStrut(40));
 
