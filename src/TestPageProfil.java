@@ -8,23 +8,44 @@ import Model.Salle.*;
 import View.ProfilPage.ViewPageProfil;
 import java.util.*;
 
-public class TestPageProfil{
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+public class TestPageProfil {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        // Créer une JFrame pour contenir le panneau
+        JFrame frame = new JFrame("Test Page Profil");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Créer une instance de ViewPageProfil (qui étend JPanel)
         ViewPageProfil view = new ViewPageProfil();
+
+        // Créer les instances des modèles nécessaires
         UserDaoImpl modeluser = new UserDaoImpl();
         TicketDaoImpl modelticket = new TicketDaoImpl();
         SeanceDaoImpl modelseance = new SeanceDaoImpl();
         FilmDaoImpl modelfilm = new FilmDaoImpl();
         SalleDaoImpl modelsalle = new SalleDaoImpl();
-        ControllerPageProfil controller = new ControllerPageProfil(view, modeluser, modelticket, modelseance, modelfilm, modelsalle);
-        int userId;
-        userId = 2;
 
-        try{
+        // Créer une instance du contrôleur avec le panneau et les modèles
+        ControllerPageProfil controller = new ControllerPageProfil(view, modeluser, modelticket, modelseance, modelfilm, modelsalle);
+
+        // Ajouter le panneau à la JFrame
+        frame.add(view);
+
+
+        // Rendre la JFrame visible
+        frame.setSize(1200, 800);
+        frame.setVisible(true);
+
+        int userId = 2; // ID de l'utilisateur à afficher
+
+        try {
+            // Appeler la méthode du contrôleur pour afficher l'utilisateur
             controller.displayUser(userId);
         } catch (UserNotFoundException e) {
-            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(view, e.getMessage());
         }
     }
 }
+

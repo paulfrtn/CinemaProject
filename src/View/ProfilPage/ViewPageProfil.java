@@ -13,7 +13,7 @@ import java.net.URL;
 import java.util.*;
 import java.util.List;
 
-public class ViewPageProfil extends JFrame {
+public class ViewPageProfil extends JPanel {
     private JLabel lblFirstName;
     private JLabel lblLastName;
     private JLabel lblEmail;
@@ -35,11 +35,8 @@ public class ViewPageProfil extends JFrame {
         couleur2 = "#669BBC";
         couleur3 = "#FDF0D5";
 
-        setTitle("Votre Profil Utilisateur");
-        setSize(1200, 800);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
-        getContentPane().setBackground(Color.decode(couleur1));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setBackground(Color.decode(couleur1));
 
         lblFirstName = new JLabel("");
         lblLastName = new JLabel("");
@@ -60,7 +57,7 @@ public class ViewPageProfil extends JFrame {
 
         int iconSize = 24;
 
-        getContentPane().add(Box.createVerticalStrut(40));
+        add(Box.createVerticalStrut(40));
 
         JPanel UserPicPanel = new JPanel();
         UserPicPanel.setLayout(new BoxLayout(UserPicPanel, BoxLayout.Y_AXIS));
@@ -68,7 +65,7 @@ public class ViewPageProfil extends JFrame {
         UserPicPanel.setBorder(new EmptyBorder(0, 0, 20, 0));
         UserPicPanel.add(new JLabel(loadIcon("/user.png", 100, 100)));
         UserPicPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        getContentPane().add(UserPicPanel);
+        add(UserPicPanel);
 
         JPanel namePanel = new JPanel();
         namePanel.setLayout(new BoxLayout(namePanel, BoxLayout.X_AXIS));
@@ -77,51 +74,52 @@ public class ViewPageProfil extends JFrame {
         namePanel.add(lblFirstName);
         namePanel.add(lblLastName);
         namePanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        getContentPane().add(namePanel);
+        add(namePanel);
 
 
         // Spacer
-        getContentPane().add(Box.createVerticalStrut(20));
+        add(Box.createVerticalStrut(20));
 
         // Ensure uniform size for all panels and adding spaces between them
         Dimension panelSize = new Dimension(500, 50);
         add(createUserInfoPanel(lblPseudo, loadIcon("/nickname.png", iconSize, iconSize), panelSize));
         add(createUserInfoPanel(lblEmail, loadIcon("/email.png", iconSize, iconSize), panelSize));
         add(createUserInfoPanel(lblBirthday, loadIcon("/calendar.png", iconSize, iconSize), panelSize));
-        getContentPane().add(Box.createVerticalStrut(30));
-
-        setVisible(true);
+        add(Box.createVerticalStrut(30));
     }
 
-    public void DisplaySeances(List<SeanceDetails> seanceDetails){
-        JPanel SeancePanel = new JPanel();
-        Dimension panelSeanceSize = new Dimension(1000, 300);
-        SeancePanel.setLayout(new BorderLayout());
-        SeancePanel.setBorder(new EmptyBorder(10, 10, 10, 10));
-        SeancePanel.setBackground(Color.decode(couleur1));
-        SeancePanel.setPreferredSize(panelSeanceSize);
-        SeancePanel.setMaximumSize(panelSeanceSize);
-        getContentPane().add(SeancePanel);
+    public void DisplaySeances(List<SeanceDetails> seanceDetails) {
+        setBackground(Color.decode(couleur1));
 
-        JPanel SeancePanelHeader = new JPanel();
-        SeancePanelHeader.setLayout(new BoxLayout(SeancePanelHeader, BoxLayout.Y_AXIS));
-        SeancePanelHeader.setBackground(Color.decode(couleur1));
+        add(Box.createVerticalStrut(10)); // Add some spacing at the top
+
+        JPanel SeancePanel = new JPanel();
+        SeancePanel.setLayout(new BorderLayout());
+        SeancePanel.setBackground(Color.decode(couleur1));
+        SeancePanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        SeancePanel.setBorder(new EmptyBorder(0, 75, 0, 0));
+        add(SeancePanel);
+
+        JPanel HeaderPanel = new JPanel();
+        HeaderPanel.setLayout(new BorderLayout());
+        HeaderPanel.setBackground(Color.decode(couleur1));
+        HeaderPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        SeancePanel.add(HeaderPanel, BorderLayout.NORTH);
+
         JLabel SeanceHeader = new JLabel("Vos séances à venir :");
         SeanceHeader.setFont(new Font("Arial", Font.BOLD, 20));
         SeanceHeader.setForeground(Color.decode(couleur3));
+        SeanceHeader.setAlignmentX(Component.CENTER_ALIGNMENT);
+        HeaderPanel.add(SeanceHeader, BorderLayout.CENTER);
 
-        JPanel SeancePanelBody = new JPanel();
-        SeancePanelBody.setLayout(new BoxLayout(SeancePanelBody, BoxLayout.X_AXIS));
-        SeancePanelBody.setBackground(Color.decode(couleur1));
-        SeancePanelBody.setBorder(new EmptyBorder(30, 10, 10, 10));
+        JPanel BodyPanel = new JPanel();
+        BodyPanel.setLayout(new BoxLayout(BodyPanel, BoxLayout.X_AXIS));
+        BodyPanel.setBackground(Color.decode(couleur1));
+        BodyPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        BodyPanel.setBorder(new EmptyBorder(30, 0, 0, 0));
+        SeancePanel.add(BodyPanel, BorderLayout.CENTER);
 
-        SeancePanel.add(SeancePanelHeader, BorderLayout.NORTH);
-        SeancePanel.add(SeancePanelBody, BorderLayout.CENTER);
-
-        SeancePanelHeader.add(SeanceHeader);
-
-        for(SeanceDetails seance : seanceDetails){
-
+        for (SeanceDetails seance : seanceDetails) {
             JLabel lblFilm = new JLabel("<html><div style='text-align: center;'>" + seance.getTitreFilm() + "</div></html>");
             JLabel lblDateSeance = new JLabel(seance.getDateSeance().toString());
             JLabel lblLanguageFilm = new JLabel(seance.getLangage());
@@ -140,7 +138,7 @@ public class ViewPageProfil extends JFrame {
                 ImageIcon icon = new ImageIcon(resizedImage);
                 JLabel imageLabel = new JLabel(icon);
                 CardSeance.add(imageLabel, BorderLayout.NORTH);
-            }catch (Exception e){
+            } catch (Exception e) {
                 System.err.println("Échec du chargement de l'image pour le poster : " + seance.getPosterFilm());
             }
 
@@ -150,17 +148,19 @@ public class ViewPageProfil extends JFrame {
 
             CardSeance.add(SeanceInfo, BorderLayout.CENTER);
             SeanceInfo.add(Box.createVerticalStrut(10));
-            SeanceInfo.add(createUserSeancePanelTitle(lblFilm, panelSeanceSize), BorderLayout.CENTER);
+            SeanceInfo.add(createUserSeancePanelTitle(lblFilm), BorderLayout.CENTER);
             SeanceInfo.add(Box.createVerticalStrut(10));
-            SeanceInfo.add(createUserSeancePanelInfo(lblDateSeance, panelSeanceSize), BorderLayout.CENTER);
-            SeanceInfo.add(createUserSeancePanelInfo(lblLanguageFilm, panelSeanceSize), BorderLayout.CENTER);
+            SeanceInfo.add(createUserSeancePanelInfo(lblDateSeance), BorderLayout.CENTER);
+            SeanceInfo.add(createUserSeancePanelInfo(lblLanguageFilm), BorderLayout.CENTER);
 
-            SeancePanelBody.add(CardSeance);
+            BodyPanel.add(CardSeance);
         }
 
+        revalidate(); // Revalidate the panel to reflect changes
+        repaint(); // Repaint the panel
     }
 
-    private JPanel createUserSeancePanelInfo(JLabel label, Dimension size){
+    private JPanel createUserSeancePanelInfo(JLabel label) {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
         panel.setBackground(Color.decode(couleur1));
@@ -172,7 +172,7 @@ public class ViewPageProfil extends JFrame {
         return panel;
     }
 
-    private JPanel createUserSeancePanelTitle(JLabel label, Dimension size){
+    private JPanel createUserSeancePanelTitle(JLabel label) {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
         panel.setBackground(Color.decode(couleur1));
@@ -212,12 +212,10 @@ public class ViewPageProfil extends JFrame {
         panel.add(iconPanel, BorderLayout.WEST);
         panel.add(descriptionPanel, BorderLayout.CENTER);
 
-        getContentPane().add(Box.createVerticalStrut(10));
+        add(Box.createVerticalStrut(10));
 
         return panel;
     }
-
-
 
     private ImageIcon loadIcon(String iconPath, int width, int height) {
         URL imageUrl = getClass().getResource(iconPath);
@@ -230,7 +228,7 @@ public class ViewPageProfil extends JFrame {
     }
 
     public void setUserProfile(String firstName, String lastName, String email, String pseudo, Boolean role, String birthday, String type) {
-        lblFirstName.setText(firstName+" ");
+        lblFirstName.setText(firstName + " ");
         lblLastName.setText(lastName);
         lblPseudo.setText(" Pseudo: " + pseudo);
         lblEmail.setText(" Email: " + email);
