@@ -25,7 +25,7 @@ public class Stat extends JFrame {
         Color backgroundColor = Color.decode("#669BBC");
         int goalDuration = 500;
         try {
-            // Vérifiez l'URL de connexion, l'utilisateur et le mot de passe
+
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/Cinema", "root", "password");
 
             // Requête SQL pour la somme des durées des films vues par un utilisateur
