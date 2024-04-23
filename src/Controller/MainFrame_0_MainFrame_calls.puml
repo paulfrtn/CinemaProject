@@ -1,0 +1,562 @@
+@startuml
+
+/' diagram meta data start
+config=CallConfiguration;
+{
+  "rootMethod": "Controller.MainFrame#MainFrame()",
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": true,
+    "cutInterfaceStructures": true,
+    "cutDataStructures": true,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 3,
+    "backwardDepth": 3,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showMethodParametersTypes": false,
+    "showMethodParametersNames": false,
+    "showMethodReturnType": false,
+    "showPackageLevels": 2,
+    "showCallOrder": false,
+    "edgeMode": "MethodsOnly", // TypesOnly, MethodsOnly, TypesAndMethods, MethodsAndDirectTypeUsage
+    "showDetailedClassStructure": false
+  },
+  "rootClass": "Controller.MainFrame",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="LR"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_1642890859 { 
+   	label=FilmNSeance
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_288528356 { 
+   	label=FilmNSchedulePage
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   FilmNSchedulePage1631579330XXXbuttonListeners429841706[
+	label="+ buttonListeners()"
+	style=filled
+	fillcolor=white
+	tooltip="FilmNSchedulePage
+
+null"
+	fontcolor=darkgreen
+];
+} 
+} 
+
+subgraph cluster_1664073796 { 
+   	label=Controller
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_988965022 { 
+   	label=MainFrame
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   MainFrame1664073796XXXMainFrame0[
+	label="+ MainFrame()"
+	style=filled
+	fillcolor=white
+	tooltip="MainFrame
+
+null"
+	penwidth=4
+	fontcolor=darkgreen
+];
+
+MainFrame1664073796XXXmain1859653459[
+	label="+ main()"
+	style=filled
+	fillcolor=white
+	tooltip="MainFrame
+
+null"
+	fontcolor=darkgreen
+];
+} 
+} 
+
+subgraph cluster_1790093524 { 
+   	label=Ticket
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_1620078217 { 
+   	label=TicketDaoImpl
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   TicketDaoImpl1259133519XXXaddTicket1790093524[
+	label="+ addTicket()"
+	style=filled
+	fillcolor=white
+	tooltip="TicketDaoImpl
+
+null"
+	fontcolor=darkgreen
+];
+
+TicketDaoImpl1259133519XXXgetTicketsByUserId104431[
+	label="+ getTicketsByUserId()"
+	style=filled
+	fillcolor=white
+	tooltip="TicketDaoImpl
+
+null"
+	fontcolor=darkgreen
+];
+} 
+} 
+
+subgraph cluster_1818601128 { 
+   	label=SignUp
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_1034393390 { 
+   	label=Hash
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   Hash563139530XXXcomparePassword2013066710[
+	label="+ comparePassword()"
+	style=filled
+	fillcolor=white
+	tooltip="Hash
+
+&#10;  Compare un mot de passe brut avec un mot de passe haché pour vérifier s'ils correspondent.&#10; &#10;  @param password le mot de passe brut à comparer&#10;  @param hashedPassword le mot de passe haché à comparer&#10;  @return true si les mots de passe correspondent, sinon false&#10; "
+	fontcolor=darkgreen
+];
+
+Hash563139530XXXhashPassword1808118735[
+	label="+ hashPassword()"
+	style=filled
+	fillcolor=white
+	tooltip="Hash
+
+&#10;  Hache le mot de passe en utilisant l'algorithme SHA-256.&#10; &#10;  @param password le mot de passe à hacher&#10;  @return le mot de passe haché encodé en base64&#10;  @throws RuntimeException si l'algorithme de hachage SHA-256 n'est pas trouvé&#10; "
+	fontcolor=darkgreen
+];
+} 
+
+subgraph cluster_578504264 { 
+   	label=ControllerSignUp
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   ControllerSignUp563139530XXXonSignUp1366095254[
+	label="+ onSignUp()"
+	style=filled
+	fillcolor=white
+	tooltip="ControllerSignUp
+
+&#10;  Tente d'inscrire un nouvel utilisateur avec les informations fournies.&#10; &#10;  @param firstName le prénom de l'utilisateur&#10;  @param lastName le nom de famille de l'utilisateur&#10;  @param email l'adresse e-mail de l'utilisateur&#10;  @param pseudole pseudo de l'utilisateur&#10;  @param password le mot de passe de l'utilisateur&#10;  @param birthday la date de naissance de l'utilisateur au format \"yyyy-mm-dd\"&#10;  @return true si l'inscription est réussie, sinon false&#10; "
+	fontcolor=darkgreen
+];
+} 
+} 
+
+subgraph cluster_1818601502 { 
+   	label=SignIn
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_1335599368 { 
+   	label=ControllerSignIn
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   ControllerSignIn563139156XXXonSignIn2013066710[
+	label="+ onSignIn()"
+	style=filled
+	fillcolor=white
+	tooltip="ControllerSignIn
+
+&#10;  Tente de connecter l'utilisateur avec l'adresse e-mail et le mot de passe fournis.&#10; &#10;  @param emaill'adresse e-mail de l'utilisateur&#10;  @param password le mot de passe de l'utilisateur&#10;  @return true si la connexion est réussie, sinon false&#10; "
+	fontcolor=darkgreen
+];
+} 
+} 
+
+subgraph cluster_1822473535 { 
+   	label=Seance
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_187614249 { 
+   	label=SeanceDaoImpl
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   SeanceDaoImpl1291513530XXXgetSeanceById104431[
+	label="+ getSeanceById()"
+	style=filled
+	fillcolor=white
+	tooltip="SeanceDaoImpl
+
+null"
+	fontcolor=darkgreen
+];
+} 
+} 
+
+subgraph cluster_1911672519 { 
+   	label=Panier
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_83535912 { 
+   	label=ControllerPanier
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   ControllerPanier470068139XXXaddPanier304211512[
+	label="+ addPanier()"
+	style=filled
+	fillcolor=white
+	tooltip="ControllerPanier
+
+&#10;  Adds a specified quantity of tickets for a given seance to the shopping cart, associated with a user and potentially an offer.&#10; &#10;  @param idSeance The ID of the seance for which tickets are being added.&#10;  @param idUser The ID of the user adding tickets to their cart.&#10;  @param idOffer The ID of any offer applied to these tickets (default is 1, indicating no specific offer).&#10;  @param price The price of each ticket.&#10;  @param status The status of the ticket (e.g., active or inactive).&#10;  @param quantity The number of tickets to add.&#10;  @param mail The email address associated with the user for ticket confirmation.&#10; "
+	fontcolor=darkgreen
+];
+} 
+} 
+
+subgraph cluster_2189732 { 
+   	label=Film
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_596182409 { 
+   	label=FilmDaoImpl
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   FilmDaoImpl243067543XXXgetComingSoonFilms104431[
+	label="+ getComingSoonFilms()"
+	style=filled
+	fillcolor=white
+	tooltip="FilmDaoImpl
+
+null"
+	fontcolor=darkgreen
+];
+
+FilmDaoImpl243067543XXXgetFilmById104431[
+	label="+ getFilmById()"
+	style=filled
+	fillcolor=white
+	tooltip="FilmDaoImpl
+
+null"
+	fontcolor=darkgreen
+];
+
+FilmDaoImpl243067543XXXgetFilmByTitle1808118735[
+	label="+ getFilmByTitle()"
+	style=filled
+	fillcolor=white
+	tooltip="FilmDaoImpl
+
+null"
+	fontcolor=darkgreen
+];
+
+FilmDaoImpl243067543XXXgetNowShowingFilms104431[
+	label="+ getNowShowingFilms()"
+	style=filled
+	fillcolor=white
+	tooltip="FilmDaoImpl
+
+null"
+	fontcolor=darkgreen
+];
+
+FilmDaoImpl243067543XXXgetPremieresFilms104431[
+	label="+ getPremieresFilms()"
+	style=filled
+	fillcolor=white
+	tooltip="FilmDaoImpl
+
+null"
+	fontcolor=darkgreen
+];
+} 
+} 
+
+subgraph cluster_2645995 { 
+   	label=User
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_1762556631 { 
+   	label=UserDaoImpl
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   UserDaoImpl242611280XXXDoesMailExist1808118735[
+	label="+ DoesMailExist()"
+	style=filled
+	fillcolor=white
+	tooltip="UserDaoImpl
+
+null"
+	fontcolor=darkgreen
+];
+
+UserDaoImpl242611280XXXDoesPasswordExist2013066710[
+	label="+ DoesPasswordExist()"
+	style=filled
+	fillcolor=white
+	tooltip="UserDaoImpl
+
+null"
+	fontcolor=darkgreen
+];
+
+UserDaoImpl242611280XXXDoesPseudoExist1808118735[
+	label="+ DoesPseudoExist()"
+	style=filled
+	fillcolor=white
+	tooltip="UserDaoImpl
+
+null"
+	fontcolor=darkgreen
+];
+
+UserDaoImpl242611280XXXaddUser2645995[
+	label="+ addUser()"
+	style=filled
+	fillcolor=white
+	tooltip="UserDaoImpl
+
+null"
+	fontcolor=darkgreen
+];
+
+UserDaoImpl242611280XXXgetUserById104431[
+	label="+ getUserById()"
+	style=filled
+	fillcolor=white
+	tooltip="UserDaoImpl
+
+null"
+	fontcolor=darkgreen
+];
+
+UserDaoImpl242611280XXXgetUserByMail1808118735[
+	label="+ getUserByMail()"
+	style=filled
+	fillcolor=white
+	tooltip="UserDaoImpl
+
+null"
+	fontcolor=darkgreen
+];
+} 
+} 
+
+subgraph cluster_2666181 { 
+   	label=View
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_189277764 { 
+   	label=PopUpMessage
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   PopUpMessage2666181XXXshowErrorMessage1808118735[
+	label="+ showErrorMessage()"
+	style=filled
+	fillcolor=white
+	tooltip="PopUpMessage
+
+null"
+	fontcolor=darkgreen
+];
+
+PopUpMessage2666181XXXshowSuccessMessage1808118735[
+	label="+ showSuccessMessage()"
+	style=filled
+	fillcolor=white
+	tooltip="PopUpMessage
+
+null"
+	fontcolor=darkgreen
+];
+} 
+} 
+
+subgraph cluster_890204939 { 
+   	label=ProfilPage
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   subgraph cluster_1650101674 { 
+   	label=ViewPageProfil
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   ViewPageProfil1998218708XXXDisplaySeances1561093413[
+	label="+ DisplaySeances()"
+	style=filled
+	fillcolor=white
+	tooltip="ViewPageProfil
+
+null"
+	fontcolor=darkgreen
+];
+} 
+
+subgraph cluster_2036457640 { 
+   	label=ControllerPageProfil
+	labeljust=l
+	fillcolor=white
+	style=filled
+   
+   ControllerPageProfil1786813315XXXdisplaySeanceUser104431[
+	label="+ displaySeanceUser()"
+	style=filled
+	fillcolor=white
+	tooltip="ControllerPageProfil
+
+&#10;  Fetches and displays the seance details for the specified user.&#10;  This method gathers all the tickets for the user and compiles details about the seances they are attending.&#10;  @param userId The ID of the user whose seance details are to be displayed.&#10; "
+	fontcolor=darkgreen
+];
+
+ControllerPageProfil1786813315XXXdisplayUser104431[
+	label="+ displayUser()"
+	style=filled
+	fillcolor=white
+	tooltip="ControllerPageProfil
+
+&#10;  Displays user information in the profile view or throws an exception if the user is not found.&#10;  @param userId The ID of the user to display.&#10;  @throws UserNotFoundException if the user cannot be found in the database.&#10; "
+	fontcolor=darkgreen
+];
+} 
+} 
+
+'edges    
+ControllerPageProfil1786813315XXXdisplaySeanceUser104431 -> FilmDaoImpl243067543XXXgetFilmById104431;
+ControllerPageProfil1786813315XXXdisplaySeanceUser104431 -> SeanceDaoImpl1291513530XXXgetSeanceById104431;
+ControllerPageProfil1786813315XXXdisplaySeanceUser104431 -> TicketDaoImpl1259133519XXXgetTicketsByUserId104431;
+ControllerPageProfil1786813315XXXdisplaySeanceUser104431 -> UserDaoImpl242611280XXXgetUserById104431;
+ControllerPageProfil1786813315XXXdisplaySeanceUser104431 -> ViewPageProfil1998218708XXXDisplaySeances1561093413;
+ControllerPageProfil1786813315XXXdisplayUser104431 -> ControllerPageProfil1786813315XXXdisplaySeanceUser104431;
+ControllerPageProfil1786813315XXXdisplayUser104431 -> UserDaoImpl242611280XXXgetUserById104431;
+ControllerPanier470068139XXXaddPanier304211512 -> SeanceDaoImpl1291513530XXXgetSeanceById104431;
+ControllerPanier470068139XXXaddPanier304211512 -> TicketDaoImpl1259133519XXXaddTicket1790093524;
+ControllerSignIn563139156XXXonSignIn2013066710 -> Hash563139530XXXcomparePassword2013066710;
+ControllerSignIn563139156XXXonSignIn2013066710 -> PopUpMessage2666181XXXshowErrorMessage1808118735;
+ControllerSignIn563139156XXXonSignIn2013066710 -> UserDaoImpl242611280XXXDoesMailExist1808118735;
+ControllerSignIn563139156XXXonSignIn2013066710 -> UserDaoImpl242611280XXXDoesPasswordExist2013066710;
+ControllerSignIn563139156XXXonSignIn2013066710 -> UserDaoImpl242611280XXXgetUserByMail1808118735;
+ControllerSignUp563139530XXXonSignUp1366095254 -> Hash563139530XXXhashPassword1808118735;
+ControllerSignUp563139530XXXonSignUp1366095254 -> PopUpMessage2666181XXXshowErrorMessage1808118735;
+ControllerSignUp563139530XXXonSignUp1366095254 -> UserDaoImpl242611280XXXDoesMailExist1808118735;
+ControllerSignUp563139530XXXonSignUp1366095254 -> UserDaoImpl242611280XXXDoesPseudoExist1808118735;
+ControllerSignUp563139530XXXonSignUp1366095254 -> UserDaoImpl242611280XXXaddUser2645995;
+Hash563139530XXXcomparePassword2013066710 -> Hash563139530XXXhashPassword1808118735;
+MainFrame1664073796XXXMainFrame0 -> ControllerPageProfil1786813315XXXdisplayUser104431;
+MainFrame1664073796XXXMainFrame0 -> ControllerPanier470068139XXXaddPanier304211512;
+MainFrame1664073796XXXMainFrame0 -> ControllerSignIn563139156XXXonSignIn2013066710;
+MainFrame1664073796XXXMainFrame0 -> ControllerSignUp563139530XXXonSignUp1366095254;
+MainFrame1664073796XXXMainFrame0 -> FilmDaoImpl243067543XXXgetComingSoonFilms104431;
+MainFrame1664073796XXXMainFrame0 -> FilmDaoImpl243067543XXXgetFilmById104431;
+MainFrame1664073796XXXMainFrame0 -> FilmDaoImpl243067543XXXgetFilmByTitle1808118735;
+MainFrame1664073796XXXMainFrame0 -> FilmDaoImpl243067543XXXgetNowShowingFilms104431;
+MainFrame1664073796XXXMainFrame0 -> FilmDaoImpl243067543XXXgetPremieresFilms104431;
+MainFrame1664073796XXXMainFrame0 -> FilmNSchedulePage1631579330XXXbuttonListeners429841706;
+MainFrame1664073796XXXMainFrame0 -> PopUpMessage2666181XXXshowSuccessMessage1808118735;
+MainFrame1664073796XXXMainFrame0 -> UserDaoImpl242611280XXXgetUserByMail1808118735;
+MainFrame1664073796XXXmain1859653459 -> MainFrame1664073796XXXMainFrame0;
+    
+}
+@enduml

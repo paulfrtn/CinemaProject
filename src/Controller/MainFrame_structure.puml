@@ -1,0 +1,685 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": false,
+    "cutInterfaceStructures": false,
+    "cutDataStructures": false,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 6,
+    "backwardDepth": 6,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 2,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "Controller.MainFrame",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_104786860 { 
+   	label=Reservation
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   Paiement93475331[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Paiement</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   cardHolderNameField: JTextField [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   cardNumberField: JTextField [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   ccvField: JTextField [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   controller: MainFrame [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   couleur1: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   couleur2: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   couleur3: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   expirationDateField: JTextField [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   id_offer: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   price: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   quantity: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   validerButton: JButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   validerPaiement: Boolean [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- validerInformations(): boolean</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Panier93475331[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Panier</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   BtnBack: JButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   BtnFilm: JButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   BtnProfile: JButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   ValiderButton: JButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   billetsPanel: JPanel [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   controller: MainFrame [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   couleur1: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   couleur2: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   couleur3: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   filmLabel: JLabel [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   mainCardPanel: JPanel [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   nombreBillets: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   offerId: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   payerButton: JButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   posterLabel: JLabel [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   prixParBillet: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   prixTotalLabel: JLabel [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   seanceId: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   seanceLabel: JLabel [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   spinner: JSpinner [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   validerPaiement: Boolean [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- formatDate(date: Date): String</TD></TR>
+<TR><TD ALIGN="LEFT" >- payer()</TD></TR>
+<TR><TD ALIGN="LEFT" >- updatePrixTotal()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_1642890859 { 
+   	label=FilmNSeance
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   FilmNSchedulePage1631579330[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)FilmNSchedulePage</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   CurrentButtonDate: JButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   Start: Boolean [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   backButton: JButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   controller: ControllerFilmSchedule [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   couleur: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   couleur2: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   couleur3: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   current_film_id: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   line2: JPanel [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   line4: JPanel [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   mainFrame: MainFrame [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   profil: JButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   seances: List&lt;Seance&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ BandeAnnonceButtonClicked(path: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ buttonClicked(button: JButton)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ buttonListeners(actionListener: ActionListener)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getButtonClickedName(button: JButton): String</TD></TR>
+<TR><TD ALIGN="LEFT" >- updateSeanceButtons()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_1664073796 { 
+   	label=Controller
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   MainFrame1664073796[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)MainFrame</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   ControllerProfil: ControllerPageProfil [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   CurrentFilmId: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   CurrentSeanceId: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   CurrentUser: User [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   FilmButtonListener: ActionListener [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   PaiementButtonListener: ActionListener [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   SeanceButtonListener: ActionListener [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   cardLayout: CardLayout [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   cardsPanel: JPanel [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   film: Film [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   filmDao: FilmDaoImpl [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   filmNSchedulePage: FilmNSchedulePage [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   offerDao: OfferDaoImpl [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   offersPage: OffersPage [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   paiementPage: Paiement [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   salleDao: SalleDaoImpl [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   seanceDao: SeanceDaoImpl [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   ticketDao: TicketDaoImpl [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   userdao: UserDaoImpl [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ main(args: String[])</TD></TR>
+<TR><TD ALIGN="LEFT" >+ showAccueilView()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_1790093524 { 
+   	label=Ticket
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   TicketDaoImpl1259133519[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)TicketDaoImpl</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ addTicket(ticket: Ticket)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ deleteTicketById(id: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getTicketByDate(date: Date): List&lt;Ticket&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getTicketById(id: int): Ticket</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getTicketsByUserId(userId: int): List&lt;Ticket&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ updateTicket(ticket: Ticket)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_1822473535 { 
+   	label=Seance
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   Seance1291513530[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Seance</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   film_id: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   salle_id: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   seance_date: Date [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   seance_id: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   seance_language: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   seance_nb_reservation: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   seance_time: Time [0..1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+SeanceDaoImpl1291513530[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)SeanceDaoImpl</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ addSeance(seance: Seance)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ deleteSeance(seance: Seance)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getSeanceByCriteria(filmId: int, seanceDate: Date, seanceTime: Time, seanceLanguage: String, salleId: int): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getSeanceByDateNFilmId(date: Date, film_id: int): List&lt;Seance&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getSeanceById(id: int): Seance</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getSeanceByTimeNFilmIdNDate(time: Time, film_id: int, date: Date): Seance</TD></TR>
+<TR><TD ALIGN="LEFT" >+ updateSeance(seance: Seance)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_1935913743 { 
+   	label=Offres
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   OffersPage228199482[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)OffersPage</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   btnBack: JButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   btnFilms: JButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   btnProfile: JButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   mainPanel: JPanel [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- applyBackgroundColor(component: Component, bgColor: Color)</TD></TR>
+<TR><TD ALIGN="LEFT" >- initializeUI()</TD></TR>
+<TR><TD ALIGN="LEFT" >- loadOffersFromDatabase(offersListPanel: JPanel)</TD></TR>
+<TR><TD ALIGN="LEFT" >- navigateToHomeView()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_2189732 { 
+   	label=Film
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   Film243067543[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Film</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   film_director: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   film_duration: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   film_genre: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   film_id: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   film_poster: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   film_release_date: Date [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   film_status: Boolean [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   film_synopsis: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   film_title: String [0..1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+FilmDaoImpl243067543[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)FilmDaoImpl</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ Top3(): List&lt;Film&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ addFilm(film: Film)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ deleteFilm(film: Film)</TD></TR>
+<TR><TD ALIGN="LEFT" >- executeFilmQuery(sql: String, limit: int): List&lt;Film&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ filmExists(filmTitle: String): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getComingSoonFilms(limit: int): List&lt;Film&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getFilmById(id: int): Film</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getFilmByTitle(title: String): Film</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getNowShowingFilms(limit: int): List&lt;Film&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getPremieresFilms(limit: int): List&lt;Film&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ updateFilm(film: Film)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_2645995 { 
+   	label=User
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   User242611280[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)User</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   user_birthday: Date [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   user_firstname: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   user_id: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   user_lastname: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   user_mail: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   user_password: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   user_pseudo: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   user_role: Boolean [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   user_token: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   user_type: int [1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+UserDaoImpl242611280[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)UserDaoImpl</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ DoesMailExist(mail: String): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ DoesPasswordExist(mail: String, password: String): Boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ DoesPseudoExist(pseudo: String): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ addUser(user: User)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ deleteUserById(id: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ deleteUserByPseudo(pseudo: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getUserById(id: int): User</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getUserByMail(mail: String): User</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getUserByPseudo(pseudo: String): User</TD></TR>
+<TR><TD ALIGN="LEFT" >+ updateUser(user: User)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_2666181 { 
+   	label=View
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   BandeADiffuser2666181[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)BandeADiffuser</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ showVideoPopup(videoPath: String)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_487497620 { 
+   	label=Accueil
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   Accueil1144469141[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Accueil</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   btnFilms: JButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   btnOffers: JButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   btnProfile: JButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   btnSearch: JButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   carouselComingSoon: JCarousel [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   carouselNowShowing: JCarousel [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   carouselPremieres: JCarousel [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   controller: MainFrame [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   couleur1: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   couleur2: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   couleur3: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   mainPanel: JPanel [0..1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+JCarousel1144469141[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)JCarousel</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   controller: MainFrame [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   couleur1: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   couleur2: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   couleur3: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   filmsPanel: JPanel [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   listener: ActionListener [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- addFilm(film: Film)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ addFilmListener()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_76098108 { 
+   	label=Offer
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   OfferDaoImpl1063057175[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)OfferDaoImpl</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ addOffer(offer: Offer, user_id: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ deleteOfferByName(name: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ deleteOfferbyId(id: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getOfferById(id: int): Offer</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getOfferByName(name: String): Offer</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getOffersByUserType(user_type: int): List&lt;Offer&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ updateOffer(offer: Offer)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_79649207 { 
+   	label=Salle
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   SalleDaoImpl1066608274[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)SalleDaoImpl</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ addSalle(salle: Salle)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ deleteSalleByNumber(number: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getSalleByNumber(number: int): Salle</TD></TR>
+<TR><TD ALIGN="LEFT" >+ updateSalle(salle: Salle)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_890204939 { 
+   	label=ProfilPage
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   ControllerPageProfil1786813315[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)ControllerPageProfil</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   modelfilm: FilmDaoImpl [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   modelsalle: SalleDaoImpl [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   modelseance: SeanceDaoImpl [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   modelticket: TicketDaoImpl [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   modeluser: UserDaoImpl [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   view: ViewPageProfil [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ displaySeanceUser(userId: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ displayUser(userId: int)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+ViewPageProfil1998218708[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)ViewPageProfil</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   LogOut: JButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   Poster: ImageIcon [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   Statistiques: JButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   couleur1: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   couleur2: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   couleur3: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   lblBirthday: JLabel [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   lblDateSeance: JLabel [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   lblEmail: JLabel [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   lblFilm: JLabel [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   lblFirstName: JLabel [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   lblLanguageFilm: JLabel [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   lblLastName: JLabel [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   lblPseudo: JLabel [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   lblRole: JLabel [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   lblType: JLabel [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   retour: JButton [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ DisplaySeances(seanceDetails: List&lt;SeanceDetails&gt;)</TD></TR>
+<TR><TD ALIGN="LEFT" >- createUserInfoPanel(label: JLabel, icon: ImageIcon, size: Dimension): JPanel</TD></TR>
+<TR><TD ALIGN="LEFT" >- createUserSeancePanelInfo(label: JLabel): JPanel</TD></TR>
+<TR><TD ALIGN="LEFT" >- createUserSeancePanelTitle(label: JLabel): JPanel</TD></TR>
+<TR><TD ALIGN="LEFT" >- loadIcon(iconPath: String, width: int, height: int): ImageIcon</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_918584411 { 
+   	label=FilmSchedule
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   ControllerFilmSchedule989452621[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)ControllerFilmSchedule</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   CurrentSeanceId: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   SeanceButtonListener: ActionListener [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ onFilmSchedule()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+'edges    
+Accueil1144469141 -> JCarousel1144469141[label="carouselComingSoon
+[0..1]"];
+Accueil1144469141 -> JCarousel1144469141[label="carouselNowShowing
+[0..1]"];
+Accueil1144469141 -> JCarousel1144469141[label="carouselPremieres
+[0..1]"];
+Accueil1144469141 -> MainFrame1664073796[label="controller
+[0..1]"];
+ControllerPageProfil1786813315 -> FilmDaoImpl243067543[label="modelfilm
+[0..1]"];
+ControllerPageProfil1786813315 -> SalleDaoImpl1066608274[label="modelsalle
+[0..1]"];
+ControllerPageProfil1786813315 -> SeanceDaoImpl1291513530[label="modelseance
+[0..1]"];
+ControllerPageProfil1786813315 -> TicketDaoImpl1259133519[label="modelticket
+[0..1]"];
+ControllerPageProfil1786813315 -> UserDaoImpl242611280[label="modeluser
+[0..1]"];
+ControllerPageProfil1786813315 -> ViewPageProfil1998218708[label="view
+[0..1]"];
+FilmNSchedulePage1631579330 -> BandeADiffuser2666181[label="BandeAnnonceButtonClicked() -> showVideoPopup()"];
+FilmNSchedulePage1631579330 -> ControllerFilmSchedule989452621[label="controller
+[0..1]"];
+FilmNSchedulePage1631579330 -> MainFrame1664073796[label="mainFrame
+[0..1]"];
+FilmNSchedulePage1631579330 -> Seance1291513530[label="seances
+[0..*]"];
+FilmNSchedulePage1631579330 -> SeanceDaoImpl1291513530[label="buttonClicked() -> getSeanceByDateNFilmId()"];
+JCarousel1144469141 -> MainFrame1664073796[label="controller
+[0..1]"];
+MainFrame1664073796 -> ControllerPageProfil1786813315[label="ControllerProfil
+[0..1]"];
+MainFrame1664073796 -> Film243067543[label="film
+[0..1]"];
+MainFrame1664073796 -> FilmDaoImpl243067543[label="filmDao
+[0..1]"];
+MainFrame1664073796 -> FilmNSchedulePage1631579330[label="filmNSchedulePage
+[0..1]"];
+MainFrame1664073796 -> OfferDaoImpl1063057175[label="offerDao
+[0..1]"];
+MainFrame1664073796 -> OffersPage228199482[label="offersPage
+[0..1]"];
+MainFrame1664073796 -> Paiement93475331[label="paiementPage
+[0..1]"];
+MainFrame1664073796 -> SalleDaoImpl1066608274[label="salleDao
+[0..1]"];
+MainFrame1664073796 -> SeanceDaoImpl1291513530[label="seanceDao
+[0..1]"];
+MainFrame1664073796 -> TicketDaoImpl1259133519[label="ticketDao
+[0..1]"];
+MainFrame1664073796 -> User242611280[label="CurrentUser
+[0..1]"];
+MainFrame1664073796 -> UserDaoImpl242611280[label="userdao
+[0..1]"];
+OffersPage228199482 -> MainFrame1664073796[label="navigateToHomeView() -> showAccueilView()"];
+Paiement93475331 -> MainFrame1664073796[label="controller
+[0..1]"];
+Panier93475331 -> MainFrame1664073796[label="controller
+[0..1]"];
+    
+}
+@enduml
