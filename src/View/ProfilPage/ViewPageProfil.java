@@ -16,6 +16,9 @@ import java.net.URL;
 import java.util.*;
 import java.util.List;
 
+/**
+ * Vue de la page de profil utilisateur.
+ */
 public class ViewPageProfil extends JPanel {
     private JLabel lblFirstName;
     private JLabel lblLastName;
@@ -35,6 +38,9 @@ public class ViewPageProfil extends JPanel {
     private String couleur2;
     private String couleur3;
 
+    /**
+     * Constructeur de la classe ViewPageProfil.
+     */
     public ViewPageProfil() {
         couleur1 = "#003049";
         couleur2 = "#669BBC";
@@ -115,6 +121,11 @@ public class ViewPageProfil extends JPanel {
         add(Box.createVerticalStrut(30));
     }
 
+    /**
+     * Affiche les séances à venir de l'utilisateur.
+     *
+     * @param seanceDetails Liste des détails des séances
+     */
     public void DisplaySeances(List<SeanceDetails> seanceDetails) {
         setBackground(Color.decode(couleur1));
 
@@ -187,6 +198,12 @@ public class ViewPageProfil extends JPanel {
         repaint(); // Repaint the panel
     }
 
+    /**
+     * Crée un panneau pour afficher les informations de la séance.
+     *
+     * @param label Le label contenant l'information
+     * @return Le panneau créé
+     */
     private JPanel createUserSeancePanelInfo(JLabel label) {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
@@ -199,6 +216,12 @@ public class ViewPageProfil extends JPanel {
         return panel;
     }
 
+    /**
+     * Crée un panneau pour afficher le titre de la séance.
+     *
+     * @param label Le label contenant le titre
+     * @return Le panneau créé
+     */
     private JPanel createUserSeancePanelTitle(JLabel label) {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
@@ -211,6 +234,14 @@ public class ViewPageProfil extends JPanel {
         return panel;
     }
 
+    /**
+     * Crée un panneau pour afficher les informations de l'utilisateur.
+     *
+     * @param label Le label contenant l'information
+     * @param icon  L'icône associée à l'information
+     * @param size  La taille du panneau
+     * @return Le panneau créé
+     */
     private JPanel createUserInfoPanel(JLabel label, ImageIcon icon, Dimension size) {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout()); // Using BorderLayout to better control spacing and alignment
@@ -244,6 +275,14 @@ public class ViewPageProfil extends JPanel {
         return panel;
     }
 
+    /**
+     * Charge une icône à partir du chemin spécifié avec une taille donnée.
+     *
+     * @param iconPath Le chemin de l'icône
+     * @param width    La largeur de l'icône
+     * @param height   La hauteur de l'icône
+     * @return L'icône chargée
+     */
     private ImageIcon loadIcon(String iconPath, int width, int height) {
         URL imageUrl = getClass().getResource(iconPath);
         if (imageUrl == null) {
@@ -254,6 +293,17 @@ public class ViewPageProfil extends JPanel {
         return icon;
     }
 
+    /**
+     * Définit le profil de l'utilisateur avec les informations spécifiées.
+     *
+     * @param firstName Le prénom de l'utilisateur
+     * @param lastName  Le nom de l'utilisateur
+     * @param email     L'email de l'utilisateur
+     * @param pseudo    Le pseudo de l'utilisateur
+     * @param role      Le rôle de l'utilisateur
+     * @param birthday  La date de naissance de l'utilisateur
+     * @param type      Le type de l'utilisateur
+     */
     public void setUserProfile(String firstName, String lastName, String email, String pseudo, Boolean role, String birthday, String type) {
         lblFirstName.setText(firstName + " ");
         lblLastName.setText(lastName);
@@ -262,17 +312,30 @@ public class ViewPageProfil extends JPanel {
         lblBirthday.setText(" Date de naissance: " + birthday);
     }
 
+    /**
+     * Obtient le bouton "Retour".
+     *
+     * @return Le bouton "Retour"
+     */
     public JButton getRetour() {
         return retour;
     }
 
+    /**
+     * Obtient le bouton "Déconnexion".
+     *
+     * @return Le bouton "Déconnexion"
+     */
     public JButton getLogOut() {
         return LogOut;
     }
 
+    /**
+     * Obtient le bouton "Statistiques".
+     *
+     * @return Le bouton "Statistiques"
+     */
     public JButton getStatistiques() {
         return Statistiques;
     }
-
-
 }

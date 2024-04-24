@@ -9,12 +9,13 @@ import View.BorderRadCompenent.BorderRadButton;
 import View.BorderRadCompenent.BorderRadLabel;
 import View.BorderRadCompenent.BorderRadPanel;
 
-import java.util.List;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * Vue principale pour l'administration du site.
+ */
 public class AdminPrincipal extends JPanel {
     String couleur1;
     String couleur2;
@@ -26,6 +27,9 @@ public class AdminPrincipal extends JPanel {
     private JButton GestionFilm;
     private JButton GestionUser;
 
+    /**
+     * Constructeur de la classe AdminPrincipal.
+     */
     public AdminPrincipal() {
         couleur1 = "#003049";
         couleur2 = "#669BBC";
@@ -134,23 +138,48 @@ public class AdminPrincipal extends JPanel {
         add(mainPanel);
     }
 
-
-
+    /**
+     * Renvoie le bouton pour accéder à la gestion des films.
+     *
+     * @return Le bouton pour accéder à la gestion des films
+     */
     public JButton getBtnFilms() {
         return btnFilms;
     }
+
+    /**
+     * Renvoie le bouton pour accéder à la gestion des offres.
+     *
+     * @return Le bouton pour accéder à la gestion des offres
+     */
     public JButton getGestionOffre() {
         return GestionOffre;
     }
+
+    /**
+     * Renvoie le bouton pour accéder à la gestion des films.
+     *
+     * @return Le bouton pour accéder à la gestion des films
+     */
     public JButton getGestionFilm() {
         return GestionFilm;
     }
+
+    /**
+     * Renvoie le bouton pour accéder à la gestion des utilisateurs.
+     *
+     * @return Le bouton pour accéder à la gestion des utilisateurs
+     */
     public JButton getGestionUser() {
         return GestionUser;
     }
+
+    /**
+     * Renvoie le bouton pour se déconnecter.
+     *
+     * @return Le bouton pour se déconnecter
+     */
     public JButton getBtnLogOut() {
         return btnLogOut;
     }
-
 }
-

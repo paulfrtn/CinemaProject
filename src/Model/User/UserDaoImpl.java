@@ -6,25 +6,22 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-
-import Model.DataBase.ConnectionDb;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Cette classe implémente l'interface UserDao pour fournir des méthodes CRUD (Create, Read, Update, Delete) pour les utilisateurs.
+ */
 public class UserDaoImpl implements UserDao {
-    //Nous allons réaliser le CRUD (Create, Read, Update, Delete)
+    // Nous allons réaliser le CRUD (Create, Read, Update, Delete)
 
     // Create
+
+    /**
+     * Ajoute un nouvel utilisateur à la base de données.
+     *
+     * @param user L'utilisateur à ajouter
+     */
     public void addUser(User user) {
         Connection con = null;
         PreparedStatement ps = null;
@@ -56,11 +53,16 @@ public class UserDaoImpl implements UserDao {
                 e.printStackTrace();
             }
         }
-
     }
 
-
     // Read
+
+    /**
+     * Récupère un utilisateur par son identifiant.
+     *
+     * @param id L'identifiant de l'utilisateur à récupérer
+     * @return L'utilisateur correspondant à l'identifiant spécifié
+     */
     public User getUserById(int id) {
         Connection con = null;
         PreparedStatement ps = null;
@@ -96,6 +98,12 @@ public class UserDaoImpl implements UserDao {
         return user;
     }
 
+    /**
+     * Récupère un utilisateur par son pseudo.
+     *
+     * @param pseudo Le pseudo de l'utilisateur à récupérer
+     * @return L'utilisateur correspondant au pseudo spécifié
+     */
     public User getUserByPseudo(String pseudo) {
         Connection con = null;
         PreparedStatement ps = null;
@@ -131,6 +139,12 @@ public class UserDaoImpl implements UserDao {
         return user;
     }
 
+    /**
+     * Récupère un utilisateur par son adresse e-mail.
+     *
+     * @param mail L'adresse e-mail de l'utilisateur à récupérer
+     * @return L'utilisateur correspondant à l'adresse e-mail spécifiée
+     */
     public User getUserByMail(String mail) {
         Connection con = null;
         PreparedStatement ps = null;
@@ -167,6 +181,12 @@ public class UserDaoImpl implements UserDao {
     }
 
     // Update
+
+    /**
+     * Met à jour les informations d'un utilisateur dans la base de données.
+     *
+     * @param user L'utilisateur à mettre à jour
+     */
     public void updateUser(User user) {
         Connection con = null;
         PreparedStatement ps = null;
@@ -202,6 +222,12 @@ public class UserDaoImpl implements UserDao {
     }
 
     // Delete
+
+    /**
+     * Supprime un utilisateur de la base de données par son identifiant.
+     *
+     * @param id L'identifiant de l'utilisateur à supprimer
+     */
     public void deleteUserById(int id) {
         Connection con = null;
         PreparedStatement ps = null;
@@ -228,6 +254,11 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
+    /**
+     * Supprime un utilisateur de la base de données par son pseudo.
+     *
+     * @param pseudo Le pseudo de l'utilisateur à supprimer
+     */
     public void deleteUserByPseudo(String pseudo) {
         Connection con = null;
         PreparedStatement ps = null;
@@ -254,7 +285,14 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
-    //Méthodes verifiant si un pseudo est déjà utilisé ou un mail est déjà utilisé
+    // Méthodes vérifiant si un pseudo ou un mail est déjà utilisé
+
+    /**
+     * Vérifie si un pseudo est déjà utilisé dans la base de données.
+     *
+     * @param pseudo Le pseudo à vérifier
+     * @return true si le pseudo est déjà utilisé, sinon false
+     */
     public boolean DoesPseudoExist(String pseudo) {
         Connection con = null;
         PreparedStatement ps = null;
@@ -292,6 +330,12 @@ public class UserDaoImpl implements UserDao {
         return isUsed;
     }
 
+    /**
+     * Vérifie si une adresse e-mail est déjà utilisée dans la base de données.
+     *
+     * @param mail L'adresse e-mail à vérifier
+     * @return true si l'adresse e-mail est déjà utilisée, sinon false
+     */
     public boolean DoesMailExist(String mail) {
         Connection con = null;
         PreparedStatement ps = null;
@@ -329,7 +373,14 @@ public class UserDaoImpl implements UserDao {
         return isUsed;
     }
 
-    public Boolean DoesPasswordExist(String mail, String password){
+    /**
+     * Vérifie si un mot de passe correspond à une adresse e-mail dans la base de données.
+     *
+     * @param mail     L'adresse e-mail de l'utilisateur
+     * @param password Le mot de passe à vérifier
+     * @return true si le mot de passe correspond à l'adresse e-mail, sinon false
+     */
+    public Boolean DoesPasswordExist(String mail, String password) {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -351,15 +402,15 @@ public class UserDaoImpl implements UserDao {
             e.printStackTrace();
         } finally {
             try {
-            if (rs != null) {
-                rs.close();
-            }
-            if (ps != null) {
-                ps.close();
-            }
-            if (con != null) {
-                con.close();
-            }
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -367,6 +418,11 @@ public class UserDaoImpl implements UserDao {
         return isUsed;
     }
 
+    /**
+     * Récupère tous les utilisateurs de la base de données.
+     *
+     * @return Une liste de tous les utilisateurs
+     */
     public List<User> getAllUsers() {
         Connection con = null;
         PreparedStatement ps = null;
@@ -401,19 +457,4 @@ public class UserDaoImpl implements UserDao {
         }
         return users;
     }
-
- }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}

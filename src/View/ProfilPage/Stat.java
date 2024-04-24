@@ -13,19 +13,27 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Cette classe représente la fenêtre des statistiques pour un utilisateur.
+ */
 public class Stat extends JFrame {
 
+    /**
+     * Constructeur de la classe Stat.
+     *
+     * @param title          Le titre de la fenêtre
+     * @param CurrentUserId  L'ID de l'utilisateur actuel
+     */
     public Stat(String title, int CurrentUserId) {
         super(title);
 
-
+        // Connexion à la base de données
         Connection conn = null;
         PreparedStatement stmt1 = null, stmt2 = null, stmt3 = null;
         ResultSet rs1 = null, rs2 = null, rs3 = null;
         Color backgroundColor = Color.decode("#669BBC");
         int goalDuration = 500;
         try {
-
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/Cinema", "root", "password");
 
             // Requête SQL pour la somme des durées des films vues par un utilisateur
@@ -107,6 +115,7 @@ public class Stat extends JFrame {
                     "Nbr de réservations",
                     dataset3);
 
+            // Configuration des panneaux de graphiques
             ChartPanel chartPanel1 = new ChartPanel(chart1);
             chart1.setBackgroundPaint(backgroundColor);
             chart1.getPlot().setBackgroundPaint(backgroundColor);
@@ -128,6 +137,7 @@ public class Stat extends JFrame {
             chartPanel3.setBackground(backgroundColor);
             chartPanel3.setBounds(0, 400, 1200, 350); // Réglé pour occuper
 
+            // Panneau global pour afficher les graphiques
             JPanel panel = new JPanel() {
                 @Override
                 public void paintComponent(Graphics g) {
@@ -142,12 +152,13 @@ public class Stat extends JFrame {
             panel.add(chartPanel3);
 
             setContentPane(panel);
-            setSize(1200, 800); // La
+            setSize(1200, 800); // Taille de la fenêtre
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Erreur SQL : " + e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         } finally {
             try {
+                // Fermeture des ressources
                 if (rs1 != null) rs1.close();
                 if (rs2 != null) rs2.close();
                 if (rs3 != null) rs3.close();
@@ -161,18 +172,4 @@ public class Stat extends JFrame {
             }
         }
     }
-
-//    public static void main(String[] args) {
-//        SwingUtilities.invokeLater(new Runnable() {
-//            @Override
-//            public void run() {
-//                Stat stat = new Stat("Film Durations and Reservations",1);
-//                stat.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//                stat.setSize(1200, 800);
-//                stat.setResizable(false);
-//                stat.setLocationRelativeTo(null);
-//                stat.setVisible(true);
-//            }
-//        });
-//    }
 }

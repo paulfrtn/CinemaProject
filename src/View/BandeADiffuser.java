@@ -15,8 +15,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
+/**
+ * Classe pour afficher une vidéo dans une fenêtre popup.
+ */
 public class BandeADiffuser {
 
+    /**
+     * Affiche une fenêtre popup contenant une vidéo.
+     *
+     * @param videoPath Le chemin vers le fichier vidéo
+     */
     public static void showVideoPopup(String videoPath) {
         JFXPanel jfxPanel = new JFXPanel();
         jfxPanel.setBackground(Color.BLACK);
@@ -67,3 +75,4 @@ public class BandeADiffuser {
         frame.setVisible(true);
     }
 }
+

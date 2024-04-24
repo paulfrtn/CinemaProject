@@ -10,20 +10,28 @@ import View.BorderRadCompenent.BorderRadPanel;
 import View.BorderRadCompenent.BorderRadPasswordField;
 import View.BorderRadCompenent.BorderRadTextField;
 
+/**
+ * Vue pour l'inscription d'un nouvel utilisateur.
+ */
 public class SignUp extends JPanel {
     private ControllerSignUp controller;
 
-    private JTextField firstNameField;
-    private JTextField lastNameField;
-    private JTextField emailField;
-    private JTextField pseudoField;
-    private JPasswordField passwordField;
-    private JTextField birthdayField;
-    private JButton signUpButton; // Ajout du champ pour le bouton d'inscription
-    private JButton alreadyMemberButton;
+    private JTextField firstNameField; // Champ de saisie du prénom
+    private JTextField lastNameField; // Champ de saisie du nom de famille
+    private JTextField emailField; // Champ de saisie de l'email
+    private JTextField pseudoField; // Champ de saisie du pseudo
+    private JPasswordField passwordField; // Champ de saisie du mot de passe
+    private JTextField birthdayField; // Champ de saisie de la date de naissance
+    private JButton signUpButton; // Bouton d'inscription
+    private JButton alreadyMemberButton; // Bouton "Déjà membre ?"
 
-    private ImageIcon image;
+    private ImageIcon image; // Image de fond
 
+    /**
+     * Constructeur de la classe SignUp.
+     *
+     * @param controller Le contrôleur associé à la vue.
+     */
     public SignUp(ControllerSignUp controller) {
         this.controller = controller;
 
@@ -169,34 +177,74 @@ public class SignUp extends JPanel {
         add(bgLabel, BorderLayout.CENTER);
     }
 
+    /**
+     * Méthode permettant d'obtenir le contenu du champ "Prénom".
+     *
+     * @return Le prénom saisi.
+     */
     public String getFirstName() {
         return firstNameField.getText();
     }
 
+    /**
+     * Méthode permettant d'obtenir le contenu du champ "Nom de famille".
+     *
+     * @return Le nom de famille saisi.
+     */
     public String getLastName() {
         return lastNameField.getText();
     }
 
+    /**
+     * Méthode permettant d'obtenir le contenu du champ "E-mail".
+     *
+     * @return L'email saisi.
+     */
     public String getEmail() {
         return emailField.getText();
     }
 
+    /**
+     * Méthode permettant d'obtenir le contenu du champ "Pseudo".
+     *
+     * @return Le pseudo saisi.
+     */
     public String getPseudo() {
         return pseudoField.getText();
     }
 
+    /**
+     * Méthode permettant d'obtenir le contenu du champ "Mot de passe".
+     *
+     * @return Le mot de passe saisi.
+     */
     public String getPassword() {
         return new String(passwordField.getPassword());
     }
 
+    /**
+     * Méthode permettant d'obtenir le contenu du champ "Date de naissance".
+     *
+     * @return La date de naissance saisie.
+     */
     public String getBirthday() {
         return birthdayField.getText();
     }
 
+    /**
+     * Méthode permettant d'obtenir le bouton d'inscription.
+     *
+     * @return Le bouton d'inscription.
+     */
     public JButton getSignUpButton() {
         return signUpButton;
     }
 
+    /**
+     * Méthode permettant d'obtenir le bouton "Déjà membre ?".
+     *
+     * @return Le bouton "Déjà membre ?".
+     */
     public JButton getalreadyMemberButton() {
         return alreadyMemberButton;
     }

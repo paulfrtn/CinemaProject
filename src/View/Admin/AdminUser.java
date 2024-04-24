@@ -20,6 +20,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * Vue pour la gestion des utilisateurs par l'administrateur.
+ */
 public class AdminUser extends JPanel {
     String couleur1;
     String couleur2;
@@ -33,6 +36,11 @@ public class AdminUser extends JPanel {
     private JButton btnDeleteUser;
     private JPanel FilmsPanel;
 
+    /**
+     * Constructeur de la classe AdminUser.
+     *
+     * @param users La liste des utilisateurs
+     */
     public AdminUser(List<User> users) {
         couleur1 = "#003049";
         couleur2 = "#669BBC";
@@ -172,6 +180,11 @@ public class AdminUser extends JPanel {
         add(mainPanel);
     }
 
+    /**
+     * Met à jour la liste des utilisateurs affichée.
+     *
+     * @param users La nouvelle liste d'utilisateurs
+     */
     public void updateUsers(List<User> users) {
         FilmsPanel.removeAll();
         for (User user : users) {
