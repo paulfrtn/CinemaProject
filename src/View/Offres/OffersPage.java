@@ -69,7 +69,7 @@ public class OffersPage extends JPanel {
         mainPanel.add(scrollPane, BorderLayout.CENTER);
         add(mainPanel);
 
-        // Apply background color recursively to all components
+
         applyBackgroundColor(this, bgColor);
 
     }
