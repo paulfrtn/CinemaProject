@@ -26,7 +26,7 @@ public class OffersPage extends JPanel {
 
         mainPanel.setBackground(bgColor);
 
-        // Panel for navigation buttons
+
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.setBackground(bgColor);
 
@@ -54,7 +54,7 @@ public class OffersPage extends JPanel {
 
         mainPanel.add(topPanel, BorderLayout.NORTH);
 
-        // Panel to display offers
+
         JPanel offersListPanel = new JPanel();
         offersListPanel.setLayout(new BoxLayout(offersListPanel, BoxLayout.Y_AXIS));
         offersListPanel.setBackground(bgColor);
@@ -85,19 +85,19 @@ public class OffersPage extends JPanel {
 
 
     private void navigateToHomeView() {
-        // Traverse the parent hierarchy to find an instance of MainFrame
+
         Container parent = this.getParent();
         while (parent != null && !(parent instanceof MainFrame)) {
             parent = parent.getParent();
         }
 
-        // If we found the MainFrame, we can invoke a method to switch views
+
         if (parent != null) {
             MainFrame mainFrame = (MainFrame) parent;
-            mainFrame.showAccueilView(); // Call the method that will show the Accueil view
+            mainFrame.showAccueilView();
         } else {
-            // Handle error - MainFrame was not found in the hierarchy
-            JOptionPane.showMessageDialog(this, "Navigation error: MainFrame not found.", "Navigation Error", JOptionPane.ERROR_MESSAGE);
+
+            JOptionPane.showMessageDialog(this, "PB", "PB", JOptionPane.ERROR_MESSAGE);
         }
     }
 
