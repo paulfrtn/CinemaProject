@@ -127,7 +127,7 @@ public class OffersPage extends JPanel {
                 userTypePanel.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2)); // Bordure autour de la case
 
 
-                userTypePanel.setMaximumSize(new Dimension(800, 150)); // Par exemple, 800 de large et 150 de haut
+                userTypePanel.setMaximumSize(new Dimension(800, 150)); //800 de large et 150 de haut
 
                 JLabel userTypeLabel = new JLabel("<html><b><font size='5' color='white'>" + rs.getString("offer_name") + "</font></b></html>", SwingConstants.CENTER);
                 userTypeLabel.setForeground(Color.WHITE);
