@@ -190,7 +190,6 @@ public class SignUp extends JPanel {
     }
 
     public String getBirthday() {
-        System.out.println(birthdayField.getText());
         return birthdayField.getText();
     }
 

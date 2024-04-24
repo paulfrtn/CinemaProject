@@ -32,7 +32,6 @@ public class SalleDaoImpl implements SalleDao {
             ps.setInt(2, salle.getSalle_capa_max());
             ps.setBoolean(3, salle.getSalle_dispo());
             ps.executeUpdate();
-            System.out.println("Salle ajoutée avec succès");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -105,7 +104,6 @@ public class SalleDaoImpl implements SalleDao {
             ps.setInt(3, salle.getSalle_number());
             ps.setInt(4, salle.getSalle_id());
             ps.executeUpdate();
-            System.out.println("Salle modifiée avec succès");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -134,7 +132,6 @@ public class SalleDaoImpl implements SalleDao {
             ps = con.prepareStatement(query);
             ps.setInt(1, number);
             ps.executeUpdate();
-            System.out.println("Salle supprimée avec succès");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

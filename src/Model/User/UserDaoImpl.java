@@ -42,7 +42,6 @@ public class UserDaoImpl implements UserDao {
             ps.setDate(7, user.getUser_birthday());
             ps.setInt(8, user.getUser_type());
             ps.executeUpdate();
-            System.out.println("Utilisateur ajouté avec succès !");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -179,7 +178,6 @@ public class UserDaoImpl implements UserDao {
             ps.setString(1, user.getUser_firstname());
             ps.setString(2, user.getUser_lastname());
             ps.setString(3, user.getUser_mail());
-            System.out.println(user.getUser_mail());
             ps.setString(4, user.getUser_pseudo());
             ps.setString(5, user.getUser_password());
             ps.setBoolean(6, user.getUser_role());
@@ -187,7 +185,6 @@ public class UserDaoImpl implements UserDao {
             ps.setInt(8, user.getUser_type());
             ps.setInt(9, user.getUser_id());
             ps.executeUpdate();
-            System.out.println("Utilisateur modifié avec succès !");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -215,7 +212,6 @@ public class UserDaoImpl implements UserDao {
             ps = con.prepareStatement(query);
             ps.setInt(1, id);
             ps.executeUpdate();
-            System.out.println("Utilisateur supprimé avec succès !");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -242,7 +238,6 @@ public class UserDaoImpl implements UserDao {
             ps = con.prepareStatement(query);
             ps.setString(1, pseudo);
             ps.executeUpdate();
-            System.out.println("Utilisateur supprimé avec succès !");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

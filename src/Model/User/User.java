@@ -37,6 +37,7 @@ public class User {
         this.user_type = user_type;
     }
 
+
     // Getters
     public int getUser_id() {
         return user_id;

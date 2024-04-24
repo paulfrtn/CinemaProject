@@ -2,8 +2,11 @@ package View.Reservation;
 
 import Controller.MainFrame;
 import Controller.Panier.ControllerPanier;
+import CustomExceptions.UserNotFoundException;
 import Model.Film.Film;
 import Model.Film.FilmDaoImpl;
+import Model.Offer.Offer;
+import Model.Offer.OfferDaoImpl;
 import Model.Seance.Seance;
 import Model.Seance.SeanceDaoImpl;
 import Model.User.User;
@@ -12,7 +15,11 @@ import View.BorderRadCompenent.BorderRadLabel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 public class Panier extends JPanel {
     private MainFrame controller;
@@ -25,8 +32,10 @@ public class Panier extends JPanel {
     private JSpinner spinner;
     private int prixParBillet = 12;
     private int nombreBillets = 0;
+    private float discount=0;
     private int seanceId;
     private int offerId;
+
     private Boolean validerPaiement;
     private JButton ValiderButton;
     private String couleur1;
@@ -208,7 +217,60 @@ public class Panier extends JPanel {
         gbc2.gridy = 100; // Position en Y
         mainPanel.add(spinnerPanel, gbc2);
 
-        // Ajout du conteneur principal à la frame
+
+        if(user != null && !user.getUser_role()) {
+
+            OfferDaoImpl offerDao = new OfferDaoImpl();
+            List<Offer> offers = offerDao.getOffersByUserType(user.getUser_type(), Date.valueOf(java.time.LocalDate.now()));
+            String[] offers_name = new String[offers.size() + 1];
+            offers_name[0]= "Aucune selection";
+            for(int i = 0; i < offers.size(); i++){
+                if((offers.get(i).getOffer_start_date().before(new Date(System.currentTimeMillis())) && offers.get(i).getOffer_end_date().after(new Date(System.currentTimeMillis())))){
+                    offers_name[i + 1] = offers.get(i).getOffer_name();
+                }
+
+            }
+            JPanel Offer_panel = new JPanel();
+            Offer_panel.setLayout(new GridLayout(1, 2));
+            Offer_panel.setBackground(Color.decode(couleur1));
+            JLabel Offer_label = new JLabel("Offre : ");
+            Offer_label.setForeground(Color.WHITE);
+            Offer_label.setFont(font);
+            Offer_panel.add(Offer_label);
+            gbc2.gridy = 200;
+            JComboBox<String> comboBox = new JComboBox<>(offers_name);
+            comboBox.setBounds(50, 50, 100, 30);
+
+
+            comboBox.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    String selectedOption = (String) comboBox.getSelectedItem();
+                    for(int i = 0; i < offers.size(); i++){
+                        if(offers.get(i).getOffer_name().equals(selectedOption) ){
+                            discount = offers.get(i).getOffer_discount();
+                            offerId = offers.get(i).getOffer_id();
+                        }
+                        if(selectedOption.equals("Aucune selection")){
+                            discount = 0;
+                            offerId = 0;
+                        }
+                    }
+                    updatePrixTotal();
+                }
+            });
+
+
+            Offer_panel.add(comboBox);
+
+            mainPanel.add(Offer_panel, gbc2);
+
+        }
+
+
+
+
+
         row2.add(mainPanel, BorderLayout.CENTER);
 
 
@@ -223,15 +285,19 @@ public class Panier extends JPanel {
         JPanel payerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         payerPanel.setBackground(Color.decode(couleur1));
 
+
         payerPanel.add(payerButton);
 
         ValiderButton = new BorderRadButton("Valider", 10);
         ValiderButton.setBackground(Color.decode(couleur2)); // Couleur de bouton
-// Définition de la taille de police plus grande pour le bouton "Payer"
+        // Définition de la taille de police plus grande pour le bouton "Payer"
         Font boutonFont1 = new Font("Arial", Font.PLAIN, 18); // Choisir la police et la taille de police désirées
         ValiderButton.setFont(boutonFont1);
         ValiderButton.setPreferredSize(new Dimension(100, 50)); // Taille du bouton
         payerPanel.add(ValiderButton);
+
+
+
 
 
         row2.add(payerPanel, BorderLayout.SOUTH);
@@ -244,7 +310,11 @@ public class Panier extends JPanel {
     }
 
     private void updatePrixTotal() {
-        prixTotalLabel.setText("Prix total : " + nombreBillets * prixParBillet + " euros");
+        int prixTotal = nombreBillets * prixParBillet - (int) discount;
+        if(prixTotal < 0){
+            prixTotal = 0;
+        }
+        prixTotalLabel.setText("Prix total : " + prixTotal + " euros");
     }
 
     private void payer() {
@@ -300,6 +370,7 @@ public class Panier extends JPanel {
     public void setValiderPaiement(Boolean validerPaiement) {
         this.validerPaiement = validerPaiement;
     }
+
 
 
 }

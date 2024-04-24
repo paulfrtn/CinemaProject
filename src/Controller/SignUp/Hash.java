@@ -35,10 +35,8 @@ public class Hash {
      */
     public static boolean comparePassword(String password, String hashedPassword) {
         if (hashPassword(password).equals(hashedPassword)) {
-            System.out.println("Mot de passe correct");
             return true;
         } else {
-            System.out.println("Mot de passe incorrect");
             return false;
         }
     }

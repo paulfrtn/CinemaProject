@@ -30,8 +30,6 @@ public class ControllerPanier implements ControllerPanierInterface {
         Seance seance = seanceDao.getSeanceById(idSeance);
 
         Date date = seance.getSeance_date();
-        idOffer = 1;
-        System.out.println("Quantity: " + quantity);
 
         for (int i = 0; i < quantity; i++) {
             Ticket ticket = new Ticket(date, status, price, idUser, idSeance, idOffer, mail);

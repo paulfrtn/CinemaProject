@@ -34,7 +34,6 @@ public class ControllerFilmSchedule implements ControllerFilmScheduleInterface {
         public void actionPerformed(ActionEvent e) {
             JButton button = (JButton) e.getSource();
             CurrentSeanceId = Integer.parseInt(button.getName());
-            System.out.println("CurrentSeanceId : " + CurrentSeanceId);
         }
     };
 

@@ -34,7 +34,6 @@ public class OfferDaoImpl implements OfferDao {
             ps.setBoolean(9, offer.getOffer_status()); // Statut de l'offre
             ps.setInt(10, user_id); // ID de l'utilisateur associé à l'offre
             ps.executeUpdate();
-            System.out.println("Offre ajoutée avec succès !");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -149,7 +148,6 @@ public class OfferDaoImpl implements OfferDao {
             ps.setBoolean(8, offer.getOffer_status());
             ps.setInt(9, offer.getOffer_id());
             ps.executeUpdate();
-            System.out.println("Offre mise à jour avec succès !");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -179,7 +177,6 @@ public class OfferDaoImpl implements OfferDao {
             ps = con.prepareStatement(query);
             ps.setInt(1, id);
             ps.executeUpdate();
-            System.out.println("Offre supprimée avec succès !");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -208,7 +205,6 @@ public class OfferDaoImpl implements OfferDao {
             ps = con.prepareStatement(query);
             ps.setString(1, name);
             ps.executeUpdate();
-            System.out.println("Offre supprimée avec succès !");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -259,7 +255,7 @@ public class OfferDaoImpl implements OfferDao {
         return offers;
     }
 
-    public List<Offer> getOffersByUserType(int user_type) {
+    public List<Offer> getOffersByUserType(int user_type, Date currentDate) {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -267,12 +263,25 @@ public class OfferDaoImpl implements OfferDao {
 
         try {
             con = ConnectionDb.getConnection();
-            String query = "SELECT * FROM offer WHERE offer_user_type = ?";
+            String query = "SELECT * FROM offer WHERE offer_user_type = ? AND offer_start_date <= ? AND offer_end_date >= ?";
             ps = con.prepareStatement(query);
             ps.setInt(1, user_type);
+            ps.setDate(2, new java.sql.Date(currentDate.getTime())); // Convertir la date en java.sql.Date
+            ps.setDate(3, new java.sql.Date(currentDate.getTime())); // Convertir la date en java.sql.Date
             rs = ps.executeQuery();
             while (rs.next()) {
-                Offer offer = new Offer(rs.getInt("offer_id"), rs.getString("offer_name"), rs.getString("offer_description"), rs.getDate("offer_start_date"), rs.getDate("offer_end_date"), rs.getFloat("offer_price"), rs.getFloat("offer_discount"), rs.getInt("offer_limit"), rs.getInt("offer_user_type"), rs.getBoolean("offer_status"));
+                Offer offer = new Offer(
+                        rs.getInt("offer_id"),
+                        rs.getString("offer_name"),
+                        rs.getString("offer_description"),
+                        rs.getDate("offer_start_date"),
+                        rs.getDate("offer_end_date"),
+                        rs.getFloat("offer_price"),
+                        rs.getFloat("offer_discount"),
+                        rs.getInt("offer_limit"),
+                        rs.getInt("offer_user_type"),
+                        rs.getBoolean("offer_status")
+                );
                 offers.add(offer);
             }
         } catch (SQLException e) {
@@ -295,3 +304,4 @@ public class OfferDaoImpl implements OfferDao {
         return offers;
     }
 }
+

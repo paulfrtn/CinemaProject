@@ -207,7 +207,7 @@ public class FilmNSchedulePage extends JPanel {
         JButton bandeAnnonceButton = new BorderRadButton("Bande d'annonce",10);
         bandeAnnonceButton.setPreferredSize(new Dimension(10, 30)); // Définir la taille du bouton
         bandeAnnonceButton.setBackground(Color.decode(couleur2));
-        bandeAnnonceButton.addActionListener(e -> BandeAnnonceButtonClicked("src/Model/Images/BandeAnnonce/TFG.mp4"));
+        bandeAnnonceButton.addActionListener(e -> BandeAnnonceButtonClicked("src/Model/Images/BandeAnnonce/Trailer_chihiro.mp4"));
         column3.add(bandeAnnonceButton, gbcColumn3);
 
         middlePanel1.add(column3, gbcColumn3);
@@ -240,7 +240,6 @@ public class FilmNSchedulePage extends JPanel {
         if (!Start) {
             button1.setBackground(Color.decode(couleur3));
             CurrentButtonDate = button1;
-            System.out.println(CurrentButtonDate.getName());
             seances = seanceDao.getSeanceByDateNFilmId(java.sql.Date.valueOf(CurrentButtonDate.getName()), film_id);
             Collections.sort(seances, new SeanceComparator());
             Start = true;
@@ -263,7 +262,7 @@ public class FilmNSchedulePage extends JPanel {
 
         middlePanel2.add(row1, gbcRow1);
 
-// Deuxième ligne (65% de la hauteur)
+        // Deuxième ligne (65% de la hauteur)
         JPanel row2 = new JPanel(new GridBagLayout()); // Utiliser GridBagLayout pour ajouter les lignes avec des tailles variables
         row2.setBackground(Color.decode(couleur)); // Couleur pour visualiser
         GridBagConstraints gbcRow2 = new GridBagConstraints();
