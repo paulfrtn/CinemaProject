@@ -3,8 +3,8 @@ package Controller.SuppFilm;
 import Model.Film.Film;
 import Model.Film.FilmDao;
 import Model.Film.FilmDaoImpl;
-import View.SuppFilm;
-import View.PopUpMessage;
+import View.AddThings.SuppFilm;
+import View.PopUpMessage.PopUpMessage;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

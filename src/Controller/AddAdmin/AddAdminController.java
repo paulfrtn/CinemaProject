@@ -3,8 +3,8 @@ package Controller.AddAdmin;
 import Controller.SignUp.Hash;
 import Model.User.User;
 import Model.User.UserDaoImpl;
-import View.AddAdmin;
-import View.PopUpMessage;
+import View.AddThings.AddAdmin;
+import View.PopUpMessage.PopUpMessage;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

@@ -1,18 +1,13 @@
 package View.Admin;
 
 import Controller.AddAdmin.AddAdminController;
-import Controller.AddFilm.ControllerAddFilm;
 import Controller.SuppUser.SuppUserController;
-import Model.Film.Film;
-import Model.Seance.Seance;
 import Model.User.User;
-import Model.User.UserDaoImpl;
-import View.AddAdmin;
-import View.AddFilm;
+import View.AddThings.AddAdmin;
 import View.BorderRadCompenent.BorderRadButton;
 import View.BorderRadCompenent.BorderRadLabel;
 import View.BorderRadCompenent.BorderRadPanel;
-import View.SuppUser;
+import View.AddThings.SuppUser;
 
 import javax.swing.*;
 import java.awt.*;

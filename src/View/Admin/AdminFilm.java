@@ -6,12 +6,12 @@ import Model.Film.Film;
 import Model.Film.FilmDaoImpl;
 import Model.Seance.Seance;
 import Model.Seance.SeanceDaoImpl;
-import View.AddFilm;
-import View.AddSeance;
+import View.AddThings.AddFilm;
+import View.AddThings.AddSeance;
 import View.BorderRadCompenent.BorderRadButton;
 import View.BorderRadCompenent.BorderRadLabel;
 import View.BorderRadCompenent.BorderRadPanel;
-import View.SuppFilm;
+import View.AddThings.SuppFilm;
 
 import javax.swing.*;
 import java.awt.*;

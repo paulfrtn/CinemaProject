@@ -2,9 +2,6 @@ package View.Admin;
 
 import Model.Film.Film;
 import Model.Film.FilmDaoImpl;
-import Model.Seance.SeanceDaoImpl;
-import View.Accueil.JCarousel;
-import View.BandeADiffuser;
 import View.BorderRadCompenent.BorderRadButton;
 import View.BorderRadCompenent.BorderRadLabel;
 import View.BorderRadCompenent.BorderRadPanel;

@@ -5,10 +5,9 @@ import Model.Film.FilmDaoImpl;
 import Model.Salle.Salle;
 import Model.Salle.SalleDaoImpl;
 import Model.Seance.SeanceDaoImpl;
-import View.PopUpMessage;
+import View.PopUpMessage.PopUpMessage;
 import Model.Seance.Seance;
-import Model.Seance.SeanceDao;
-import View.AddSeance;
+import View.AddThings.AddSeance;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -16,7 +15,6 @@ import java.awt.event.ActionListener;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Contrôleur pour l'ajout de séances de films dans l'application.

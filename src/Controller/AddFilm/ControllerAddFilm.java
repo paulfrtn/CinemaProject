@@ -3,8 +3,8 @@ package Controller.AddFilm;
 import Model.Film.Film;
 import Model.Film.FilmDao;
 import Model.Film.FilmDaoImpl;
-import View.AddFilm;
-import View.PopUpMessage;
+import View.AddThings.AddFilm;
+import View.PopUpMessage.PopUpMessage;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;

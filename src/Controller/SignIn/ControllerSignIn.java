@@ -3,7 +3,7 @@ package Controller.SignIn;
 import Controller.SignUp.Hash;
 import Model.User.User;
 import Model.User.UserDaoImpl;
-import View.PopUpMessage;
+import View.PopUpMessage.PopUpMessage;
 
 /**
  * Contrôleur pour la fonctionnalité de connexion.

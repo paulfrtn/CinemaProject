@@ -2,7 +2,7 @@ package Controller.SignUp;
 
 import Model.User.User;
 import Model.User.UserDaoImpl;
-import View.PopUpMessage;
+import View.PopUpMessage.PopUpMessage;
 import java.sql.Date;
 
 /**

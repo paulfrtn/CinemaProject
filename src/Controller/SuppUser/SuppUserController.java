@@ -1,8 +1,8 @@
 package Controller.SuppUser;
 
 import Model.User.UserDaoImpl;
-import View.PopUpMessage;
-import View.SuppUser;
+import View.PopUpMessage.PopUpMessage;
+import View.AddThings.SuppUser;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

@@ -25,7 +25,7 @@ import java.util.Collections;
 import Controller.MainFrame;
 import Model.Seance.Seance;
 import Model.Seance.SeanceDaoImpl;
-import View.BandeADiffuser;
+import View.VideoDiffuser.BandeADiffuser;
 import View.BorderRadCompenent.BorderRadButton;
 import View.BorderRadCompenent.BorderRadLabel;
 
