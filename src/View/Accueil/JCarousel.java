@@ -65,7 +65,6 @@ public class JCarousel extends JPanel{
         nextPanel.setBackground(Color.decode(couleur1));
 
         // Utiliser un FlowLayout pour permettre aux films de s'afficher côte à côte
-
         filmsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, (5), 10));
         filmsPanel.setBackground(Color.decode(couleur1));
 

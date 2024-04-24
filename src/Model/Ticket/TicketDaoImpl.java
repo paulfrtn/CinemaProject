@@ -1,16 +1,24 @@
 package Model.Ticket;
 
 import Model.DataBase.ConnectionDb;
-import Model.User.User;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Cette classe implémente l'interface TicketDao et fournit les opérations CRUD pour les tickets.
+ */
 public class TicketDaoImpl {
-    //Nous allons réaliser le CRUD (Create, Read, Update, Delete)
+    // Nous allons réaliser le CRUD (Create, Read, Update, Delete)
 
     // Create
+
+    /**
+     * Ajoute un nouveau ticket à la base de données.
+     *
+     * @param ticket Le ticket à ajouter
+     */
     public void addTicket(Ticket ticket) {
         Connection connection = null;
         try {
@@ -28,15 +36,23 @@ public class TicketDaoImpl {
             e.printStackTrace();
         } finally {
             try {
-                connection.close();
+                if (connection != null) {
+                    connection.close();
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-
         }
     }
 
     // Read
+
+    /**
+     * Récupère un ticket par son identifiant.
+     *
+     * @param id L'identifiant du ticket à récupérer
+     * @return Le ticket correspondant à l'identifiant spécifié
+     */
     public Ticket getTicketById(int id) {
         Connection con = null;
         PreparedStatement ps = null;
@@ -71,6 +87,12 @@ public class TicketDaoImpl {
         return ticket;
     }
 
+    /**
+     * Récupère une liste de tickets pour un utilisateur donné.
+     *
+     * @param userId L'identifiant de l'utilisateur pour lequel récupérer les tickets
+     * @return Une liste de tickets pour l'utilisateur spécifié
+     */
     public List<Ticket> getTicketsByUserId(int userId) {
         List<Ticket> tickets = new ArrayList<>();
         Connection con = null;
@@ -116,6 +138,12 @@ public class TicketDaoImpl {
         return tickets;
     }
 
+    /**
+     * Récupère une liste de tickets pour une date donnée.
+     *
+     * @param date La date pour laquelle récupérer les tickets
+     * @return Une liste de tickets pour la date spécifiée
+     */
     public List<Ticket> getTicketByDate(Date date) {
         Connection con = null;
         PreparedStatement ps = null;
@@ -126,7 +154,6 @@ public class TicketDaoImpl {
             String query = "SELECT * FROM ticket WHERE ticket_date = ?";
             ps = con.prepareStatement(query);
             ps.setDate(1, date);
-            System.out.println(date);
             rs = ps.executeQuery();
             while (rs.next()) {
                 Ticket ticket = new Ticket(rs.getInt("ticket_id"), rs.getDate("ticket_date"), rs.getBoolean("ticket_status"), rs.getInt("ticket_price"), rs.getInt("user_id"), rs.getInt("seance_id"), rs.getInt("offer_id"), rs.getString("mail"));
@@ -153,6 +180,12 @@ public class TicketDaoImpl {
     }
 
     // Update
+
+    /**
+     * Met à jour les informations d'un ticket dans la base de données.
+     *
+     * @param ticket Le ticket à mettre à jour
+     */
     public void updateTicket(Ticket ticket) {
         Connection con = null;
         PreparedStatement ps = null;
@@ -185,6 +218,12 @@ public class TicketDaoImpl {
     }
 
     // Delete
+
+    /**
+     * Supprime un ticket de la base de données.
+     *
+     * @param id L'identifiant du ticket à supprimer
+     */
     public void deleteTicketById(int id) {
         Connection con = null;
         PreparedStatement ps = null;
@@ -210,3 +249,4 @@ public class TicketDaoImpl {
         }
     }
 }
+

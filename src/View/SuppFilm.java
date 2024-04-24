@@ -7,10 +7,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * Fenêtre de l'interface utilisateur pour supprimer un film.
+ */
 public class SuppFilm extends JFrame {
     private JTextField filmTitleField;
     private JButton deleteButton;
 
+    /**
+     * Constructeur de la classe SuppFilm.
+     */
     public SuppFilm() {
         setTitle("Supprimer un film");
         setSize(400, 200);
@@ -43,16 +49,32 @@ public class SuppFilm extends JFrame {
         add(panel);
     }
 
+    /**
+     * Récupère le titre du film saisi par l'utilisateur.
+     *
+     * @return Le titre du film à supprimer
+     */
     public String getFilmTitle() {
         return filmTitleField.getText();
     }
 
+    /**
+     * Affiche un message à l'utilisateur.
+     *
+     * @param message Le message à afficher
+     */
     public void showMessage(String message) {
         JOptionPane.showMessageDialog(this, message);
     }
 
+    /**
+     * Ajoute un écouteur d'événements au bouton de suppression.
+     *
+     * @param listener L'écouteur d'événements
+     */
     public void addDeleteListener(ActionListener listener) {
         deleteButton.addActionListener(listener);
     }
 }
+
 

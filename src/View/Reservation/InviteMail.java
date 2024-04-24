@@ -90,8 +90,6 @@ public class InviteMail extends JDialog {
 
     public static void main(String[] args) {
         InviteMail inviteMail = new InviteMail(new JFrame(), "Inviter un ami");
-        System.out.println(inviteMail.getEmail());
-        System.out.println(inviteMail.isCancelled());
     }
 
 }

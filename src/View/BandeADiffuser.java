@@ -15,33 +15,35 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
+/**
+ * Classe pour afficher une vidéo dans une fenêtre popup.
+ */
 public class BandeADiffuser {
 
+    /**
+     * Affiche une fenêtre popup contenant une vidéo.
+     *
+     * @param videoPath Le chemin vers le fichier vidéo
+     */
     public static void showVideoPopup(String videoPath) {
-        JFXPanel jfxPanel = new JFXPanel(); // Crée un panneau JFXPanel pour afficher la vidéo
+        JFXPanel jfxPanel = new JFXPanel();
+        jfxPanel.setBackground(Color.BLACK);
 
-        // Créez un objet File à partir du chemin de la vidéo
         File file = new File(videoPath);
 
-        // Créez un objet Media avec le fichier vidéo
         Media media = new Media(file.toURI().toString());
 
-        // Créez un lecteur multimédia avec le fichier Media
         MediaPlayer mediaPlayer = new MediaPlayer(media);
 
-        // Créez une vue multimédia pour afficher le lecteur multimédia
         MediaView mediaView = new MediaView(mediaPlayer);
 
-        // Créez un conteneur JavaFX BorderPane pour contenir la vue multimédia et les contrôles
         BorderPane borderPane = new BorderPane();
         borderPane.setCenter(mediaView);
 
-        // Créez des boutons pour les contrôles de lecture
         Button playButton = new Button("Play");
         Button pauseButton = new Button("Pause");
         Button stopButton = new Button("Stop");
 
-        // Ajoutez des actions aux boutons pour contrôler le lecteur multimédia
         playButton.setOnAction(e -> mediaPlayer.play());
         pauseButton.setOnAction(e -> mediaPlayer.pause());
         stopButton.setOnAction(e -> {
@@ -49,27 +51,23 @@ public class BandeADiffuser {
             mediaPlayer.seek(Duration.ZERO);
         });
 
-        // Ajoutez les boutons au conteneur BorderPane
         borderPane.setBottom(new HBox(playButton, pauseButton, stopButton));
 
-        // Créez une scène JavaFX avec le conteneur BorderPane
         Scene scene = new Scene(borderPane);
 
-        // Initialiser le lecteur multimédia
         mediaPlayer.setOnReady(() -> {
-            mediaPlayer.seek(Duration.ZERO); // Rembobiner la vidéo au début
-            mediaPlayer.play(); // Lancer la lecture de la vidéo
+            mediaPlayer.seek(Duration.ZERO);
+            mediaPlayer.play();
         });
 
-        // Ajouter la scène au JFXPanel
         jfxPanel.setScene(scene);
 
-        // Créez un conteneur Swing JPanel pour contenir le panneau JFXPanel
         JPanel panel = new JPanel(new BorderLayout());
         panel.add(jfxPanel, BorderLayout.CENTER);
 
         // Créez un conteneur Swing JFrame pour contenir le JPanel
         JFrame frame = new JFrame("Video Popup");
+        frame.setBackground(Color.BLACK);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Fermer la fenêtre lorsque le pop-up est fermé
         frame.setSize(800, 600);
         frame.setLocationRelativeTo(null); // Centrer la fenêtre sur l'écran
@@ -77,3 +75,4 @@ public class BandeADiffuser {
         frame.setVisible(true);
     }
 }
+

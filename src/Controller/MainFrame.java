@@ -86,7 +86,7 @@ public class MainFrame extends JFrame {
         salleDao = new SalleDaoImpl();
 
 
-        PopUpMessage popUP = new PopUpMessage();
+        PopUpMessage PopUp = new PopUpMessage();
         //CurrentUser = userdao.getUserById(5);
         int filmLimit = 100;
         java.util.List<Film> nowShowingFilms = filmDao.getNowShowingFilms(filmLimit);
@@ -129,7 +129,6 @@ public class MainFrame extends JFrame {
                 String pseudo = signUpPanel.getPseudo();
                 String password = signUpPanel.getPassword();
                 String birthday = signUpPanel.getBirthday();
-                System.out.println("Birthday : " + birthday);
 
                 boolean success = controllerSignUp.onSignUp(firstName, lastName, email, pseudo, password, birthday);
                 if (success) {
@@ -220,7 +219,7 @@ public class MainFrame extends JFrame {
                             if (panierPanel.getValiderPaiement()) {
                                 if (CurrentUser != null) {
                                     controllerPanier.addPanier(CurrentSeanceId, CurrentUser.getUser_id(), offerId, price, true, quantity, CurrentUser.getUser_mail());
-                                    popUP.showSuccessMessage("Votre réservation a été effectuée avec succès");
+                                    PopUp.showSuccessMessage("Votre réservation a été effectuée avec succès");
                                     cardLayout.show(cardsPanel, "Accueil");
                                 } else {
                                     JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(MainFrame.this);
@@ -228,7 +227,7 @@ public class MainFrame extends JFrame {
                                     if (!inviteMail.isCancelled()) {
                                         String email = inviteMail.getEmail();
                                         controllerPanier.addPanier(CurrentSeanceId, 18, offerId, price, true, quantity, email);
-                                        popUP.showSuccessMessage("Votre réservation a été effectuée avec succès");
+                                        PopUp.showSuccessMessage("Votre réservation a été effectuée avec succès");
                                         cardLayout.show(cardsPanel, "Accueil");
                                     }
                                 }
@@ -304,7 +303,6 @@ public class MainFrame extends JFrame {
                 filmNSchedulePage.getProfil().addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        System.out.println(CurrentUser);
                         if (CurrentUser != null) {
                             if (CurrentUser.getUser_role()) {
                                 cardLayout.show(cardsPanel, "AdminPrincipal");
@@ -318,7 +316,6 @@ public class MainFrame extends JFrame {
                             }
                         }
                         if (CurrentUser == null) {
-                            System.out.println("Current user is null");
                             cardLayout.show(cardsPanel, "SignInPanel");
                         }
                     }

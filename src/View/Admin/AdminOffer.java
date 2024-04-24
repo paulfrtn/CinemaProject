@@ -14,6 +14,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * Vue pour la gestion des offres par l'administrateur.
+ */
 public class AdminOffer extends JPanel {
     String couleur1;
     String couleur2;
@@ -28,7 +31,12 @@ public class AdminOffer extends JPanel {
     private JPanel offersPanel;
     private OfferDaoImpl offerDao;
 
-
+    /**
+     * Constructeur de la classe AdminOffer.
+     *
+     * @param offers         La liste des offres
+     * @param CurrentUserId  L'identifiant de l'utilisateur actuel
+     */
     public AdminOffer(List<Offer> offers, int CurrentUserId) {
         couleur1 = "#003049";
         couleur2 = "#669BBC";
@@ -176,6 +184,9 @@ public class AdminOffer extends JPanel {
         add(mainPanel);
     }
 
+    /**
+     * Met à jour l'affichage des offres.
+     */
     public void updateOffers() {
         // Supprimer toutes les offres actuellement affichées
         offersPanel.removeAll();

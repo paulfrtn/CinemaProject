@@ -9,6 +9,9 @@ import View.BorderRadCompenent.BorderRadPanel;
 import View.BorderRadCompenent.BorderRadPasswordField;
 import View.BorderRadCompenent.BorderRadTextField;
 
+/**
+ * Vue pour la connexion.
+ */
 public class SignIn extends JPanel {
     private ControllerSignIn controller;
 
@@ -20,6 +23,11 @@ public class SignIn extends JPanel {
 
     private ImageIcon image;
 
+    /**
+     * Constructeur de la classe SignIn.
+     *
+     * @param controller Le contrôleur pour la connexion
+     */
     public SignIn(ControllerSignIn controller) {
         this.controller = controller;
 

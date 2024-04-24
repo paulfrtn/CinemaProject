@@ -23,7 +23,6 @@ public class ControllerSignIn implements ControllerSignInInterface {
         PopUpMessage popUpMessage = new PopUpMessage(); // Instance de la fenêtre contextuelle pour les messages
 
         // Affichage de l'e-mail et du mot de passe pour le débogage
-        System.out.println(email + " " + password);
 
         // Vérification si l'e-mail existe dans la base de données
         boolean mailExists = userDao.DoesMailExist(email);

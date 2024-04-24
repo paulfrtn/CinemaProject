@@ -8,10 +8,16 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * Fenêtre de suppression d'utilisateur.
+ */
 public class SuppUser extends JFrame {
     private JTextField emailField;
     private JButton supprimerButton;
 
+    /**
+     * Constructeur de la classe SuppUser.
+     */
     public SuppUser() {
         setTitle("Suppression d'utilisateur");
         setSize(400, 200);
@@ -47,17 +53,21 @@ public class SuppUser extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * Méthode pour récupérer l'adresse e-mail saisie.
+     *
+     * @return L'adresse e-mail saisie
+     */
     public String getEmail() {
         return emailField.getText();
     }
 
+    /**
+     * Méthode pour ajouter un écouteur au bouton de suppression.
+     *
+     * @param listener L'écouteur à ajouter
+     */
     public void addSupprimerListener(ActionListener listener) {
         supprimerButton.addActionListener(listener);
     }
 }
-
-
-
-
-
-
