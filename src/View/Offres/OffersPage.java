@@ -42,6 +42,7 @@ public class OffersPage extends JPanel {
         btnProfile.setForeground(Color.WHITE);
 
         btnFilms.addActionListener(e -> navigateToHomeView());
+        btnProfile.addActionListener(e -> navigateToProfile());
 
         leftPanel.add(btnFilms);
 
@@ -95,6 +96,23 @@ public class OffersPage extends JPanel {
         if (parent != null) {
             MainFrame mainFrame = (MainFrame) parent;
             mainFrame.showAccueilView();
+        } else {
+
+            JOptionPane.showMessageDialog(this, "PB", "PB", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void navigateToProfile() {
+
+        Container parent = this.getParent();
+        while (parent != null && !(parent instanceof MainFrame)) {
+            parent = parent.getParent();
+        }
+
+
+        if (parent != null) {
+            MainFrame mainFrame = (MainFrame) parent;
+            mainFrame.showProfile();
         } else {
 
             JOptionPane.showMessageDialog(this, "PB", "PB", JOptionPane.ERROR_MESSAGE);

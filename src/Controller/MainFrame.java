@@ -550,6 +550,7 @@ public class MainFrame extends JFrame {
     public void showAccueilView() {
         cardLayout.show(cardsPanel, "Accueil");
     }
+    public void showProfile(){ cardLayout.show(cardsPanel, "ProfilePage");}
 }
 
 
