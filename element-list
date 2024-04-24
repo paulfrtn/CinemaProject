@@ -18,12 +18,14 @@ Model.Salle
 Model.Seance
 Model.Ticket
 Model.User
-View
 View.Accueil
+View.AddThings
 View.Admin
 View.BorderRadCompenent
 View.FilmNSeance
 View.Offres
+View.PopUpMessage
 View.ProfilPage
 View.Reservation
 View.SignInSignUp
+View.VideoDiffuser

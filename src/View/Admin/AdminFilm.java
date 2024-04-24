@@ -178,6 +178,16 @@ public class AdminFilm extends JPanel {
         gbc2.insets = new Insets(7, 7, 7, 15);
         gbc2.fill = GridBagConstraints.HORIZONTAL;
         gbc2.anchor = GridBagConstraints.NORTH;
+
+        for(Seance seance : seances){
+            JPanel seancePanel = new BorderRadPanel(10);
+            film = filmDao.getFilmById(seance.getFilm_id());
+            JLabel seanceLabel = new JLabel(film.getFilm_title() + " - " + seance.getSeance_date() + " - " + seance.getSeance_time() + " - " + seance.getSeance_language());
+            seancePanel.add(seanceLabel);
+            seancePanel.setBackground(Color.decode(couleur3));
+            FilmsPanel.add(seancePanel);
+        }
+        FilmsScrollPane.add(FilmsPanel);
         row2.add(FilmsScrollPane, gbc2);
         mainPanel.add(row2, gbc);
         add(mainPanel);
