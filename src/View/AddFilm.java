@@ -1,7 +1,5 @@
 package View;
 
-
-
 import View.BorderRadCompenent.BorderRadButton;
 import View.BorderRadCompenent.BorderRadLabel;
 import View.BorderRadCompenent.BorderRadTextField;
@@ -11,6 +9,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * Fenêtre permettant d'ajouter un film.
+ */
 public class AddFilm extends JFrame {
     private JTextField titleField;
     private JTextField directorField;
@@ -25,6 +26,9 @@ public class AddFilm extends JFrame {
     private JButton insertPosterButton;
     private JLabel posterLabel;
 
+    /**
+     * Constructeur de la classe AddFilm.
+     */
     public AddFilm() {
         setTitle("Ajouter un film");
         setSize(1000, 400);
@@ -143,42 +147,92 @@ public class AddFilm extends JFrame {
         add(panel);
     }
 
+    /**
+     * Renvoie le chemin du poster du film.
+     *
+     * @return Chemin du poster.
+     */
     public String getPosterPath() {
         return posterLabel.getText();
     }
 
+    /**
+     * Définit le chemin du poster du film.
+     *
+     * @param path Chemin du poster.
+     */
     public void setPosterPath(String path) {
         posterLabel.setText(path);
     }
 
+    /**
+     * Ajoute un écouteur pour le bouton d'insertion de poster.
+     *
+     * @param listener ActionListener pour le bouton d'insertion de poster.
+     */
     public void addInsertPosterListener(ActionListener listener) {
         insertPosterButton.addActionListener(listener);
     }
 
+    /**
+     * Renvoie le titre du film.
+     *
+     * @return Titre du film.
+     */
     public String getTitleField() {
         return titleField.getText();
     }
 
+    /**
+     * Renvoie le réalisateur du film.
+     *
+     * @return Réalisateur du film.
+     */
     public String getDirectorField() {
         return directorField.getText();
     }
 
+    /**
+     * Renvoie le genre du film.
+     *
+     * @return Genre du film.
+     */
     public String getGenreField() {
         return genreField.getText();
     }
 
+    /**
+     * Renvoie le synopsis du film.
+     *
+     * @return Synopsis du film.
+     */
     public String getSynopsisArea() {
         return synopsisArea.getText();
     }
 
+    /**
+     * Renvoie la durée du film.
+     *
+     * @return Durée du film.
+     */
     public String getDurationField() {
         return durationField.getText();
     }
 
+    /**
+     * Renvoie la date de sortie du film.
+     *
+     * @return Date de sortie du film.
+     */
     public String getReleaseDateField() {
         return releaseDateField.getText();
     }
 
+    /**
+     * Renvoie le statut du film.
+     *
+     * @return Statut du film (1 = À l'affiche, 2 = À venir, 3 = En Avant Première).
+     */
     public int getStatus() {
         if (atAfficheButton.isSelected()) {
             return 1; // À l'affiche
@@ -190,14 +244,21 @@ public class AddFilm extends JFrame {
         return 0; // Aucun statut sélectionné
     }
 
+    /**
+     * Affiche un message dans la fenêtre.
+     *
+     * @param message Message à afficher.
+     */
     public void showMessage(String message) {
         JOptionPane.showMessageDialog(this, message);
     }
 
+    /**
+     * Ajoute un écouteur pour le bouton d'ajout de film.
+     *
+     * @param listener ActionListener pour le bouton d'ajout de film.
+     */
     public void addAddListener(ActionListener listener) {
         addButton.addActionListener(listener);
     }
 }
-
-
-

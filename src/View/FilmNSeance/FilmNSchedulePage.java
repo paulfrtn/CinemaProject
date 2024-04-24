@@ -29,6 +29,9 @@ import View.BandeADiffuser;
 import View.BorderRadCompenent.BorderRadButton;
 import View.BorderRadCompenent.BorderRadLabel;
 
+/**
+ * Cette classe représente la page d'affichage des séances pour un film donné.
+ */
 public class FilmNSchedulePage extends JPanel {
     private ControllerFilmSchedule controller;
     private MainFrame mainFrame;
@@ -44,6 +47,20 @@ public class FilmNSchedulePage extends JPanel {
     String couleur2;
     String couleur3;
 
+    /**
+     * Constructeur de la classe FilmNSchedulePage.
+     *
+     * @param controller      Contrôleur de la page principale.
+     * @param film_id         ID du film.
+     * @param film_title      Titre du film.
+     * @param film_director   Réalisateur du film.
+     * @param film_genre      Genre du film.
+     * @param film_duration   Durée du film.
+     * @param film_synopsis   Synopsis du film.
+     * @param film_release_date Date de sortie du film.
+     * @param film_status     Statut du film.
+     * @param film_poster     Chemin vers l'affiche du film.
+     */
     public FilmNSchedulePage(MainFrame controller,
                              int film_id,
                              String film_title,
@@ -132,7 +149,7 @@ public class FilmNSchedulePage extends JPanel {
             Image resizedImage = posterImage.getScaledInstance(210, 297, Image.SCALE_SMOOTH);
             ImageIcon icon = new ImageIcon(resizedImage);
             JLabel imageLabel = new BorderRadLabel(icon, 10, Color.decode(couleur)); // 10 est le rayon du bord
-           // imageLabel.setBorder(null);
+            // imageLabel.setBorder(null);
             column1.add(imageLabel, gbcColumn1);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -371,10 +388,21 @@ public class FilmNSchedulePage extends JPanel {
 
     }
 
+    /**
+     * Renvoie le bouton de profil.
+     *
+     * @return Le bouton de profil
+     */
     public JButton getButtonProfil() {
         return profil;
     }
 
+    /**
+     * Méthode appelée lorsqu'un bouton est cliqué.
+     * Change la couleur du bouton cliqué et met à jour la liste des séances disponibles.
+     *
+     * @param button Le bouton qui a été cliqué
+     */
     public void buttonClicked(JButton button) {
         if (CurrentButtonDate != null) {
             CurrentButtonDate.setBackground(Color.decode(couleur2));
@@ -386,18 +414,37 @@ public class FilmNSchedulePage extends JPanel {
         updateSeanceButtons();
     }
 
+    /**
+     * Renvoie le nom du bouton cliqué.
+     *
+     * @param button Le bouton cliqué
+     * @return Le nom du bouton cliqué
+     */
     public String getButtonClickedName(JButton button) {
         return button.getName();
     }
 
+    /**
+     * Renvoie le bouton de date actuellement sélectionné.
+     *
+     * @return Le bouton de date actuellement sélectionné
+     */
     public JButton getCurrentButtonDate() {
         return CurrentButtonDate;
     }
 
+    /**
+     * Méthode appelée lorsqu'un utilisateur clique sur le bouton "Bande annonce".
+     *
+     * @param path Le chemin de la vidéo de la bande annonce
+     */
     public void BandeAnnonceButtonClicked(String path) {
         BandeADiffuser.showVideoPopup(path);
     }
 
+    /**
+     * Comparateur de séances utilisé pour trier les séances par heure de début.
+     */
     public class SeanceComparator implements Comparator<Seance> {
         @Override
         public int compare(Seance s1, Seance s2) {
@@ -406,10 +453,12 @@ public class FilmNSchedulePage extends JPanel {
         }
     }
 
+    /**
+     * Met à jour les boutons de séance disponibles.
+     */
     private void updateSeanceButtons() {
         line2.removeAll(); // Supprime tous les boutons actuels de line2
         line4.removeAll(); // Supprime tous les boutons actuels de line4
-
 
         for (int i = 0; i < seances.size(); i++) {
             Seance seance = seances.get(i);
@@ -433,10 +482,13 @@ public class FilmNSchedulePage extends JPanel {
         line2.repaint();
         line4.revalidate();
         line4.repaint();
-
     }
 
-
+    /**
+     * Ajoute des écouteurs de boutons aux boutons de séance.
+     *
+     * @param actionListener L'écouteur d'action
+     */
     public void buttonListeners(ActionListener actionListener) {
         Component[] components = line2.getComponents();
         for (Component component : components) {
@@ -453,13 +505,23 @@ public class FilmNSchedulePage extends JPanel {
         }
     }
 
+    /**
+     * Renvoie le bouton de retour.
+     *
+     * @return Le bouton de retour
+     */
     public JButton getBackButton() {
         return backButton;
     }
 
+    /**
+     * Renvoie le bouton de profil.
+     *
+     * @return Le bouton de profil
+     */
     public JButton getProfil() {
         return profil;
     }
-
-
 }
+
+

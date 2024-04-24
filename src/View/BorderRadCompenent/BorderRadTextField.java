@@ -4,14 +4,27 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 
+/**
+ * La classe BorderRadTextField crée un champ de texte avec une bordure arrondie.
+ */
 public class BorderRadTextField extends JTextField {
     private int borderRadius;
 
-    public BorderRadTextField( int borderRadius) {
+    /**
+     * Crée un champ de texte avec une bordure arrondie.
+     *
+     * @param borderRadius Le rayon de la bordure arrondie.
+     */
+    public BorderRadTextField(int borderRadius) {
         this.borderRadius = borderRadius;
         setOpaque(false); // Rendre le champ de texte transparent
     }
 
+    /**
+     * Définit le rayon de la bordure arrondie.
+     *
+     * @param borderRadius Le nouveau rayon de la bordure arrondie.
+     */
     public void setBorderRadius(int borderRadius) {
         this.borderRadius = borderRadius;
         repaint();

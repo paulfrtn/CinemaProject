@@ -10,6 +10,9 @@ import java.awt.event.*;
 import java.awt.geom.RoundRectangle2D;
 import java.util.List;
 
+/**
+ * La classe JCarousel est une représentation de l'affichage en carrousel de films.
+ */
 public class JCarousel extends JPanel{
     private JPanel filmsPanel;
     private MainFrame controller;
@@ -18,6 +21,12 @@ public class JCarousel extends JPanel{
     private String couleur2;
     private String couleur3;
 
+    /**
+     * Crée une instance de la classe JCarousel.
+     * @param controller Le contrôleur de l'application.
+     * @param category La catégorie des films à afficher.
+     * @param films La liste des films à afficher dans le carrousel.
+     */
     public JCarousel(MainFrame controller, String category, List<Film> films) {
 
         this.controller = controller;
@@ -162,6 +171,9 @@ public class JCarousel extends JPanel{
 
     }
 
+    /**
+     * Ajoute un ActionListener aux films du carrousel.
+     */
     public void addFilmListener() {
         for (Component component : filmsPanel.getComponents()) {
             if (component instanceof JPanel) {
@@ -183,10 +195,12 @@ public class JCarousel extends JPanel{
         }
     }
 
-
+    /**
+     * Définit l'ActionListener pour les films du carrousel.
+     * @param listener L'ActionListener à définir.
+     */
     public void setFilmButtonListener(ActionListener listener) {
         this.listener = listener;
     }
-
 
 }

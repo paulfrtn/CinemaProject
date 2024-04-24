@@ -4,7 +4,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 
+/**
+ * La classe RoundButton crée un bouton avec une forme ronde.
+ */
 public class RoundButton extends JButton {
+    /**
+     * Crée un bouton avec une forme ronde.
+     *
+     * @param label Le texte du bouton.
+     */
     public RoundButton(String label) {
         super(label);
         setContentAreaFilled(false); // On ne remplit pas le contenu par défaut

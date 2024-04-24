@@ -5,12 +5,21 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Classe représentant une boîte de dialogue pour inviter un ami par e-mail.
+ */
 public class InviteMail extends JDialog {
     private JTextField emailField;
     private JButton okButton;
     private JButton cancelButton;
     private boolean isCancelled;
 
+    /**
+     * Constructeur de la boîte de dialogue pour inviter un ami par e-mail.
+     *
+     * @param parent La fenêtre parente.
+     * @param title  Le titre de la boîte de dialogue.
+     */
     public InviteMail(Frame parent, String title) {
         super(parent, title, true);
         isCancelled = true;
@@ -61,10 +70,20 @@ public class InviteMail extends JDialog {
         setVisible(true);
     }
 
+    /**
+     * Renvoie l'adresse e-mail saisie.
+     *
+     * @return L'adresse e-mail saisie.
+     */
     public String getEmail() {
         return emailField.getText();
     }
 
+    /**
+     * Vérifie si l'utilisateur a annulé l'action.
+     *
+     * @return true si l'utilisateur a annulé l'action, sinon false.
+     */
     public boolean isCancelled() {
         return isCancelled;
     }

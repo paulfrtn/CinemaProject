@@ -9,6 +9,9 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.sql.Date;
 
+/**
+ * Fenêtre permettant d'ajouter un administrateur.
+ */
 public class AddAdmin extends JFrame {
     private JTextField firstNameField;
     private JTextField lastNameField;
@@ -18,6 +21,9 @@ public class AddAdmin extends JFrame {
     private JTextField birthdayField;
     private JButton addButton;
 
+    /**
+     * Constructeur de la classe AddAdmin.
+     */
     public AddAdmin() {
         setTitle("Ajouter Administrateur");
         setSize(400, 300);
@@ -67,39 +73,76 @@ public class AddAdmin extends JFrame {
         add(panel);
     }
 
+    /**
+     * Renvoie le prénom de l'administrateur.
+     *
+     * @return Prénom de l'administrateur.
+     */
     public String getFirstName() {
         return firstNameField.getText();
     }
 
+    /**
+     * Renvoie le nom de l'administrateur.
+     *
+     * @return Nom de l'administrateur.
+     */
     public String getLastName() {
         return lastNameField.getText();
     }
 
+    /**
+     * Renvoie l'e-mail de l'administrateur.
+     *
+     * @return E-mail de l'administrateur.
+     */
     public String getMail() {
         return mailField.getText();
     }
 
+    /**
+     * Renvoie le pseudo de l'administrateur.
+     *
+     * @return Pseudo de l'administrateur.
+     */
     public String getPseudo() {
         return pseudoField.getText();
     }
 
+    /**
+     * Renvoie le mot de passe de l'administrateur.
+     *
+     * @return Mot de passe de l'administrateur.
+     */
     public String getPassword() {
         return new String(passwordField.getPassword());
     }
 
+    /**
+     * Renvoie la date de naissance de l'administrateur.
+     *
+     * @return Date de naissance de l'administrateur.
+     */
     public Date getBirthday() {
         // Convertir la date de naissance en format Date
         return Date.valueOf(birthdayField.getText());
     }
 
+    /**
+     * Ajoute un écouteur pour le bouton d'ajout d'administrateur.
+     *
+     * @param listener ActionListener pour le bouton d'ajout.
+     */
     public void addAddAdminListener(ActionListener listener) {
         addButton.addActionListener(listener);
     }
 
+    /**
+     * Affiche un message dans la fenêtre.
+     *
+     * @param message Message à afficher.
+     */
     public void showMessage(String message) {
         JOptionPane.showMessageDialog(this, message);
     }
 }
-
-
-

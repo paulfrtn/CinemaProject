@@ -105,7 +105,6 @@ public class MainFrame extends JFrame {
         SignIn signInPanel = new SignIn(controllerSignIn);
         AdminPrincipal adminPrincipal = new AdminPrincipal();
         Accueil accueilPanel = new Accueil(this, nowShowingFilms, premieresFilms, comingSoonFilms, filmLimit);
-        FauxAccueil fauxAccueil = new FauxAccueil();
         JCarousel jCarousel = new JCarousel(this, "Now Showing", nowShowingFilms);
         /////////////////////////////////////////////////////////////////////////////
 

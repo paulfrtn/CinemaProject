@@ -9,6 +9,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * La classe Accueil représente la vue de la page d'accueil de l'application.
+ */
 public class Accueil extends JPanel {
     private JPanel mainPanel;
     private JButton btnFilms;
@@ -23,6 +26,14 @@ public class Accueil extends JPanel {
     private String couleur2;
     private String couleur3;
 
+    /**
+     * Crée une instance de la classe Accueil.
+     * @param controller Le contrôleur de l'application.
+     * @param nowShowingFilms La liste des films actuellement diffusés.
+     * @param premieresFilms La liste des premières de films à venir.
+     * @param comingSoonFilms La liste des films à venir.
+     * @param filmLimit La limite de films à afficher dans les carrousels.
+     */
     public Accueil(MainFrame controller, List<Film> nowShowingFilms, List<Film> premieresFilms, List<Film> comingSoonFilms, int filmLimit) {
 
         this.controller = controller;
@@ -107,18 +118,28 @@ public class Accueil extends JPanel {
         add(mainPanel);
     }
 
+    /**
+     * Renvoie le bouton de recherche.
+     * @return Le bouton de recherche.
+     */
     public JButton getbtnSearch(){
         return btnSearch;
     }
 
-
+    /**
+     * Renvoie le bouton de profil.
+     * @return Le bouton de profil.
+     */
     public JButton getbtnProfile(){
         return btnProfile;
     }
 
+    /**
+     * Renvoie le bouton des offres.
+     * @return Le bouton des offres.
+     */
     public JButton getbtnOffers(){
         return btnOffers;
     }
 
 }
-

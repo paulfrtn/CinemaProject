@@ -1,23 +1,28 @@
 package Model.Seance;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Time;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-import Model.Film.*;
-import Model.Salle.Salle;
 import Model.DataBase.ConnectionDb;
+import Model.Film.Film;
+import Model.Salle.Salle;
 
-
+/**
+ * La classe SeanceDaoImpl implémente l'interface SeanceDao et définit les méthodes pour manipuler les objets Seance en base de données.
+ */
 public class SeanceDaoImpl implements SeanceDao {
     //Nous allons réaliser le CRUD (Create, Read, Update, Delete)
 
     // Create
+    /**
+     * Ajoute une séance à la base de données.
+     * @param seance La séance à ajouter.
+     */
     public void addSeance(Seance seance) {
         String sql = "INSERT INTO Seance (seance_date, seance_time, seance_language, seance_nb_reservation, film_id, salle_id) VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection conn = ConnectionDb.getConnection();
@@ -34,8 +39,12 @@ public class SeanceDaoImpl implements SeanceDao {
         }
     }
 
-
     // Read
+    /**
+     * Récupère une séance par son identifiant.
+     * @param id L'identifiant de la séance à récupérer.
+     * @return La séance correspondant à l'identifiant donné.
+     */
     public Seance getSeanceById(int id) {
         String query = "SELECT * FROM Seance WHERE seance_id = ?";
         //Récupérer une séance par son id
@@ -61,6 +70,10 @@ public class SeanceDaoImpl implements SeanceDao {
     }
 
     // Update
+    /**
+     * Met à jour les informations d'une séance dans la base de données.
+     * @param seance La séance à mettre à jour.
+     */
     public void updateSeance(Seance seance) {
         String sql = "UPDATE Seance SET seance_date = ?, seance_time = ?, seance_language = ?, seance_nb_reservation = ? WHERE seance_id = ?";
         try (Connection conn = ConnectionDb.getConnection();
@@ -77,6 +90,10 @@ public class SeanceDaoImpl implements SeanceDao {
     }
 
     // Delete
+    /**
+     * Supprime une séance de la base de données.
+     * @param seance La séance à supprimer.
+     */
     public void deleteSeance(Seance seance) {
         String sql = "DELETE FROM Seance WHERE seance_id = ?";
         try (Connection conn = ConnectionDb.getConnection();
@@ -88,6 +105,12 @@ public class SeanceDaoImpl implements SeanceDao {
         }
     }
 
+    /**
+     * Récupère une liste de séances pour une date donnée et un identifiant de film donné.
+     * @param date La date des séances à récupérer.
+     * @param film_id L'identifiant du film des séances à récupérer.
+     * @return La liste des séances correspondant à la date et à l'identifiant de film donnés.
+     */
     public List<Seance> getSeanceByDateNFilmId(java.sql.Date date, int film_id) {
         String query = "SELECT * FROM Seance WHERE seance_date = ? AND film_id = ?";
         List<Seance> seances = new ArrayList<>();
@@ -115,6 +138,13 @@ public class SeanceDaoImpl implements SeanceDao {
         return seances;
     }
 
+    /**
+     * Récupère une séance par son heure, son identifiant de film et sa date.
+     * @param time L'heure de la séance à récupérer.
+     * @param film_id L'identifiant du film de la séance à récupérer.
+     * @param date La date de la séance à récupérer.
+     * @return La séance correspondant à l'heure, l'identifiant de film et la date donnés.
+     */
     public Seance getSeanceByTimeNFilmIdNDate(Time time, int film_id, Date date) {
         String query = "SELECT * FROM Seance WHERE seance_time = ? AND film_id = ? AND seance_date = ?";
         Seance seance = null;
@@ -141,6 +171,15 @@ public class SeanceDaoImpl implements SeanceDao {
         return seance;
     }
 
+    /**
+     * Compte le nombre de séances selon certains critères.
+     * @param filmId L'identifiant du film des séances à compter.
+     * @param seanceDate La date des séances à compter.
+     * @param seanceTime L'heure des séances à compter.
+     * @param seanceLanguage Le langage des séances à compter.
+     * @param salleId L'identifiant de la salle des séances à compter.
+     * @return Le nombre de séances correspondant aux critères donnés.
+     */
     public int getSeanceByCriteria(int filmId, Date seanceDate, Time seanceTime, String seanceLanguage, int salleId) {
         String query = "SELECT COUNT(*) FROM Seance WHERE film_id = ? AND seance_date = ? AND seance_time = ? AND seance_language = ? AND salle_id= ?";
         int count = 0;
@@ -163,6 +202,10 @@ public class SeanceDaoImpl implements SeanceDao {
         return count;
     }
 
+    /**
+     * Récupère toutes les séances de la base de données.
+     * @return La liste de toutes les séances.
+     */
     public List<Seance> getAllSeances() {
         String query = "SELECT * FROM Seance";
         List<Seance> seances = new ArrayList<>();
@@ -186,6 +229,4 @@ public class SeanceDaoImpl implements SeanceDao {
         }
         return seances;
     }
-
-
 }

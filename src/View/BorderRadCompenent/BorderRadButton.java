@@ -5,12 +5,20 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * La classe BorderRadButton crée un JButton avec une bordure arrondie.
+ */
 public class BorderRadButton extends JButton {
     private static final long serialVersionUID = 1L;
     private int borderRadius;
 
-    public BorderRadButton(String texte , int rad) {
-        super(texte);
+    /**
+     * Crée un bouton avec une bordure arrondie et du texte.
+     * @param text Le texte du bouton.
+     * @param rad Le rayon de la bordure arrondie.
+     */
+    public BorderRadButton(String text, int rad) {
+        super(text);
         this.borderRadius = rad;
         setOpaque(false);
         setContentAreaFilled(false);
@@ -30,6 +38,10 @@ public class BorderRadButton extends JButton {
         });
     }
 
+    /**
+     * Crée un bouton avec une bordure arrondie sans texte.
+     * @param rad Le rayon de la bordure arrondie.
+     */
     public BorderRadButton(int rad) {
         this.borderRadius = rad;
         setOpaque(false);

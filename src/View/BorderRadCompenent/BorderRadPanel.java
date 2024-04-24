@@ -4,14 +4,29 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 
+/**
+ * La classe BorderRadPanel crée un JPanel avec une bordure arrondie.
+ */
 public class BorderRadPanel extends JPanel {
     private int borderRadius;
 
+    /**
+     * Crée un JPanel avec une bordure arrondie.
+     *
+     * @param rad Le rayon de la bordure arrondie.
+     */
     public BorderRadPanel(int rad) {
         this.borderRadius = rad;
         setOpaque(false); // Rendre le panel transparent
     }
-    public BorderRadPanel(LayoutManager layout,int rad) {
+
+    /**
+     * Crée un JPanel avec une bordure arrondie et un gestionnaire de disposition spécifié.
+     *
+     * @param layout Le gestionnaire de disposition à utiliser.
+     * @param rad    Le rayon de la bordure arrondie.
+     */
+    public BorderRadPanel(LayoutManager layout, int rad) {
         super(layout);
         this.borderRadius = rad;
         setOpaque(false); // Rendre le panel transparent

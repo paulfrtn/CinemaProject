@@ -10,6 +10,9 @@ import java.awt.*;
 import java.awt.event.*;
 import java.sql.Date;
 
+/**
+ * Fenêtre de paiement pour finaliser une transaction.
+ */
 public class Paiement extends JDialog {
     private JTextField cardHolderNameField;
     private JTextField cardNumberField;
@@ -25,6 +28,13 @@ public class Paiement extends JDialog {
     private String couleur3;
     private Boolean validerPaiement;
 
+    /**
+     * Constructeur de la fenêtre de paiement.
+     *
+     * @param controller        Contrôleur de la fenêtre principale.
+     * @param controllerPanier  Contrôleur du panier.
+     * @param panier            Panier contenant les éléments à payer.
+     */
     public Paiement(MainFrame controller, ControllerPanier controllerPanier, Panier panier) {
         this.controller = controller;
 
@@ -103,6 +113,11 @@ public class Paiement extends JDialog {
         setPreferredSize(new Dimension(300, 250));
     }
 
+    /**
+     * Vérifie si les informations de paiement sont valides.
+     *
+     * @return true si les informations sont valides, sinon false.
+     */
     private boolean validerInformations() {
         // Vérifier le numéro de carte
         String cardNumber = cardNumberField.getText().trim();
@@ -125,18 +140,13 @@ public class Paiement extends JDialog {
         // Si toutes les validations réussissent, retourner true
         return true;
     }
+
+    /**
+     * Renvoie true si les informations de paiement sont valides, sinon false.
+     *
+     * @return true si les informations sont valides, sinon false.
+     */
     public Boolean getValiderInformation() {
         return validerInformations();
     }
-
-//    public Boolean getValiderPaiement() {
-//        return validerPaiement;
-//    }
-
-
-
 }
-
-
-
-

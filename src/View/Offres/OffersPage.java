@@ -137,7 +137,7 @@ public class OffersPage extends JPanel {
                 userOffersPanel.setLayout(new BoxLayout(userOffersPanel, BoxLayout.Y_AXIS));
                 userOffersPanel.setBackground(bgColor);
 
-                                JLabel offerDescription = new JLabel("<html><b>" + rs.getString("descriptions") + "</b></html>");
+                JLabel offerDescription = new JLabel("<html><b>" + rs.getString("descriptions") + "</b></html>");
 
                 offerDescription.setForeground(Color.WHITE);
 

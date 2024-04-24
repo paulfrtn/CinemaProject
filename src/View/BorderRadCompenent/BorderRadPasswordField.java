@@ -4,14 +4,27 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 
+/**
+ * La classe BorderRadPasswordField crée un champ de texte pour mot de passe avec une bordure arrondie.
+ */
 public class BorderRadPasswordField extends JPasswordField {
     private int borderRadius;
 
-    public BorderRadPasswordField( int borderRadius) {
+    /**
+     * Crée un champ de texte pour mot de passe avec une bordure arrondie.
+     *
+     * @param borderRadius Le rayon de la bordure arrondie.
+     */
+    public BorderRadPasswordField(int borderRadius) {
         this.borderRadius = borderRadius;
         setOpaque(false); // Rendre le champ de texte transparent
     }
 
+    /**
+     * Définit le rayon de la bordure arrondie.
+     *
+     * @param borderRadius Le nouveau rayon de la bordure arrondie.
+     */
     public void setBorderRadius(int borderRadius) {
         this.borderRadius = borderRadius;
         repaint();

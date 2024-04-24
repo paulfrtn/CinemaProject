@@ -14,6 +14,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.text.SimpleDateFormat;
 
+/**
+ * Panier contenant les éléments sélectionnés par l'utilisateur avant le paiement.
+ */
 public class Panier extends JPanel {
     private MainFrame controller;
     private JLabel filmLabel;
@@ -38,6 +41,14 @@ public class Panier extends JPanel {
     private JButton BtnProfile;
     private ControllerPanier controllerPanier;
 
+    /**
+     * Constructeur du panier.
+     *
+     * @param controller      Contrôleur de la fenêtre principale.
+     * @param controllerPanier    Contrôleur du panier.
+     * @param seanceId        Identifiant de la séance.
+     * @param user            Utilisateur.
+     */
     public Panier(MainFrame controller, ControllerPanier controllerPanier, int seanceId, User user) {
         this.controller = controller;
         this.controllerPanier = controllerPanier;
@@ -261,51 +272,96 @@ public class Panier extends JPanel {
         return sdf.format(date);
     }
 
+    /**
+     * Renvoie le prix par billet.
+     *
+     * @return Prix par billet.
+     */
     public int getPrice() {
         return prixParBillet;
     }
 
+    /**
+     * Renvoie le nombre de billets.
+     *
+     * @return Nombre de billets.
+     */
     public int getNumberOfTickets() {
         return nombreBillets;
     }
 
+    /**
+     * Renvoie l'identifiant de la séance.
+     *
+     * @return Identifiant de la séance.
+     */
     public int getSeanceId() {
         return seanceId;
     }
 
+    /**
+     * Renvoie l'identifiant de l'offre.
+     *
+     * @return Identifiant de l'offre.
+     */
     public int getOfferId() {
         return offerId;
     }
 
+    /**
+     * Renvoie le bouton de validation.
+     *
+     * @return Bouton de validation.
+     */
     public JButton getValiderButton() {
         return ValiderButton;
     }
 
+    /**
+     * Renvoie le bouton de retour.
+     *
+     * @return Bouton de retour.
+     */
     public JButton getBtnBack() {
         return BtnBack;
     }
 
+    /**
+     * Renvoie le bouton de sélection des films.
+     *
+     * @return Bouton de sélection des films.
+     */
     public JButton getBtnFilm() {
         return BtnFilm;
     }
 
+    /**
+     * Renvoie le bouton de profil.
+     *
+     * @return Bouton de profil.
+     */
     public JButton getBtnProfile() {
         return BtnProfile;
     }
 
+    /**
+     * Renvoie l'état de la validation du paiement.
+     *
+     * @return true si le paiement est validé, sinon false.
+     */
     public Boolean getValiderPaiement() {
         return validerPaiement;
     }
 
+    /**
+     * Définit l'état de validation du paiement.
+     *
+     * @param validerPaiement Etat de validation du paiement.
+     */
     public void setValiderPaiement(Boolean validerPaiement) {
         this.validerPaiement = validerPaiement;
     }
 
 
 }
-
-
-
-
-
 

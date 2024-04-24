@@ -7,6 +7,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * Classe représentant une fenêtre de dialogue pour ajouter une nouvelle offre.
+ */
 public class PopUpAddOffer extends JFrame {
     private JTextField nameField;
     private JTextArea descriptionArea;
@@ -17,6 +20,9 @@ public class PopUpAddOffer extends JFrame {
     private JTextField userTypeField;
     private JButton addButton;
 
+    /**
+     * Constructeur de la fenêtre de dialogue pour ajouter une nouvelle offre.
+     */
     public PopUpAddOffer() {
         setTitle("Ajouter une offre");
         setSize(400, 400);
@@ -24,7 +30,7 @@ public class PopUpAddOffer extends JFrame {
         setLocationRelativeTo(null);
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(10, 2,2,10));
+        panel.setLayout(new GridLayout(10, 2, 2, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         panel.setBackground(Color.decode("#2a2d43"));
 
@@ -56,7 +62,7 @@ public class PopUpAddOffer extends JFrame {
         userTypeLabel.setForeground(Color.WHITE);
         userTypeField = new BorderRadTextField(10);
 
-        addButton = new BorderRadButton("Ajouter",10);
+        addButton = new BorderRadButton("Ajouter", 10);
 
         panel.add(nameLabel);
         panel.add(nameField);
@@ -78,36 +84,66 @@ public class PopUpAddOffer extends JFrame {
         add(panel);
     }
 
+    /**
+     * Renvoie le contenu du champ de saisie du nom de l'offre.
+     *
+     * @return Le contenu du champ de saisie du nom de l'offre.
+     */
     public String getNameField() {
         return nameField.getText();
     }
 
+    /**
+     * Renvoie le contenu de la zone de texte de description de l'offre.
+     *
+     * @return Le contenu de la zone de texte de description de l'offre.
+     */
     public String getDescriptionArea() {
         return descriptionArea.getText();
     }
 
+    /**
+     * Renvoie le contenu du champ de saisie de la date de début de l'offre.
+     *
+     * @return Le contenu du champ de saisie de la date de début de l'offre.
+     */
     public String getStartDateField() {
         return startDateField.getText();
     }
 
+    /**
+     * Renvoie le contenu du champ de saisie de la date de fin de l'offre.
+     *
+     * @return Le contenu du champ de saisie de la date de fin de l'offre.
+     */
     public String getEndDateField() {
         return endDateField.getText();
     }
 
-
-
+    /**
+     * Renvoie le contenu du champ de saisie de la réduction de l'offre.
+     *
+     * @return Le contenu du champ de saisie de la réduction de l'offre.
+     */
     public String getDiscountField() {
         return discountField.getText();
     }
 
-
-
+    /**
+     * Renvoie le contenu du champ de saisie du type d'utilisateur de l'offre.
+     *
+     * @return Le contenu du champ de saisie du type d'utilisateur de l'offre.
+     */
     public String getUserTypeField() {
         return userTypeField.getText();
     }
 
+    /**
+     * Ajoute un écouteur d'événement au bouton d'ajout.
+     *
+     * @param listener L'écouteur d'événement à ajouter.
+     */
     public void addAddButtonListener(ActionListener listener) {
         addButton.addActionListener(listener);
     }
 }
-
