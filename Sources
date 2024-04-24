@@ -28,3 +28,13 @@ Cette classe permet de créer un bouton personnalisé avec des coins arrondis.
 Elle hérite de la classe JButton de Swing et arrondis ses bords d'un rayon spécifié.
 Source : https://gist.github.com/henriqueblang/1f7890fce85883e9f0c97005eed46ffa
 Source : https://stackoverflow.com/questions/16343098/rounded-jbutton-in-java
+
+
+SOURCES
+Stackoverflow :   https://stackoverflow.com/questions/tagged/java
+Koor.fr : https://koor.fr/Java/TutorialSwing/first_application.wp#google_vignette
+Oracle : 
+https://www.oracle.com/technical-resources/articles/javase/mvc.html
+Jenkov et JavaTpoint
+https://jenkov.com/tutorials/javafx/media.html
+https://www.javatpoint.com/javafx-playing-video
