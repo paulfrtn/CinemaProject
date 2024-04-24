@@ -6,6 +6,7 @@ import Model.Film.Film;
 import Model.Film.FilmDaoImpl;
 import Model.Seance.Seance;
 import Model.Seance.SeanceDaoImpl;
+import Model.User.User;
 import View.BorderRadCompenent.BorderRadButton;
 import View.BorderRadCompenent.BorderRadLabel;
 
@@ -35,9 +36,11 @@ public class Panier extends JPanel {
     private JButton BtnBack;
     private JButton BtnFilm;
     private JButton BtnProfile;
+    private ControllerPanier controllerPanier;
 
-    public Panier(MainFrame controller, ControllerPanier controllerPanier, int seanceId) {
+    public Panier(MainFrame controller, ControllerPanier controllerPanier, int seanceId, User user) {
         this.controller = controller;
+        this.controllerPanier = controllerPanier;
         this.seanceId = seanceId;
         this.offerId = 0;
         this.validerPaiement = false;
@@ -246,10 +249,10 @@ public class Panier extends JPanel {
 
     private void payer() {
         JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        Paiement paiement = new Paiement(controller);
-        validerPaiement = paiement.getValiderInformation();
-        validerPaiement = paiement.getValiderPaiement();
+        Paiement paiement = new Paiement(controller,controllerPanier, this);
         paiement.setVisible(true);
+        validerPaiement = paiement.getValiderInformation();
+        //validerPaiement = paiement.getValiderPaiement();
     }
 
 
@@ -290,6 +293,13 @@ public class Panier extends JPanel {
         return BtnProfile;
     }
 
+    public Boolean getValiderPaiement() {
+        return validerPaiement;
+    }
+
+    public void setValiderPaiement(Boolean validerPaiement) {
+        this.validerPaiement = validerPaiement;
+    }
 
 
 }

@@ -1,11 +1,14 @@
 package View.Reservation;
 
 import Controller.MainFrame;
+import Controller.Panier.ControllerPanier;
+import Model.User.User;
 import View.BorderRadCompenent.BorderRadButton;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Date;
 
 public class Paiement extends JDialog {
     private JTextField cardHolderNameField;
@@ -22,7 +25,7 @@ public class Paiement extends JDialog {
     private String couleur3;
     private Boolean validerPaiement;
 
-    public Paiement(MainFrame controller) {
+    public Paiement(MainFrame controller, ControllerPanier controllerPanier, Panier panier) {
         this.controller = controller;
 
         couleur1 = "#2a2d43";
@@ -43,7 +46,8 @@ public class Paiement extends JDialog {
                 if (validerInformations()) {
                     // Afficher un message de paiement effectué
                     JOptionPane.showMessageDialog(Paiement.this, "Paiement effectué !");
-                    validerPaiement = true;
+                    panier.setValiderPaiement(true);
+                    //validerPaiement = true;
                     dispose(); // Fermer la fenêtre modale
                 } else {
                     // Afficher un message de paiement refusé
@@ -125,9 +129,9 @@ public class Paiement extends JDialog {
         return validerInformations();
     }
 
-    public Boolean getValiderPaiement() {
-        return validerPaiement;
-    }
+//    public Boolean getValiderPaiement() {
+//        return validerPaiement;
+//    }
 
 
 

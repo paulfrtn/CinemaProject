@@ -85,7 +85,7 @@ public class AddSeance extends JFrame {
     public int getSalleNumber() {
         try {
             int salleNumber = Integer.parseInt(salleNumberField.getText());
-            if (salleNumber < 1 || salleNumber > 5) {
+            if (salleNumber < 1 || salleNumber > 6) {
                 throw new NumberFormatException(); // Lever une exception si le numéro de salle n'est pas entre 1 et 5
             }
             return salleNumber;

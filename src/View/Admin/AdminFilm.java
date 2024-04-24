@@ -79,11 +79,11 @@ public class AdminFilm extends JPanel {
         buttonsPanel.setOpaque(false);
         buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
 
-        btnBack = new BorderRadButton("Déconnexion", 10);
+        btnBack = new BorderRadButton("Retour", 10);
         btnBack.setBackground(Color.decode(couleur2));
         btnFilms = new BorderRadButton("Films", 10);
         btnFilms.setBackground(Color.decode(couleur2));
-        btnLogOut = new BorderRadButton("Profil", 10);
+        btnLogOut = new BorderRadButton("Déconnexion", 10);
         btnLogOut.setBackground(Color.decode(couleur2));
 
         buttonsPanel.add(Box.createHorizontalStrut(10));

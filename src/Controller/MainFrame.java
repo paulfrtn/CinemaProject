@@ -27,6 +27,7 @@ import View.FilmNSeance.FilmNSchedulePage;
 import View.Offres.OffersPage;
 import View.ProfilPage.Stat;
 import View.ProfilPage.ViewPageProfil;
+import View.Reservation.InviteMail;
 import View.Reservation.Paiement;
 import View.Reservation.Panier;
 import View.SignInSignUp.SignIn;
@@ -69,6 +70,8 @@ public class MainFrame extends JFrame {
         setSize(1200, 800);
         setLocationRelativeTo(null);
         setResizable(false);
+
+
         // Création du conteneur principal avec CardLayout
         cardLayout = new CardLayout();
         cardsPanel = new JPanel(cardLayout);
@@ -93,7 +96,7 @@ public class MainFrame extends JFrame {
         ///////////////////////////CONFIGURATION DES PAGES///////////////////////////
 
         ViewPageProfil viewPageProfil = new ViewPageProfil();
-        ControllerProfil = new ControllerPageProfil(viewPageProfil,userdao, ticketDao, seanceDao, filmDao, salleDao);
+        ControllerProfil = new ControllerPageProfil(viewPageProfil, userdao, ticketDao, seanceDao, filmDao, salleDao);
         ControllerSignUp controllerSignUp = new ControllerSignUp();
         ControllerSignIn controllerSignIn = new ControllerSignIn();
         ControllerPanier controllerPanier = new ControllerPanier();
@@ -114,7 +117,6 @@ public class MainFrame extends JFrame {
         cardsPanel.add(adminPrincipal, "AdminPrincipal");
         cardsPanel.add(viewPageProfil, "ProfilePage");
         /////////////////////////////////////////////////////////////////////
-
 
 
         cardLayout.show(cardsPanel, "SignInPanel");
@@ -199,7 +201,7 @@ public class MainFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JButton button = (JButton) e.getSource();
                 CurrentSeanceId = Integer.parseInt(button.getName());
-                Panier panierPanel = new Panier(MainFrame.this, controllerPanier, CurrentSeanceId);
+                Panier panierPanel = new Panier(MainFrame.this, controllerPanier, CurrentSeanceId, CurrentUser);
                 cardsPanel.add(panierPanel, "Panier");
                 cardLayout.show(cardsPanel, "Panier");
 
@@ -216,14 +218,25 @@ public class MainFrame extends JFrame {
 
 
                         if (quantity > 0) {
-                            if (CurrentUser != null) {
-                                controllerPanier.addPanier(CurrentSeanceId, CurrentUser.getUser_id(), offerId, price, true, quantity, CurrentUser.getUser_mail());
-                                popUP.showSuccessMessage("Votre réservation a été effectuée avec succès");
-                                cardLayout.show(cardsPanel, "Accueil");
+                            if (panierPanel.getValiderPaiement()) {
+                                if (CurrentUser != null) {
+                                    controllerPanier.addPanier(CurrentSeanceId, CurrentUser.getUser_id(), offerId, price, true, quantity, CurrentUser.getUser_mail());
+                                    popUP.showSuccessMessage("Votre réservation a été effectuée avec succès");
+                                    cardLayout.show(cardsPanel, "Accueil");
+                                } else {
+                                    JFrame parentFrame = (JFrame) SwingUtilities.getWindowAncestor(MainFrame.this);
+                                    InviteMail inviteMail = new InviteMail(parentFrame, "Entrez votre adresse e-mail");
+                                    if (!inviteMail.isCancelled()) {
+                                        String email = inviteMail.getEmail();
+                                        controllerPanier.addPanier(CurrentSeanceId, 18, offerId, price, true, quantity, email);
+                                        popUP.showSuccessMessage("Votre réservation a été effectuée avec succès");
+                                        cardLayout.show(cardsPanel, "Accueil");
+                                    }
+                                }
                             }
+
                         }
                     }
-
 
                 });
 
@@ -331,17 +344,16 @@ public class MainFrame extends JFrame {
                 offersPage.getProfile().addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if(CurrentUser != null){
-                            if(CurrentUser.getUser_role()){
-                                cardLayout.show(cardsPanel,"AdminPrincipal");
-                            }
-                            else{
-                                cardLayout.show(cardsPanel,"ProfilePage");
+                        if (CurrentUser != null) {
+                            if (CurrentUser.getUser_role()) {
+                                cardLayout.show(cardsPanel, "AdminPrincipal");
+                            } else {
+                                cardLayout.show(cardsPanel, "ProfilePage");
 
                             }
                         }
-                        if(CurrentUser == null){
-                            cardLayout.show(cardsPanel,"SignInPanel");
+                        if (CurrentUser == null) {
+                            cardLayout.show(cardsPanel, "SignInPanel");
                         }
 
                     }
@@ -369,7 +381,6 @@ public class MainFrame extends JFrame {
         });
 
 
-
         viewPageProfil.getRetour().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -380,8 +391,8 @@ public class MainFrame extends JFrame {
         viewPageProfil.getStatistiques().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Stat stat = new Stat("Film Durations and Reservations",CurrentUser.getUser_id());
-                stat.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                Stat stat = new Stat("Film Durations and Reservations", CurrentUser.getUser_id());
+                stat.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 stat.setSize(1200, 800);
                 stat.setResizable(false);
                 stat.setLocationRelativeTo(null);
