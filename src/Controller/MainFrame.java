@@ -418,7 +418,7 @@ public class MainFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 List<Film> films = filmDao.getAllFilms();
-                List<Seance> seances = new SeanceDaoImpl().getAllSeances();
+                List<Seance> seances =  seanceDao.getAllSeances();
                 AdminFilm adminFilm = new AdminFilm(films, seances);
                 cardsPanel.add(adminFilm, "AdminFilm");
                 cardLayout.show(cardsPanel, "AdminFilm");
