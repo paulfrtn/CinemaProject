@@ -226,7 +226,7 @@ public class MainFrame extends JFrame {
                                     InviteMail inviteMail = new InviteMail(parentFrame, "Entrez votre adresse e-mail");
                                     if (!inviteMail.isCancelled()) {
                                         String email = inviteMail.getEmail();
-                                        controllerPanier.addPanier(CurrentSeanceId, 18, offerId, price, true, quantity, email);
+                                        controllerPanier.addPanier(CurrentSeanceId,0 , offerId, price, true, quantity, email);
                                         PopUp.showSuccessMessage("Votre réservation a été effectuée avec succès");
                                         cardLayout.show(cardsPanel, "Accueil");
                                     }

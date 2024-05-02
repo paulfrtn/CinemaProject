@@ -35,6 +35,23 @@ public class Ticket {
     }
 
     /**
+     * Constructeur pour un ticket invité.
+     *
+     * @param ticket_date   Date du ticket
+     * @param ticket_status Statut du ticket
+     * @param ticket_price  Prix du ticket
+     * @param seance_id     Identifiant de la séance
+     * @param mail          Adresse e-mail de l'utilisateur
+     */
+    public Ticket(Date ticket_date, Boolean ticket_status, int ticket_price, int seance_id, String mail) {
+        this.ticket_date = ticket_date;
+        this.ticket_status = ticket_status;
+        this.ticket_price = ticket_price;
+        this.seance_id = seance_id;
+        this.mail = mail;
+    }
+
+    /**
      * Constructeur pour un ticket avec une offre.
      *
      * @param ticket_date   Date du ticket

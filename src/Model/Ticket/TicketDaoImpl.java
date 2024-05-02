@@ -45,6 +45,57 @@ public class TicketDaoImpl {
         }
     }
 
+
+    public void addTicket2(Ticket ticket) {
+        Connection connection = null;
+        try {
+            connection = ConnectionDb.getConnection();
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO ticket (ticket_date, ticket_status, ticket_price, seance_id, user_id, mail) VALUES (?, ?, ?, ?, ?,?)");
+            ps.setDate(1, (Date) ticket.getTicket_date());
+            ps.setBoolean(2, ticket.getTicket_status());
+            ps.setInt(3, ticket.getTicket_price());
+            ps.setInt(4, ticket.getSeance_id());
+            ps.setInt(5, ticket.getUser_id());
+            ps.setString(6, ticket.getMail());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void addTicket3(Ticket ticket) {
+        Connection connection = null;
+        try {
+            connection = ConnectionDb.getConnection();
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO ticket (ticket_date, ticket_status, ticket_price, seance_id, mail) VALUES (?, ?, ?, ?, ?)");
+            ps.setDate(1, (Date) ticket.getTicket_date());
+            ps.setBoolean(2, ticket.getTicket_status());
+            ps.setInt(3, ticket.getTicket_price());
+            ps.setInt(4, ticket.getSeance_id());
+            ps.setString(5, ticket.getMail());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
     // Read
 
     /**

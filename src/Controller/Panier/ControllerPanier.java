@@ -32,6 +32,16 @@ public class ControllerPanier implements ControllerPanierInterface {
         Date date = seance.getSeance_date();
 
         for (int i = 0; i < quantity; i++) {
+            if(idUser == 0){
+                Ticket ticket = new Ticket(date, status, price, idSeance, mail);
+                ticketDao.addTicket3(ticket);
+                return;
+            }
+            if(idOffer == 0){
+                Ticket ticket = new Ticket(date, status, price, idUser, idSeance, mail);
+                ticketDao.addTicket2(ticket);
+                return;
+            }
             Ticket ticket = new Ticket(date, status, price, idUser, idSeance, idOffer, mail);
             ticketDao.addTicket(ticket);
         }
